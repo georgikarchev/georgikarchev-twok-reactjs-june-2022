@@ -1,0 +1,19 @@
+.navigation {
+    font-size: 1em;
+
+    &__toggle {
+        margin-left: 5px;
+        margin-right: 5px;
+
+        font-size: inherit;
+        width: 4em;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        & > * {
+            cursor: pointer;
+        }
+    }
+}

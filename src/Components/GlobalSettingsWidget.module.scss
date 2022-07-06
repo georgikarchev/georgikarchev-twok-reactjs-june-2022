@@ -1,0 +1,12 @@
+.globalSettingsWidget {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-start;
+    align-items: center;
+
+    & > * {
+        cursor: pointer;
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+}

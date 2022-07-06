@@ -1,23 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+// import logo from './images/logo.svg';
+import React, { useState, useContext } from "react";
+
+import { ThemeContext } from "./contexts/ThemeContext";
+import { ChatContext } from "./contexts/ChatContext";
+
+import { Header } from "./Components/Header";
+import "./App.scss";
+import { Profile } from "./Components/Profile";
 
 function App() {
+  const [isDark, setIsDark] = useState(false);
+  const [isAutoplayOn, setIsAutoplayOn] = useState(false);
+
+  const toggleThemeHandler = (newState) => {
+    setIsDark(newState);
+  };
+
+  const toggleAutoPlayHandler = (newState) => {
+    setIsAutoplayOn(newState);
+  };
+
+  // const [isAutoplayOn, setIsAutoplayOn] = useState(false);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <ChatContext.Provider value={{ isAutoplayOn, toggleAutoPlayHandler }}>
+        <ThemeContext.Provider value={{ isDark, toggleThemeHandler }}>
+          <Header className="app__header" />
+          <main className="app__main">
+            <Profile />
+          </main>
+        </ThemeContext.Provider>
+      </ChatContext.Provider>
     </div>
   );
 }

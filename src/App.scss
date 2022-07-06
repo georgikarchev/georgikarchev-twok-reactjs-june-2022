@@ -1,0 +1,20 @@
+.app {
+    width: 100%;
+
+    font-size: 1rem;
+
+    display: grid;
+    grid-template-areas: "appHeader" "appMain";
+    grid-template-columns: 100%;
+    grid-template-rows: 75px 1fr;
+
+    // if ChatList is on
+
+    &__header {
+        grid-area: appHeader;
+    }
+
+    &__main {
+        grid-area: appMain;
+    }
+}
