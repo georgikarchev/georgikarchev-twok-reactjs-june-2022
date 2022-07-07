@@ -20,6 +20,8 @@ export const GlobalSettingsWidget = () => {
     <div className={styles.globalSettingsWidget}>
       {!isDark && <img src={moon} alt="turn dark mode on" onClick={()=>toggleThemeHandler(true)} />}
       {isDark && <img src={sun} alt="turn light mode on" onClick={()=>toggleThemeHandler(false)} />}
+      
+      {/* Only show the autoplay widget if inside a chat. */}
       {!isAutoplayOn && <img src={autoplayOn} alt="turn autoplay on" onClick={() => toggleAutoPlayHandler(true)} />}
       {isAutoplayOn && <img src={autoplayOff} alt="turn autoplay off" onClick={() => toggleAutoPlayHandler(false)} />}
     </div>
