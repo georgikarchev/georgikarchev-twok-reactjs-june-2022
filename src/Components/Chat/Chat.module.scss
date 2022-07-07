@@ -1,0 +1,5 @@
+.chat {
+  display: grid;
+  grid-template-areas: "chatList chatContent chatMessageInfo";
+  grid-template-columns: 1fr 2fr 1fr;
+}

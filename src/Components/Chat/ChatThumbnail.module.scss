@@ -1,0 +1,66 @@
+.chatThumbnail {
+
+  display: grid;
+  grid-template-areas: "avatar contactName lastActive" "avatar message lastActive";
+  grid-template-columns: 10.8rem 1fr 6rem;
+  align-items: center;
+
+  height: 9rem;
+  padding-top: 1.0rem;
+  padding-bottom: 1.0rem;
+
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgba(#31FFF3, 0.1);
+  }
+
+  &.current {
+    border-left: 0.3rem solid #2acbee;
+  }
+  &.bookmarked {
+  }
+  &.unread {
+     
+  }
+
+  & .contactAvatar {
+    grid-area: avatar;
+
+    display: block;
+    margin-left: 2.4rem;
+    margin-right: 2rem;
+
+    width: 6.4rem;
+    height: 6.4rem;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  &.current .contactAvatar {
+    margin-left: 2.1rem;
+  }
+
+  & .contactName {
+    grid-area: contactName;
+    font-size: 2.4rem;
+    line-height: 1;
+    color: #424242;
+    margin: 0;
+  }
+
+  & .lastMessage {
+    grid-area: message;
+    font-size: 1.6rem;
+    line-height: 1.3;
+    color: #787878;
+    margin: 0.1rem;
+  }
+
+  & .lastActive {
+    font-size: 1.4rem;
+    line-height: 1;
+    grid-area: lastActive;
+    text-align: center;
+    color: #ABABAB;
+  }
+}

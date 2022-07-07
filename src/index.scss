@@ -17,7 +17,7 @@ html {
   height: 100%;
   background: linear-gradient(to right, #ececec, #e8fbff);
 
-  font-family: 'Baloo 2', cursive;
+  font-family: "Baloo 2", cursive;
 
   font-size: 10px;
 
@@ -30,7 +30,7 @@ html {
 
     & #root {
       flex: 1;
-      
+
       display: flex;
       justify-content: center;
       align-items: stretch;
