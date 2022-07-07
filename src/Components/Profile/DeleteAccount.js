@@ -1,13 +1,18 @@
 import styles from "./DeleteAccount.module.scss";
 
 export const DeleteAccount = ({ deleteAccountHandler }) => {
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    console.log("#Delete account");
+    // Send request to server and await response so that a confirmation (page) can be shown to the user
+  }
   return (
     <div className={styles.deleteAccount}>
-      <button>Delete account (permanently)</button>
-      <p>
-        We believe that it is your right to have full control over your account.
-        Deleting your account is just a click away. But keep in mind that it is
-        going to be permanent. There will be no going back.
+      <button className="submit" onClick={onSubmitHandler}>Delete account <small className={styles.small}>(permanently)</small></button>
+      <p className={styles.info}>
+        Your email address will not be saved in our database. You will stay
+        completely anonymous. You will however have your login credentials in
+        your inbox.
       </p>
     </div>
   );
