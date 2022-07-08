@@ -10,6 +10,7 @@ export const ChatMessage = ({
   translation,
   isBookmarked,
   isCorrect,
+  showAllTranslations
 }) => {
   const [showTranslation, setShowTranslation] = useState(false);
 
@@ -19,8 +20,12 @@ export const ChatMessage = ({
   messageClassNames += isCorrect !== undefined && isCorrect ? " " + styles.correct : " " + styles.false;
   
   let translationClassNames = styles.translation;
-  translationClassNames += showTranslation ? " " + styles.fadeIn : " " + styles.fadeOut;
-  console.log(showTranslation);
+  if(showAllTranslations) {
+    translationClassNames += " " + styles.fadeIn;
+  } else {
+    translationClassNames += showTranslation ? " " + styles.fadeIn : " " + styles.fadeOut;
+  }
+  
   
   const onClickHandler = () => {
     setShowTranslation(state => !state)

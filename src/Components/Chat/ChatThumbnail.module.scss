@@ -18,9 +18,12 @@
     background-color: rgba(#31fff3, 0.05);
   }
 
-  &.current {
-    border-left: 0.3rem solid #2acbee;
-    grid-template-columns: 10.5rem 1fr 6rem;
+  &.current::after {
+    content: "";
+    height: 100%;
+    position: absolute;
+    width: 0.3rem;
+    background-color: #2acbee;
   }
   
   &.unread::before {
@@ -32,9 +35,6 @@
     position: absolute;
     left: 0.7rem;
     border-radius: 50%;
-  }
-  &.current.unread::before {
-    margin-left: -0.3rem;
   }
 
   & .contactAvatar {
@@ -48,9 +48,6 @@
     height: 6.4rem;
     border-radius: 50%;
     object-fit: cover;
-  }
-  &.current .contactAvatar {
-    margin-left: 2.1rem;
   }
 
   & .contactName {

@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { ChatContext } from "../../contexts/ChatContext";
 
 import { ChatsList } from "./ChatsList";
-import { ChatContent } from "./ChatContent";
+import { ChatMain } from "./ChatMain";
 import { ChatMessageInfo } from "./ChatMessageInfo";
 
 import styles from "./Chat.module.scss";
@@ -93,7 +93,7 @@ export const Chat = () => {
         chatListData={chatsList}
         selectChatHandler={selectChatHandler}
       />
-      <ChatContent chatId={currentChat} />
+      <ChatMain chatId={currentChat} />
       <ChatMessageInfo />
     </div>
   );

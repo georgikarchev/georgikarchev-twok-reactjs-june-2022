@@ -1,0 +1,106 @@
+.chatInputBar {
+    width: 85%;
+    font-size: 1rem;
+    height: 8em;
+
+    background-color: #DBDBDB;
+    border-radius: 4em;
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
+
+    position: relative;
+
+    & .translation {
+        color: #ABABAB;
+        font-size: 1.8em;
+
+        position: absolute;
+        top: 0.7rem;
+        left: 8.0rem;
+    }
+
+    & .showAllTranslations,
+    & .inputPlus,
+    & .showHelp {
+        position: absolute;
+        top: 1.8rem;
+
+        display: block;
+        width: 4.6rem;
+        height: 4.6rem;
+
+        color: #2ACBEE;
+        font-size: 3.2rem;
+        line-height: 4.6rem;
+
+        text-align: center;
+
+        border-radius: 50%;
+        background-color: #F9F9F9;
+        box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.05);
+
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+
+        &:hover {
+            transform: scale(0.9);
+        }
+
+        
+    }
+
+    & .inputPlus {
+        left: 1.8rem;
+    }
+    & .showAllTranslations {
+        left: -5.8rem;
+        background-color: #F9F9F9;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        & img {
+            width: 3.0rem;
+            height: auto;
+        }
+    }
+    & .showHelp {
+        right: -5.8rem;
+        background-color: #F9F9F9;
+    }
+    
+    & .inactive {
+        color: #ABABAB;
+    }
+    & .chatInputField {
+        position: absolute;
+        width: 73%;
+        left: 8rem;
+        top: 2.9rem;
+        
+        font-size: 2.2rem;
+        color: #000000;
+        font-family: inherit;
+
+        border: none;
+        border-bottom: 1px solid rgba(#000000, 0.05);
+        background-color: transparent;
+        outline-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    & .sendButton {
+        position: absolute;
+        right: 1.3em;
+
+        top: 1.8em;
+
+
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+     
+        &:hover {
+            transform: scale(0.9);
+        }
+    }
+}

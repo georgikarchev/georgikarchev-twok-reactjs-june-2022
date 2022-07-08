@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { Spinner } from "../Spinner";
+import { ChatInputBar } from "./ChatInputBar";
 
-import styles from "./ChatContent.module.scss";
+import styles from "./ChatMain.module.scss";
 import { ChatMessage } from "./ChatMessage";
 
-export const ChatContent = ({ chatId }) => {
+export const ChatMain = ({ chatId }) => {
   const [chatData, setChatData] = useState(null);
   const [dateCreated, setDateCreated] = useState(null);
+  const [showAllTranslations,setShowAllTranslations] = useState(false);
 
   // Load chat data from server
   useEffect(() => {
@@ -59,6 +61,14 @@ export const ChatContent = ({ chatId }) => {
           isCorrect: false,
         },
       ],
+      questions: [
+        "Hello!",
+        "Nice to meet you!",
+        "My name is (Your name)",
+        "I am a (girl/boy/man/woman/human/alien)",
+        "I come from (Country)",
+        "My city is (City)"
+      ]
     };
 
     setTimeout(() => {
@@ -94,11 +104,16 @@ export const ChatContent = ({ chatId }) => {
       return (
         <ChatMessage
           key={"message_" + chatData.id + "_" + message.id}
-          {...message}
+          {...message} showAllTranslations={showAllTranslations}
         />
       );
     });
   }
+
+
+  const showAllTranslationsHandler = () => {
+    setShowAllTranslations((state) => !state);
+  };
 
   return (
     <div className={styles.chatContent}>
@@ -111,6 +126,9 @@ export const ChatContent = ({ chatId }) => {
         )}
       </header>
       <main>{messages}</main>
+      <footer>
+        <ChatInputBar showAllTranslations={showAllTranslations} showAllTranslationsHandler={showAllTranslationsHandler} />
+      </footer>
     </div>
   );
 };
