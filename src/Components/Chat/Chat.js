@@ -82,7 +82,7 @@ export const Chat = () => {
 
       setChatsList(chatsListDataFromServer);
       // console.log(chatsList);
-    }, 1500);
+    }, 500);
     //eslint-disable-next-line
   }, []);
 
@@ -93,7 +93,7 @@ export const Chat = () => {
         chatListData={chatsList}
         selectChatHandler={selectChatHandler}
       />
-      <ChatContent />
+      <ChatContent chatId={currentChat} />
       <ChatMessageInfo />
     </div>
   );

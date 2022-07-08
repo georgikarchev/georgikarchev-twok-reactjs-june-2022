@@ -27,6 +27,9 @@
   }
 
   &__main {
+    // prevens shadows to bleed into the header area
+    overflow: hidden;
+
     grid-area: appMain;
 
     z-index: 1;

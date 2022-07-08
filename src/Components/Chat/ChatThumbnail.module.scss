@@ -1,9 +1,10 @@
 .chatThumbnail {
   position: relative;
+  width: 100%;
 
   display: grid;
   grid-template-areas: "avatar contactName lastActive" "avatar message lastActive";
-  grid-template-columns: 10.8rem 1fr 6rem;
+  grid-template-columns: minmax(10.8rem, 1fr) 2fr minmax(6rem, 1fr);
   align-items: center;
 
   box-sizing: unset;

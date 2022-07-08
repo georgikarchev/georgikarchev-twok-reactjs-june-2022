@@ -1,5 +1,5 @@
 .chat {
   display: grid;
   grid-template-areas: "chatList chatContent chatMessageInfo";
-  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-columns: minmax(32rem,1fr) minmax(32rem,2fr) minmax(32rem,1fr);
 }

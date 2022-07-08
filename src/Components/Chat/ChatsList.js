@@ -8,7 +8,6 @@ import styles from "./ChatsList.module.scss";
 export const ChatsList = ({ currentChat, selectChatHandler, chatListData }) => {
   // const {chatsList} = useContext(ChatContext)
 
-  // TODO add spinner
   let list = (
     <div className={styles.mt3rem}>
       <Spinner />
