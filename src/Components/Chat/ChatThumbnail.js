@@ -1,6 +1,6 @@
 import styles from "./ChatThumbnail.module.scss";
 
-export const ChatThumbnail = ({ chat, isCurrent }) => {
+export const ChatThumbnail = ({ chat, isCurrent, selectChatHandler }) => {
   let lastActive = "now";
   // console.log(chat.lastMessage.datetime);
   const utcLastActive = new Date(
@@ -69,7 +69,7 @@ export const ChatThumbnail = ({ chat, isCurrent }) => {
     : "";
 
   return (
-    <div className={thumbnailClassNames}>
+    <div className={thumbnailClassNames} onClick={()=>{selectChatHandler(chat.id)}}>
       <h4 className={styles.contactName}>{chat.contactName}</h4>
       <img
         className={styles.contactAvatar}

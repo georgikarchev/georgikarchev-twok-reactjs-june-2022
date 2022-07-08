@@ -78,7 +78,7 @@ export const Chat = () => {
       ];
 
       setChatsList(chatsListDataFromServer);
-      console.log(chatsList);
+      // console.log(chatsList);
     }, 1500);
     //eslint-disable-next-line
   }, []);
