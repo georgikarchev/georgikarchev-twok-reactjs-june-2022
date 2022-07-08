@@ -1,4 +1,19 @@
 .chatsList {
     background-color: #FEFEFE;
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    padding-top: 4rem;
+    
+    & .mt3rem {
+        margin-top: 5rem;
+    }
+
+    & > * {
+        box-sizing: unset;
+    }
 }

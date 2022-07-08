@@ -5,9 +5,11 @@
   grid-template-columns: 10.8rem 1fr 6rem;
   align-items: center;
 
-  height: 9rem;
+  box-sizing: unset;
+  height: 7rem;
   padding-top: 1.0rem;
   padding-bottom: 1.0rem;
+  
 
   cursor: pointer;
 
