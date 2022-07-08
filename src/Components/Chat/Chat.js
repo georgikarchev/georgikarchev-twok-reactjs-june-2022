@@ -13,7 +13,6 @@ export const Chat = () => {
 
   const selectChatHandler = (selectedChatId) => {
     setCurrentChat(selectedChatId);
-    console.log("New chat selected: ", selectedChatId);
   };
 
   // set default chat list for demo user
@@ -76,6 +75,10 @@ export const Chat = () => {
           pinned: false,
         },
       ];
+
+      // TODO !
+      // IF demo user/not registered - load fedault chat list
+      // this depends on the server response? or on the state? logged out etc.
 
       setChatsList(chatsListDataFromServer);
       // console.log(chatsList);

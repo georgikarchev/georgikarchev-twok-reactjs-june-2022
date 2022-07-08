@@ -67,6 +67,8 @@ export const ChatThumbnail = ({ chat, isCurrent, selectChatHandler }) => {
   lastMessageClassNames += chat.lastMessage.bookmarked
     ? "" + styles.bookmarked
     : "";
+    
+    console.log("unread",chat.unread)
 
   return (
     <div className={thumbnailClassNames} onClick={()=>{selectChatHandler(chat.id)}}>
