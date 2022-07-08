@@ -40,6 +40,8 @@ export const ChatThumbnail = ({ chat, isCurrent, selectChatHandler }) => {
     "Saturday",
   ];
 
+  // console.log("days",diffDays,"hours",diffHours,"minutes",diffMinutes,"days",utcLastActive.getUTCDay(),utcNow.getUTCDay());
+
   if (diffDays > 6) {
     lastActive =
       utcLastActive.getUTCDate() +
@@ -47,8 +49,9 @@ export const ChatThumbnail = ({ chat, isCurrent, selectChatHandler }) => {
       month[utcLastActive.getUTCMonth()].substring(0, 3);
   } else if (diffDays > 1) {
     lastActive = weekday[utcLastActive.getUTCDay()].substring(0, 3);
-  } else if (diffDays > 0) {
-    lastActive = "Yesterday";
+  } else if (diffDays > 0 || utcLastActive.getUTCDay() !== utcNow.getUTCDay()) {
+    // lastActive = "Yesterday"; // too big for interface
+    lastActive = weekday[utcLastActive.getUTCDay()].substring(0, 3);
   } else if (diffHours > 1) {
     lastActive =
       utcLastActive.getUTCHours() + ":" + utcLastActive.getUTCMinutes();
@@ -65,10 +68,8 @@ export const ChatThumbnail = ({ chat, isCurrent, selectChatHandler }) => {
 
   let lastMessageClassNames = styles.lastMessage;
   lastMessageClassNames += chat.lastMessage.bookmarked
-    ? "" + styles.bookmarked
+    ? " " + styles.bookmarked
     : "";
-    
-    console.log("unread",chat.unread)
 
   return (
     <div className={thumbnailClassNames} onClick={()=>{selectChatHandler(chat.id)}}>

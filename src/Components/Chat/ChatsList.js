@@ -17,7 +17,6 @@ export const ChatsList = ({ currentChat, selectChatHandler, chatListData }) => {
   if (chatListData && chatListData.length > 0) {
     // TODO order chats by date (date last message/date last update)
     list = chatListData.map((chat) => {
-      console.log(currentChat === chat.id);
       return (
         <ChatThumbnail
           key={`twokChatThumbnail_${chat.id}`}
