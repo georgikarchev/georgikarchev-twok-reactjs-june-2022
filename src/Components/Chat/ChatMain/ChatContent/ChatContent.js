@@ -15,7 +15,7 @@ export const ChatContent = ({chatData, showAllTranslations}) => {
 
     const {showAllMessageTranslations} = useContext(ChatContext);
 
-  let messages = <Spinner />;
+  let messages = '';
   if (chatData && chatData.messages.length > 0) {
     messages = chatData.messages.map((message) => {
       if (Number(message.id) <= Number(chatData.lastMessageId)) {

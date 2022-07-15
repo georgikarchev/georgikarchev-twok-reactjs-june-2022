@@ -9,9 +9,12 @@ import lightbulbActive from "./images/lightbulb--active.svg";
 import lightbulbInactive from "./images/lightbulb--inactive.svg";
 
 import styles from "./ChatInputBar.module.scss";
+import { useState } from "react";
 
 export const ChatInputBar = ({translation, showHints, showHintsHandler, inputIsEnabled}) => {
 
+    const [isTouched, setIsTouched] = useState(false);
+    const [isValid, setIsValid] = useState(false);
     const {showAllMessageTranslations, setShowAllMessageTranslations} = useContext(ChatContext);
 
     const onInputChangeHandler = (e) => {
@@ -24,6 +27,8 @@ export const ChatInputBar = ({translation, showHints, showHintsHandler, inputIsE
 
     let chatInputBarClassNames = styles.chatInputBar;
     chatInputBarClassNames += inputIsEnabled? " " + styles.enabled : "";
+    chatInputBarClassNames += isTouched? " " + styles.touched : "";
+    chatInputBarClassNames += isValid? " " + styles.valid : "";
     
     let showAllTranslationsClassNames = styles.showAllTranslations;
     showAllTranslationsClassNames += showAllMessageTranslations? "" : " " + styles.inactive;

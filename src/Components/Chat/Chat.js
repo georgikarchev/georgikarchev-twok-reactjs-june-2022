@@ -12,9 +12,8 @@ import { ChatMessageInfo } from "./ChatMessageInfo/ChatMessageInfo";
 import styles from "./Chat.module.scss";
 
 export const Chat = () => {
-  const [currentChat, setCurrentChat] = useState(null); //'twokChat1User1'
+  const [currentChatId, setCurrentChat] = useState(null); //'twokChat1User1'
   const [chatsList, setChatsList] = useState();
-  const [selectedMessageData, setSelectedMessageData] = useState(null);
   const { profileData } = useContext(AuthContext);
 
   const selectChatHandler = (selectedChatId) => {
@@ -39,12 +38,12 @@ export const Chat = () => {
   return (
     <div className={`app-chat ${styles.chat}`}>
       <ChatsList
-        currentChat={currentChat}
+        currentChatId={currentChatId}
         chatsListData={chatsList}
         selectChatHandler={selectChatHandler}
       />
-      <ChatMain chatId={currentChat} />
-      <ChatMessageInfo messageData={selectedMessageData} />
+      <ChatMain currentChatId={currentChatId} />
+      <ChatMessageInfo />
     </div>
   );
 };

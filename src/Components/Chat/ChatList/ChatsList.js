@@ -5,7 +5,7 @@ import { ChatThumbnail } from "./ChatThumbnail";
 
 import styles from "./ChatsList.module.scss";
 
-export const ChatsList = ({ currentChat, selectChatHandler, chatsListData }) => {
+export const ChatsList = ({ currentChatId, selectChatHandler, chatsListData }) => {
   // const {chatsList} = useContext(ChatContext)
 
   let list = (
@@ -20,7 +20,7 @@ export const ChatsList = ({ currentChat, selectChatHandler, chatsListData }) => 
         <ChatThumbnail
           key={`twokChatThumbnail_${chat.id}`}
           chat={chat}
-          isCurrent={chat.id === currentChat}
+          isCurrent={chat.id === currentChatId}
           onSelectChat={selectChatHandler}
         />
       );
