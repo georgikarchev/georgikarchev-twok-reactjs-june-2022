@@ -57,8 +57,6 @@ function App() {
             value={{
               isAutoplayOn,
               toggleAutoPlayHandler,
-              chatsList,
-              setChatsList,
               showAllMessageTranslations,
               setShowAllMessageTranslations
             }}

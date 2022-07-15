@@ -13,7 +13,7 @@ import styles from "./Chat.module.scss";
 
 export const Chat = () => {
   const [currentChat, setCurrentChat] = useState(null); //'twokChat1User1'
-  const { chatsList, setChatsList } = useContext(ChatContext);
+  const [ chatsList, setChatsList ] = useState();
   const { profileData } = useContext(AuthContext);
 
   const selectChatHandler = (selectedChatId) => {
