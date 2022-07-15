@@ -1,3 +1,58 @@
 .chatMessageInfo {
-    background-color: aliceblue;
+  background-color: aliceblue;
+  padding-top: 5.5rem;
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+
+  & .noMessageSelected {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+    font-size: 1em;
+    font-weight: 600;
+    color: #ababab;
+  }
+
+  & .body {
+    font-size: 3.2rem;
+    line-height: 1.2;
+    color: #424242;
+    margin: 0;
+  }
+
+  & .bodyTranslation {
+    font-size: 2.4rem;
+    line-height: 1.2;
+    color: #ABABAB;
+    margin: 0;
+  }
+
+  & .words {
+    margin-top: 6rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    & .word {
+      font-size: 2.6rem;
+      line-height: 1.2;
+      margin-bottom: 3rem;
+
+      & main {
+        font-weight: 600;
+        color: #424242;
+      }
+
+      & aside {
+        color: #787878;
+        font-weight: 400;
+      }
+    }
+  }
 }

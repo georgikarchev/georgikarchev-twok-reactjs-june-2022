@@ -18,7 +18,6 @@ export const ChatContent = ({chatData, showAllTranslations}) => {
   let messages = <Spinner />;
   if (chatData && chatData.messages.length > 0) {
     messages = chatData.messages.map((message) => {
-      console.log(Number(message.id) <= Number(chatData.lastMessageId));
       if (Number(message.id) <= Number(chatData.lastMessageId)) {
         if (message.type === "chatMessage") {
           return (

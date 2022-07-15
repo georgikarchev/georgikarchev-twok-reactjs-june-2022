@@ -10,7 +10,7 @@ import { ChatHeader } from "./ChatHeader";
 export const ChatMain = ({ chatId }) => {
   const [chatData, setChatData] = useState(null);
   const [showHints, setShowHints] = useState(false);
-  const [inputIsEnabled, setInputIsEnabled] = useState(true);
+  const [inputIsEnabled, setInputIsEnabled] = useState(false);
 
   // Load chat data from server
   useEffect(() => {

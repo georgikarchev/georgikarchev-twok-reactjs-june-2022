@@ -13,7 +13,8 @@ import styles from "./Chat.module.scss";
 
 export const Chat = () => {
   const [currentChat, setCurrentChat] = useState(null); //'twokChat1User1'
-  const [ chatsList, setChatsList ] = useState();
+  const [chatsList, setChatsList] = useState();
+  const [selectedMessageData, setSelectedMessageData] = useState(null);
   const { profileData } = useContext(AuthContext);
 
   const selectChatHandler = (selectedChatId) => {
@@ -31,6 +32,10 @@ export const Chat = () => {
     //eslint-disable-next-line
   }, []);
 
+  // const selectMessageHandler = (messageData) => {
+  //   setSelectedMessageData(messageData);
+  // };
+
   return (
     <div className={`app-chat ${styles.chat}`}>
       <ChatsList
@@ -39,7 +44,7 @@ export const Chat = () => {
         selectChatHandler={selectChatHandler}
       />
       <ChatMain chatId={currentChat} />
-      <ChatMessageInfo />
+      <ChatMessageInfo messageData={selectedMessageData} />
     </div>
   );
 };

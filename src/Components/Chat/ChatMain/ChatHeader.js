@@ -1,7 +1,6 @@
 import styles from "./ChatHeader.module.scss";
 
 export const ChatHeader = ({ name, avatar, desrciption }) => {
-    console.log(desrciption)
   return (
     <div className={styles.chatHeader}>
       <img

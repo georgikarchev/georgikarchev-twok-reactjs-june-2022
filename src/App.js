@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { BrowserRouter } from "react-router-dom";
 
+import { AppContext } from "./Contexts/AppContext";
 import { ThemeContext } from "./Contexts/ThemeContext";
 import { ChatContext } from "./Contexts/ChatContext";
 import { AuthContext } from "./Contexts/AuthContext";
@@ -14,11 +15,17 @@ import { Chat } from "./Components/Chat/Chat";
 import "./App.scss";
 
 function App() {
+  const [appSettings, setAppSettings] = useState({ appLanguage: "en" });
+
   const [isDark, setIsDark] = useState(false);
   const [isAutoplayOn, setIsAutoplayOn] = useState(false);
-  const [profileData, setProfileData] = useState({ loggedIn: true, userId: "twok_user_1" });
-  const [chatsList, setChatsList] = useState(null);
-  const [showAllMessageTranslations, setShowAllMessageTranslations] = useState(false);
+  const [profileData, setProfileData] = useState({
+    loggedIn: true,
+    userId: "twok_user_1",
+  });
+  const [showAllMessageTranslations, setShowAllMessageTranslations] =
+    useState(false);
+  const [selectedMessageData, setSelectedMessageData] = useState(null);
 
   const toggleThemeHandler = (newState) => {
     setIsDark(newState);
@@ -51,28 +58,32 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div className="app">
-        <AuthContext.Provider value={{ profileData, logInTestHandler }}>
-          <ChatContext.Provider
-            value={{
-              isAutoplayOn,
-              toggleAutoPlayHandler,
-              showAllMessageTranslations,
-              setShowAllMessageTranslations
-            }}
-          >
-            <ThemeContext.Provider value={{ isDark, toggleThemeHandler }}>
-              <Header className="app__header" />
-              <main className="app__main">
-                <Routes>
-                  <Route path="/profile" element={<Profile />} />
-                  <Route path="/chat" element={<Chat />} />
-                </Routes>
-              </main>
-            </ThemeContext.Provider>
-          </ChatContext.Provider>
-        </AuthContext.Provider>
-      </div>
+      <AppContext.Provider value={{ appSettings, setAppSettings }}>
+        <div className="app">
+          <AuthContext.Provider value={{ profileData, logInTestHandler }}>
+            <ChatContext.Provider
+              value={{
+                isAutoplayOn,
+                toggleAutoPlayHandler,
+                showAllMessageTranslations,
+                setShowAllMessageTranslations,
+                selectedMessageData,
+                setSelectedMessageData,
+              }}
+            >
+              <ThemeContext.Provider value={{ isDark, toggleThemeHandler }}>
+                <Header className="app__header" />
+                <main className="app__main">
+                  <Routes>
+                    <Route path="/profile" element={<Profile />} />
+                    <Route path="/chat" element={<Chat />} />
+                  </Routes>
+                </main>
+              </ThemeContext.Provider>
+            </ChatContext.Provider>
+          </AuthContext.Provider>
+        </div>
+      </AppContext.Provider>
     </BrowserRouter>
   );
 }
