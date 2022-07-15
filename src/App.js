@@ -18,6 +18,7 @@ function App() {
   const [isAutoplayOn, setIsAutoplayOn] = useState(false);
   const [profileData, setProfileData] = useState({ loggedIn: true, userId: "twok_user_1" });
   const [chatsList, setChatsList] = useState(null);
+  const [showAllMessageTranslations, setShowAllMessageTranslations] = useState(false);
 
   const toggleThemeHandler = (newState) => {
     setIsDark(newState);
@@ -58,6 +59,8 @@ function App() {
               toggleAutoPlayHandler,
               chatsList,
               setChatsList,
+              showAllMessageTranslations,
+              setShowAllMessageTranslations
             }}
           >
             <ThemeContext.Provider value={{ isDark, toggleThemeHandler }}>

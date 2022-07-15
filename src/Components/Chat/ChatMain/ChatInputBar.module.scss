@@ -9,6 +9,10 @@
 
     position: relative;
 
+    &.enabled {
+        border: 1px solid rgba(42, 203, 238, 0.4);
+    }
+
     & .translation {
         color: #ABABAB;
         font-size: 1.8em;

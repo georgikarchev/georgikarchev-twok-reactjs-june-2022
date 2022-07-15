@@ -1,4 +1,6 @@
-import styles from "./ChatInputBar.module.scss";
+import { useContext } from "react";
+
+import { ChatContext } from "../../../Contexts/ChatContext";
 
 import sendImage from "../../../images/send.svg";
 import translateActive from "../../../images/translate--active.svg";
@@ -6,22 +8,33 @@ import translateInactive from "../../../images/translate--inactive.svg";
 import lightbulbActive from "../../../images/lightbulb--active.svg";
 import lightbulbInactive from "../../../images/lightbulb--inactive.svg";
 
-export const ChatInputBar = ({translation, showAllTranslations, showAllTranslationsHandler,showHints, showHintsHandler}) => {
+import styles from "./ChatInputBar.module.scss";
+
+export const ChatInputBar = ({translation, showHints, showHintsHandler, inputIsEnabled}) => {
+
+    const {showAllMessageTranslations, setShowAllMessageTranslations} = useContext(ChatContext);
 
     const onInputChangeHandler = (e) => {
         console.log(e.target.value);
     };
 
+    const translationsToggleHandler = () => {
+        setShowAllMessageTranslations(state => !state);
+    }
+
+    let chatInputBarClassNames = styles.chatInputBar;
+    chatInputBarClassNames += inputIsEnabled? " " + styles.enabled : "";
+    
     let showAllTranslationsClassNames = styles.showAllTranslations;
-    showAllTranslationsClassNames += showAllTranslations? "" : " " + styles.inactive;
+    showAllTranslationsClassNames += showAllMessageTranslations? "" : " " + styles.inactive;
 
     let showHintsClassNames = styles.showHints;
     showHintsClassNames += showHints? "" : " " + styles.inactive;
 
     return (
-        <div className={styles.chatInputBar}>
-            <div className={showAllTranslationsClassNames} onClick={showAllTranslationsHandler}>
-                <img src={showAllTranslations? translateActive : translateInactive} alt={showAllTranslations? "stop showing all translations" : "show all translations"} />
+        <div className={chatInputBarClassNames}>
+            <div className={showAllTranslationsClassNames} onClick={translationsToggleHandler}>
+                <img src={showAllMessageTranslations? translateActive : translateInactive} alt={showAllMessageTranslations? "stop showing all translations" : "show all translations"} />
             </div>
             <div className={styles.inputPlus}>+</div>
             <label className={styles.translation}>{translation}Gut dick kennen zu lernen.</label>

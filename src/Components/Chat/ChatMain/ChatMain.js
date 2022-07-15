@@ -1,18 +1,16 @@
 import { useEffect, useState } from "react";
 
-import { stringToDdMonthYyyy } from "../../../Utils/dateUtils";
 import * as chatService from "../../../Services/chatService";
 
 import { ChatInputBar } from "./ChatInputBar";
 import styles from "./ChatMain.module.scss";
-import { ChatMessage } from "./ChatMessage";
-import { ChatNotification } from "./ChatNotification";
-import { Spinner } from "../../Common/Spinner";
+import { ChatContent } from "./ChatContent";
+import { ChatHeader } from "./ChatHeader";
 
 export const ChatMain = ({ chatId }) => {
   const [chatData, setChatData] = useState(null);
-  const [showAllTranslations, setShowAllTranslations] = useState(false);
   const [showHints, setShowHints] = useState(false);
+  const [inputIsEnabled, setInputIsEnabled] = useState(true);
 
   // Load chat data from server
   useEffect(() => {
@@ -83,35 +81,6 @@ export const ChatMain = ({ chatId }) => {
     }, 800);
   }, [chatId]);
 
-  let messages = <Spinner />;
-  if (chatData && chatData.messages.length > 0) {
-    messages = chatData.messages.map((message) => {
-      console.log(Number(message.id) <= Number(chatData.lastMessageId));
-      if (Number(message.id) <= Number(chatData.lastMessageId)) {
-        if (message.type === "chatMessage") {
-          return (
-            <ChatMessage
-              key={"message_" + chatData.id + "_" + message.id}
-              {...message}
-              showAllTranslations={showAllTranslations}
-            />
-          );
-        } else if (message.type === "chatNotification") {
-          return (
-            <ChatNotification
-              key={"message_" + chatData.id + "_" + message.id}
-              {...message}
-            />
-          );
-        }
-      }
-    });
-  }
-
-  const showAllTranslationsHandler = () => {
-    setShowAllTranslations((state) => !state);
-  };
-
   const showHintsHandler = () => {
     setShowHints((state) => !state);
   };
@@ -124,31 +93,19 @@ export const ChatMain = ({ chatId }) => {
           <p>Choose a chat from the list on the left.</p>
         </div>
       )}
-      {chatId && (
+      {chatId && chatData && (
         <>
-          <div className={styles.chatContent}>
-            <main className={styles.chatContent__body}>
-              <div className={styles.chatMeta}>
-                {chatData && chatData.dateCreated !== "" && (
-                  <span className={styles.dateCreated}>
-                    {stringToDdMonthYyyy(chatData.dateCreated)}
-                  </span>
-                )}
-                {chatData && chatData.contactDescription !== "" && (
-                  <h3 className={styles.description}>
-                    {chatData.contactDescription}
-                  </h3>
-                )}
-              </div>
-              {messages}
-            </main>
-          </div>
+          <header>
+            <ChatHeader name={chatData.contactName} avatar={chatData.contactAvatar} desrciption={chatData.contactDescription} />
+          </header>
+          <main>
+            <ChatContent chatData={chatData} />
+          </main>
           <footer>
             <ChatInputBar
-              showAllTranslations={showAllTranslations}
-              showAllTranslationsHandler={showAllTranslationsHandler}
               showHints={showHints}
               showHintsHandler={showHintsHandler}
+              inputIsEnabled={inputIsEnabled}
             />
           </footer>
         </>
