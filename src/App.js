@@ -2,12 +2,12 @@
 import React, { useState } from "react";
 import { BrowserRouter } from "react-router-dom";
 
-import { ThemeContext } from "./contexts/ThemeContext";
-import { ChatContext } from "./contexts/ChatContext";
-import { AuthContext } from "./contexts/AuthContext";
+import { ThemeContext } from "./Contexts/ThemeContext";
+import { ChatContext } from "./Contexts/ChatContext";
+import { AuthContext } from "./Contexts/AuthContext";
 import { Route, Routes } from "react-router";
 
-import { Header } from "./Components/Header";
+import { Header } from "./Components/Header/Header";
 import { Profile } from "./Components/Profile/Profile";
 import { Chat } from "./Components/Chat/Chat";
 
@@ -16,7 +16,7 @@ import "./App.scss";
 function App() {
   const [isDark, setIsDark] = useState(false);
   const [isAutoplayOn, setIsAutoplayOn] = useState(false);
-  const [profileData, setProfileData] = useState({ loggedIn: false });
+  const [profileData, setProfileData] = useState({ loggedIn: true, userId: "twok_user_1" });
   const [chatsList, setChatsList] = useState(null);
 
   const toggleThemeHandler = (newState) => {

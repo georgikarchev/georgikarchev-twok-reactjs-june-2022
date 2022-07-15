@@ -1,0 +1,96 @@
+.chatMain {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+
+  height: 100%;
+  overflow: hidden;
+
+  .noChatSelectedMessage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+    font-size: 2em;
+    font-weight: 600;
+    color: #ababab;
+  }
+
+  & .chatContent {
+    position: relative;
+
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: space-between;
+    align-items: stretch;
+    padding-left: clamp(3rem, 5%, 7rem);
+    padding-right: clamp(3rem, 5%, 7rem);
+
+    width: 100%;
+    box-sizing: border-box;
+
+    overflow-x: hidden; /*for hiding horizontal scroll bar*/
+    overflow-y: auto; /*for vertical scroll bar*/
+
+    & .chatMeta {
+      margin-top: 6rem;
+      text-align: center;
+      font-size: 1.8rem;
+      line-height: 1;
+      margin-bottom: 10rem;
+
+      & .dateCreated {
+        font-size: 1.6rem;
+        text-align: inherit;
+        color: #787878;
+      }
+
+      & h3.description {
+        font-size: inherit;
+        font-weight: unset;
+        color: #ababab;
+      }
+    }
+
+    &__body {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: stretch;
+    }
+  }
+
+  & footer {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    width: 100%;
+    bottom: 2rem;
+  }
+}
+
+.verticalScroll::-webkit-scrollbar {
+  width: 0.5em;
+  height: 1em;
+}
+
+.verticalScroll::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 100vw;
+  margin-block: 0.5em;
+}
+
+.verticalScroll::-webkit-scrollbar-thumb {
+  background: #ababab;
+  // border: 0.25em solid rgb(32, 223, 32);
+  border-radius: 100vw;
+}
+
+.verticalScroll::-webkit-scrollbar-thumb:hover {
+  background: rgb(0, 51, 0);
+}

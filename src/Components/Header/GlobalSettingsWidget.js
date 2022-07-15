@@ -1,13 +1,13 @@
 import { useContext } from "react";
 
-import { ThemeContext } from "../contexts/ThemeContext";
-import { ChatContext } from "../contexts/ChatContext";
+import { ThemeContext } from "../../Contexts/ThemeContext";
+import { ChatContext } from "../../Contexts/ChatContext";
 
 import styles from "./GlobalSettingsWidget.module.scss";
-import moon from "../images/moon.svg";
-import sun from "../images/sun.svg";
-import autoplayOn from "../images/autoplayOn.svg";
-import autoplayOff from "../images/autoplayOff.svg";
+import moon from "./images/moon.svg";
+import sun from "./images/sun.svg";
+import autoplayOn from "./images/autoplayOn.svg";
+import autoplayOff from "./images/autoplayOff.svg";
 
 
 export const GlobalSettingsWidget = () => {

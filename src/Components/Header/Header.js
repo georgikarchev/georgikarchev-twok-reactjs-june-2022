@@ -3,7 +3,7 @@ import { Navigation } from "./Navigation";
 
 import styles from "./Header.module.scss";
 
-import logo from "../images/twok-logo--icon-text.svg";
+import logo from "./images/twok-logo--icon-text.svg";
 
 export const Header = (props) => {
   return (

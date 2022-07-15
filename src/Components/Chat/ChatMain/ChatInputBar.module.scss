@@ -20,7 +20,7 @@
 
     & .showAllTranslations,
     & .inputPlus,
-    & .showHelp {
+    & .showHints {
         position: absolute;
         top: 1.8rem;
 
@@ -63,9 +63,18 @@
             height: auto;
         }
     }
-    & .showHelp {
+    & .showHints {
         right: -5.8rem;
         background-color: #F9F9F9;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        & img {
+            width: 3.0rem;
+            height: auto;
+        }
     }
     
     & .inactive {

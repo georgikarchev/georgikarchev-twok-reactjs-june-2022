@@ -1,4 +1,4 @@
-import spinner from "../images/spinner.svg";
+import spinner from "../../images/spinner.svg";
 import styles from "./Spinner.module.scss";
 
 export const Spinner = () => {

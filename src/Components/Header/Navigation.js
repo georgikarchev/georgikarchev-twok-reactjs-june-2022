@@ -1,13 +1,13 @@
 import { useContext, useState } from "react";
 
-import { AuthContext } from "../contexts/AuthContext";
+import { AuthContext } from "../../Contexts/AuthContext";
 
 import styles from "./Navigation.module.scss";
 
-import menu from "../images/menu.svg";
-import cross from "../images/cross.svg";
-import user from "../images/user.svg";
-import userAnonymous from "../images/user-anonymous.svg";
+import menu from "./images/menu.svg";
+import cross from "./images/cross.svg";
+import user from "./images/user.svg";
+import userAnonymous from "./images/user-anonymous.svg";
 
 export const Navigation = (props) => {
   const [isOpen, setIsOpen] = useState(false);

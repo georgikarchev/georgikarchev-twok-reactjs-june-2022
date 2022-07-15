@@ -17,7 +17,7 @@
   &.userMessage {
     flex-direction: row-reverse;
 
-    &.userMessage .content {
+    &.userMessage .body {
       background: rgba(42, 203, 238, 0.2);
       -webkit-border-radius: 28px;
       -webkit-border-top-right-radius: 3px;
@@ -27,7 +27,7 @@
       border-top-right-radius: 3px;
     }
 
-    &.false .content {
+    &.false .body {
       background: rgba(42, 203, 238, 0.05);
       border: 1px solid #787878;
       border-style: dashed;
@@ -36,7 +36,7 @@
   }
 
   &.bookmarked {
-    & .content {
+    & .body {
       border: 1px solid #11a6c7;
     }
 
@@ -93,7 +93,7 @@
     transition: opacity 0.5s;
   }
 
-  & .content {
+  & .body {
     max-width: 45%;
 
     display: block;

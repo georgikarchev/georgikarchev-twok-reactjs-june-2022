@@ -1,11 +1,11 @@
 // import { useContext } from "react";
 // import { ChatContext } from "../../contexts/ChatContext";
-import { Spinner } from "../Spinner";
+import { Spinner } from "../../Common/Spinner";
 import { ChatThumbnail } from "./ChatThumbnail";
 
 import styles from "./ChatsList.module.scss";
 
-export const ChatsList = ({ currentChat, selectChatHandler, chatListData }) => {
+export const ChatsList = ({ currentChat, selectChatHandler, chatsListData }) => {
   // const {chatsList} = useContext(ChatContext)
 
   let list = (
@@ -13,15 +13,15 @@ export const ChatsList = ({ currentChat, selectChatHandler, chatListData }) => {
       <Spinner />
     </div>
   );
-  if (chatListData && chatListData.length > 0) {
+  if (chatsListData && chatsListData.list.length > 0) {
     // TODO order chats by date (date last message/date last update)
-    list = chatListData.map((chat) => {
+    list = chatsListData.list.map((chat) => {
       return (
         <ChatThumbnail
           key={`twokChatThumbnail_${chat.id}`}
           chat={chat}
           isCurrent={chat.id === currentChat}
-          selectChatHandler={selectChatHandler}
+          onSelectChat={selectChatHandler}
         />
       );
     });

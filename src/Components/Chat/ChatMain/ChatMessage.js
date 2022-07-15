@@ -1,15 +1,17 @@
 import { useState } from "react";
 // import { CSSTransition } from 'react-transition-group';
-import bookmark from "../../images/bookmark.svg";
+import bookmark from "../../../images/bookmark.svg";
 import styles from "./ChatMessage.module.scss";
 
 export const ChatMessage = ({
   id,
   authorIsUser,
-  content,
-  translation,
   isBookmarked,
-  isCorrect,
+  datetime,
+  type,
+  body,
+  translation,
+  words,
   showAllTranslations
 }) => {
   const [showTranslation, setShowTranslation] = useState(false);
@@ -17,7 +19,7 @@ export const ChatMessage = ({
   let messageClassNames = styles.message;
   messageClassNames += authorIsUser !== undefined && authorIsUser ? " " + styles.userMessage : " " + styles.botMessage;
   messageClassNames += isBookmarked ? " " + styles.bookmarked : "";
-  messageClassNames += isCorrect !== undefined && isCorrect ? " " + styles.correct : " " + styles.false;
+  // messageClassNames += isCorrect !== undefined && isCorrect ? " " + styles.correct : " " + styles.false;
   
   let translationClassNames = styles.translation;
   if(showAllTranslations) {
@@ -33,7 +35,7 @@ export const ChatMessage = ({
 
   return (
     <article className={messageClassNames} onClick={onClickHandler}>
-      <div className={styles.content}>{content}</div>
+      <div className={styles.body}>{body}</div>
       {isBookmarked && <span className={styles.bookmark}><img src={bookmark} alt="bookmarked" /></span>}
       {/* {showTranslation && <span className={translationClassNames}>{translation}</span>} */}
       {/* <CSSTransition in={showTranslation} timeout={200} className="transition"> */}
