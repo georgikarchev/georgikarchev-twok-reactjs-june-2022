@@ -1,12 +1,12 @@
 import { useContext } from "react";
 
-import { ChatContext } from "../../../Contexts/ChatContext";
+import { ChatContext } from "../../../../Contexts/ChatContext";
 
-import sendImage from "../../../images/send.svg";
-import translateActive from "../../../images/translate--active.svg";
-import translateInactive from "../../../images/translate--inactive.svg";
-import lightbulbActive from "../../../images/lightbulb--active.svg";
-import lightbulbInactive from "../../../images/lightbulb--inactive.svg";
+import sendImage from "./images/send.svg";
+import translateActive from "./images/translate--active.svg";
+import translateInactive from "./images/translate--inactive.svg";
+import lightbulbActive from "./images/lightbulb--active.svg";
+import lightbulbInactive from "./images/lightbulb--inactive.svg";
 
 import styles from "./ChatInputBar.module.scss";
 

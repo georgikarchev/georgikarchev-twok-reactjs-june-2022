@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 
 import * as chatService from "../../../Services/chatService";
 
-import { ChatInputBar } from "./ChatInputBar";
+import { ChatInputBar } from "./ChatInputBar/ChatInputBar";
 import styles from "./ChatMain.module.scss";
-import { ChatContent } from "./ChatContent";
+import { ChatContent } from "./ChatContent/ChatContent";
 import { ChatHeader } from "./ChatHeader";
 
 export const ChatMain = ({ chatId }) => {

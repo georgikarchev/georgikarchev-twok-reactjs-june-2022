@@ -1,10 +1,10 @@
 import { useContext } from "react";
 
-import { stringToDdMonthYyyy } from "../../../Utils/dateUtils";
+import { stringToDdMonthYyyy } from "../../../../Utils/dateUtils";
 
-import { ChatContext } from "../../../Contexts/ChatContext";
+import { ChatContext } from "../../../../Contexts/ChatContext";
 
-import { Spinner } from "../../Common/Spinner";
+import { Spinner } from "../../../Common/Spinner";
 import { ChatMessage } from "./ChatMessage";
 import { ChatNotification } from "./ChatNotification";
 

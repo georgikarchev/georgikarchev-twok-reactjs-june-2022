@@ -1,9 +1,9 @@
 import { useContext, useState } from "react";
 
-import { ChatContext } from "../../../Contexts/ChatContext";
+import { ChatContext } from "../../../../Contexts/ChatContext";
 
 // import { CSSTransition } from 'react-transition-group';
-import bookmark from "../../../images/bookmark.svg";
+import bookmark from "../../../../images/bookmark.svg";
 import styles from "./ChatMessage.module.scss";
 
 export const ChatMessage = ({
