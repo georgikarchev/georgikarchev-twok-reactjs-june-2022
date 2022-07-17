@@ -12,7 +12,7 @@ export const ChatMessageInfo = () => {
   const { appSettings } = useContext(AppContext);
 
   const words = !selectedMessageData? '' : selectedMessageData.words.map((word) => {
-    console.log(word[languageCodesIso2.en].join(', '));
+    // console.log(word[languageCodesIso2.en].join(', '));
     // ! TODO - Use appSettings.appLanguage
     return (
         <article key={`word_${word.id}`} className={styles.word}>

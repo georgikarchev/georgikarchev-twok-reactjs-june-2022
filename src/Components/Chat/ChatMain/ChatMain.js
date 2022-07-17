@@ -11,6 +11,7 @@ import { Spinner } from "../../Common/Spinner";
 export const ChatMain = ({ currentChatId }) => {
   const [chatData, setChatData] = useState(null);
   const [inputIsEnabled, setInputIsEnabled] = useState(false);
+  const [userMessage, setUserMessage] = useState(null);
 
   // Load chat data from server
   useEffect(() => {
@@ -22,20 +23,31 @@ export const ChatMain = ({ currentChatId }) => {
     }, 800);
   }, [currentChatId]);
 
-  let userMesage = null;
   if(chatData) {
-    const message = chatData.messages.find(x => Number(x.id) === Number(chatData.lastMessageId)+1); 
+    let message = chatData.messages.find(x => Number(x.id) === Number(chatData.lastMessageId)+1); 
     
     if(message.authorIsUser) {
       if(!inputIsEnabled) {
         setInputIsEnabled(true);
-        console.log(message);
-        userMesage = {...message};
+        setUserMessage({...message})
       }
     } else {
       setInputIsEnabled(false);
       message = null;
     }
+  }
+
+  const onSendHandler = () => {
+    // ! TODO - update chatData on server
+    
+    // lastMessageId++
+    setChatData(state => ({
+      ...state,
+      lastMessageId: state.lastMessageId + 1
+    }));
+
+    // load next message
+    
   }
 
 
@@ -57,8 +69,9 @@ export const ChatMain = ({ currentChatId }) => {
           </main>
           <footer>
             <ChatInputBar
-              messageData={userMesage}
+              messageData={userMessage}
               inputIsEnabled={inputIsEnabled}
+              onSend={onSendHandler}
             />
           </footer>
         </>

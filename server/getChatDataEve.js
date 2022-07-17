@@ -40,7 +40,7 @@ export const chatData = {
       isBookmarked: false,
       datetime: "2022-06-30T13:12:03.000Z",
       type: "chatMessade",
-      body: "Hallo",
+      body: "Hallo!",
       translation: "Hello!",
       words: [{ id: "w1", de: "hallo", en: ["hello"] }],
     },
