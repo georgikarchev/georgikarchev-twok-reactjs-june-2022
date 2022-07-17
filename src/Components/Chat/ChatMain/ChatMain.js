@@ -13,8 +13,21 @@ export const ChatMain = ({ currentChatId }) => {
   const [inputIsEnabled, setInputIsEnabled] = useState(false);
   const [userMessage, setUserMessage] = useState(null);
 
+  if (chatData) {
+    console.log(
+      "ChatMain component | lastMessageId: ",
+      chatData.lastMessageId ? chatData.lastMessageId : null
+    );
+  } else {
+    console.log("ChatMain component ChatData is: ", chatData);
+  }
+
   // Load chat data from server
   useEffect(() => {
+    if (!currentChatId) {
+      return;
+    }
+    console.log("Load Chat Data from server. currentChatiD: ", currentChatId);
     setChatData(null);
     setTimeout(() => {
       chatService.getChat(currentChatId).then((chatDataResponse) => {
@@ -23,33 +36,44 @@ export const ChatMain = ({ currentChatId }) => {
     }, 800);
   }, [currentChatId]);
 
-  if(chatData) {
-    let message = chatData.messages.find(x => Number(x.id) === Number(chatData.lastMessageId)+1); 
-    
-    if(message.authorIsUser) {
-      if(!inputIsEnabled) {
-        setInputIsEnabled(true);
-        setUserMessage({...message})
+  useEffect(() => {
+    if (chatData) {
+      let message = chatData.messages.find(
+        (x) => Number(x.id) === Number(chatData.lastMessageId) + 1
+      );
+
+      if (message.authorIsUser) {
+        if (!inputIsEnabled) {
+          setInputIsEnabled(true);
+          setUserMessage({ ...message });
+        }
+      } else {
+        setInputIsEnabled(false);
+        message = null;
+        setUserMessage(null);
       }
-    } else {
-      setInputIsEnabled(false);
-      message = null;
     }
-  }
+  }, [chatData, inputIsEnabled]);
 
   const onSendHandler = () => {
     // ! TODO - update chatData on server
-    
+
     // lastMessageId++
-    setChatData(state => ({
+    console.log("onSendHandler | lastMessageId: ", chatData.lastMessageId);
+    // if (chatData.lastMessageId === 3) {
+    //   return;
+    // }
+    setChatData((state) => ({
       ...state,
-      lastMessageId: state.lastMessageId + 1
+      lastMessageId: state.lastMessageId + 1,
     }));
 
     // load next message
-    
-  }
+  };
 
+  const showBotMessage = () => {
+
+  };
 
   return (
     <div className={`${styles.chatMain} ${styles.verticalScroll}`}>
@@ -62,7 +86,11 @@ export const ChatMain = ({ currentChatId }) => {
       {currentChatId && chatData !== null && (
         <>
           <header>
-            <ChatHeader name={chatData.contactName} avatar={chatData.contactAvatar} desrciption={chatData.contactDescription} />
+            <ChatHeader
+              name={chatData.contactName}
+              avatar={chatData.contactAvatar}
+              desrciption={chatData.contactDescription}
+            />
           </header>
           <main>
             <ChatContent chatData={chatData} />
@@ -76,7 +104,11 @@ export const ChatMain = ({ currentChatId }) => {
           </footer>
         </>
       )}
-      {currentChatId && chatData === null &&<div className={styles.spinnerWrapper}><Spinner /></div>}
+      {currentChatId && chatData === null && (
+        <div className={styles.spinnerWrapper}>
+          <Spinner />
+        </div>
+      )}
     </div>
   );
 };
