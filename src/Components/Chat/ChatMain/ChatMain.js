@@ -10,7 +10,6 @@ import { Spinner } from "../../Common/Spinner";
 
 export const ChatMain = ({ currentChatId }) => {
   const [chatData, setChatData] = useState(null);
-  const [showHints, setShowHints] = useState(false);
   const [inputIsEnabled, setInputIsEnabled] = useState(false);
 
   // Load chat data from server
@@ -23,9 +22,22 @@ export const ChatMain = ({ currentChatId }) => {
     }, 800);
   }, [currentChatId]);
 
-  const showHintsHandler = () => {
-    setShowHints((state) => !state);
-  };
+  let userMesage = null;
+  if(chatData) {
+    const message = chatData.messages.find(x => Number(x.id) === Number(chatData.lastMessageId)+1); 
+    
+    if(message.authorIsUser) {
+      if(!inputIsEnabled) {
+        setInputIsEnabled(true);
+        console.log(message);
+        userMesage = {...message};
+      }
+    } else {
+      setInputIsEnabled(false);
+      message = null;
+    }
+  }
+
 
   return (
     <div className={`${styles.chatMain} ${styles.verticalScroll}`}>
@@ -45,8 +57,7 @@ export const ChatMain = ({ currentChatId }) => {
           </main>
           <footer>
             <ChatInputBar
-              showHints={showHints}
-              showHintsHandler={showHintsHandler}
+              messageData={userMesage}
               inputIsEnabled={inputIsEnabled}
             />
           </footer>

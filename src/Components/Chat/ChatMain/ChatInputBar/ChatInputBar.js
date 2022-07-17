@@ -11,11 +11,14 @@ import lightbulbInactive from "./images/lightbulb--inactive.svg";
 import styles from "./ChatInputBar.module.scss";
 import { useState } from "react";
 
-export const ChatInputBar = ({translation, showHints, showHintsHandler, inputIsEnabled}) => {
+export const ChatInputBar = ({translation, inputIsEnabled, messageData}) => {
 
     const [isTouched, setIsTouched] = useState(false);
     const [isValid, setIsValid] = useState(false);
+    const [showHints, setShowHints] = useState(false);
     const {showAllMessageTranslations, setShowAllMessageTranslations} = useContext(ChatContext);
+
+    console.log(messageData);
 
     const onInputChangeHandler = (e) => {
         console.log(e.target.value);
@@ -24,6 +27,10 @@ export const ChatInputBar = ({translation, showHints, showHintsHandler, inputIsE
     const translationsToggleHandler = () => {
         setShowAllMessageTranslations(state => !state);
     }
+
+    const hintsClickHandler = () => {
+        setShowHints(state => !state);
+    };
 
     let chatInputBarClassNames = styles.chatInputBar;
     chatInputBarClassNames += inputIsEnabled? " " + styles.enabled : "";
@@ -47,7 +54,7 @@ export const ChatInputBar = ({translation, showHints, showHintsHandler, inputIsE
             
             {/* If input is VALID & Correct = show SEND button ELSE show HINTS button */}
             <img className={styles.sendButton} src={sendImage} alt="send" />
-            <div className={showHintsClassNames} onClick={showHintsHandler}>
+            <div className={showHintsClassNames} onClick={hintsClickHandler}>
                 <img src={showHints? lightbulbActive : lightbulbInactive} alt="show hints" />
             </div>
         </div>

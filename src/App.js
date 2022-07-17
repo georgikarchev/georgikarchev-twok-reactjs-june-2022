@@ -1,12 +1,12 @@
 // import logo from './images/logo.svg';
 import React, { useState } from "react";
 import { BrowserRouter } from "react-router-dom";
+import { Route, Routes } from "react-router";
 
 import { AppContext } from "./Contexts/AppContext";
 import { ThemeContext } from "./Contexts/ThemeContext";
 import { ChatContext } from "./Contexts/ChatContext";
 import { AuthContext } from "./Contexts/AuthContext";
-import { Route, Routes } from "react-router";
 
 import { Header } from "./Components/Header/Header";
 import { Profile } from "./Components/Profile/Profile";
