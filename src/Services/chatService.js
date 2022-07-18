@@ -62,7 +62,7 @@ const chatData = {
     unread: false,
     pinned: false,
     dateCreated: "2022-06-30T12:00:00.000Z",
-    lastMessageId: 2,
+    lastMessageId: 0,
     messages: [
       {
         id: 1,
@@ -192,7 +192,7 @@ const chatData = {
         isBookmarked: false,
         datetime: "2022-06-30T13:13:03.000Z",
         type: "chatMessage",
-        body: "",
+        body: "Ja!",
         translation: "Yes!",
         words: [{ id: "w25", de: "Ja", en: ["Yes"] }],
       },

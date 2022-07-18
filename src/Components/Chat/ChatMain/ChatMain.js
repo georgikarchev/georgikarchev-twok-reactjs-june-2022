@@ -1,4 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useContext, useState } from "react";
+
+import { ChatContext } from "../../../Contexts/ChatContext";
 
 import * as chatService from "../../../Services/chatService";
 
@@ -8,72 +10,109 @@ import { ChatContent } from "./ChatContent/ChatContent";
 import { ChatHeader } from "./ChatHeader";
 import { Spinner } from "../../Common/Spinner";
 
-export const ChatMain = ({ currentChatId }) => {
-  const [chatData, setChatData] = useState(null);
-  const [inputIsEnabled, setInputIsEnabled] = useState(false);
-  const [userMessage, setUserMessage] = useState(null);
+import translateActive from "./images/translate--active.svg";
+import translateInactive from "./images/translate--inactive.svg";
 
-  if (chatData) {
-    console.log(
-      "ChatMain component | lastMessageId: ",
-      chatData.lastMessageId ? chatData.lastMessageId : null
-    );
-  } else {
-    console.log("ChatMain component ChatData is: ", chatData);
-  }
+export const ChatMain = ({ currentChatId }) => {
+  // const [chatData, setChatData] = useState(null);
+  // const [inputIsEnabled, setInputIsEnabled] = useState(false);
+  // const [userMessage, setUserMessage] = useState(null);
+
+  const [chatState, setChatState] = useState({
+    chatData: null,
+    inputIsEnabled: false,
+    userMessage: null,
+  });
+
+  const { showAllMessageTranslations, setShowAllMessageTranslations } =
+    useContext(ChatContext);
+
+  // if (chatState.chatData) {
+  //   console.log(
+  //     "ChatMain component | lastMessageId: ",
+  //     chatState.chatData.lastMessageId ? chatState.chatData.lastMessageId : null
+  //   );
+  // } else {
+  //   console.log("ChatMain component ChatData is: ", chatState.chatData);
+  // }
 
   // Load chat data from server
   useEffect(() => {
     if (!currentChatId) {
       return;
     }
-    console.log("Load Chat Data from server. currentChatiD: ", currentChatId);
-    setChatData(null);
+    // console.log("Load Chat Data from server. currentChatiD: ", currentChatId);
+    setChatState((state) => ({
+      ...state,
+      chatData: null,
+    }));
     setTimeout(() => {
       chatService.getChat(currentChatId).then((chatDataResponse) => {
-        setChatData(chatDataResponse);
+        setChatState((state) => ({
+          ...state,
+          chatData: chatDataResponse,
+        }));
       });
     }, 800);
   }, [currentChatId]);
 
   useEffect(() => {
-    if (chatData) {
-      let message = chatData.messages.find(
-        (x) => Number(x.id) === Number(chatData.lastMessageId) + 1
-      );
-
-      if (message.authorIsUser) {
-        if (!inputIsEnabled) {
-          setInputIsEnabled(true);
-          setUserMessage({ ...message });
+    if (chatState.chatData) {
+      let message = chatState.chatData.messages.find(
+        (x) => Number(x.id) === Number(chatState.chatData.lastMessageId) + 1
+        );
+        if (message !== undefined) {
+        if (message.authorIsUser) {
+          setChatState((state) => ({
+            ...state,
+            inputIsEnabled: true,
+            userMessage: { ...message },
+          }));
+        } else {
+          message = null;
+          if(chatState.inputIsEnabled === true) {
+            setChatState((state) => ({
+              ...state,
+              inputIsEnabled: false,
+              userMessage: null,
+            }));
+          }
+          showBotMessage();
         }
-      } else {
-        setInputIsEnabled(false);
-        message = null;
-        setUserMessage(null);
       }
     }
-  }, [chatData, inputIsEnabled]);
+  }, [chatState.chatData]);
 
   const onSendHandler = () => {
     // ! TODO - update chatData on server
-
-    // lastMessageId++
-    console.log("onSendHandler | lastMessageId: ", chatData.lastMessageId);
-    // if (chatData.lastMessageId === 3) {
-    //   return;
-    // }
-    setChatData((state) => ({
-      ...state,
-      lastMessageId: state.lastMessageId + 1,
-    }));
-
-    // load next message
+    nextMessage();
   };
 
   const showBotMessage = () => {
-
+    // ! TODO - timeout should be dependent on the length of the message
+    const milisecondsToTypeOneSymbol = 30;
+    const symbolsInMessage = chatState.chatData.messages.find((x) => Number(x.id) === Number(chatState.chatData.lastMessageId) + 1).body.length;
+    setTimeout(nextMessage, symbolsInMessage * milisecondsToTypeOneSymbol);
   };
+
+  const nextMessage = () => {
+    setChatState((state) => ({
+      ...state,
+      chatData: {
+        ...state.chatData,
+        lastMessageId: state.chatData.lastMessageId + 1,
+      },
+    }));
+  };
+
+  const translationsToggleHandler = () => {
+    setShowAllMessageTranslations((state) => !state);
+  };
+
+  let showAllTranslationsClassNames = styles.showAllTranslations;
+  showAllTranslationsClassNames += showAllMessageTranslations
+    ? ""
+    : " " + styles.inactive;
 
   return (
     <div className={`${styles.chatMain} ${styles.verticalScroll}`}>
@@ -83,28 +122,41 @@ export const ChatMain = ({ currentChatId }) => {
           <p>Choose a chat from the list on the left.</p>
         </div>
       )}
-      {currentChatId && chatData !== null && (
+      {currentChatId && chatState.chatData !== null && (
         <>
           <header>
             <ChatHeader
-              name={chatData.contactName}
-              avatar={chatData.contactAvatar}
-              desrciption={chatData.contactDescription}
+              name={chatState.chatData.contactName}
+              avatar={chatState.chatData.contactAvatar}
+              desrciption={chatState.chatData.contactDescription}
             />
           </header>
           <main>
-            <ChatContent chatData={chatData} />
+            <ChatContent chatData={chatState.chatData} />
           </main>
           <footer>
+              <button
+            className={showAllTranslationsClassNames}
+            onClick={translationsToggleHandler}
+          >
+            <img
+              src={showAllMessageTranslations ? translateActive : translateInactive}
+              alt={
+                showAllMessageTranslations
+                  ? "stop showing all translations"
+                  : "show all translations"
+              }
+            />
+          </button>
             <ChatInputBar
-              messageData={userMessage}
-              inputIsEnabled={inputIsEnabled}
+              messageData={chatState.userMessage}
+              inputIsEnabled={chatState.inputIsEnabled}
               onSend={onSendHandler}
             />
           </footer>
         </>
       )}
-      {currentChatId && chatData === null && (
+      {currentChatId && chatState.chatData === null && (
         <div className={styles.spinnerWrapper}>
           <Spinner />
         </div>

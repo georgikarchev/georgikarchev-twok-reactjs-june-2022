@@ -31,10 +31,52 @@
 
   & footer {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
     position: absolute;
     width: 100%;
     bottom: 2rem;
+    padding-left: clamp(3rem, 5%, 7rem);
+    padding-right: clamp(3rem, 5%, 7rem);
+    box-sizing: border-box;
+
+    & .showAllTranslations {
+      border: unset;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: unset;
+      margin: unset;
+      margin-right: 2rem;
+
+      width: 4.6rem;
+      height: 4.6rem;
+
+      color: #2acbee;
+
+      border-radius: 50%;
+      background-color: #f9f9f9;
+      box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.05);
+
+      cursor: auto;
+      transition: all 0.2s ease-in-out;
+
+      
+      background-color: #f9f9f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+  
+      & img {
+        width: 3rem;
+        height: auto;
+      }
+  
+      &:hover {
+        transform: scale(0.9);
+      }
+    }
   }
 }
 

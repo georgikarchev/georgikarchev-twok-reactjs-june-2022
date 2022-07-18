@@ -1,39 +1,47 @@
-import { useContext, useEffect, useState } from "react";
-
-import { ChatContext } from "../../../../Contexts/ChatContext";
+import { useEffect, useState, useRef } from "react";
 
 import sendImage from "./images/send.svg";
-import translateActive from "./images/translate--active.svg";
-import translateInactive from "./images/translate--inactive.svg";
+// import translateActive from "./images/translate--active.svg";
+// import translateInactive from "./images/translate--inactive.svg";
 import lightbulbActive from "./images/lightbulb--active.svg";
 import lightbulbInactive from "./images/lightbulb--inactive.svg";
+import plus from "./images/plus.svg";
 
 import styles from "./ChatInputBar.module.scss";
 
-export const ChatInputBar = ({
-  inputIsEnabled,
-  messageData,
-  onSend,
-}) => {
+export const ChatInputBar = ({ inputIsEnabled, messageData, onSend }) => {
   const [userInput, setUserInput] = useState("");
   const [isTouched, setIsTouched] = useState(false);
   const [isValid, setIsValid] = useState(false);
   const [showHints, setShowHints] = useState(false);
-  const { showAllMessageTranslations, setShowAllMessageTranslations } =
-    useContext(ChatContext);
+
+  const inputField = useRef();
+
+  // const { showAllMessageTranslations, setShowAllMessageTranslations } =
+  //   useContext(ChatContext);
 
   useEffect(() => {
-    if(!messageData) {
-        setUserInput("");
-        setIsTouched(false);
-        setIsValid(false);
-        setShowHints(false);
+    if (!messageData) {
+      setUserInput("");
+      setIsTouched(false);
+      setIsValid(false);
+      setShowHints(false);
     }
-  },[messageData]);
+  }, [messageData]);
 
-  const translationsToggleHandler = () => {
-    setShowAllMessageTranslations((state) => !state);
-  };
+  useEffect(() => {
+    // autoFocus the input filed when the ChatInputbar is ebabled
+    if (inputIsEnabled) {
+      // console.log("tuk", inputField.current);
+      inputField.current.focus();
+      // console.log(document.getElementById("if1"));
+      // document.getElementById("if1").autofocus = true;
+    }
+  }, [inputIsEnabled]);
+
+  // const translationsToggleHandler = () => {
+  //   setShowAllMessageTranslations((state) => !state);
+  // };
 
   const hintsClickHandler = () => {
     setShowHints((state) => !state);
@@ -60,10 +68,10 @@ export const ChatInputBar = ({
   chatInputBarClassNames += isTouched ? " " + styles.touched : "";
   chatInputBarClassNames += isValid ? " " + styles.valid : "";
 
-  let showAllTranslationsClassNames = styles.showAllTranslations;
-  showAllTranslationsClassNames += showAllMessageTranslations
-    ? ""
-    : " " + styles.inactive;
+  // let showAllTranslationsClassNames = styles.showAllTranslations;
+  // showAllTranslationsClassNames += showAllMessageTranslations
+  //   ? ""
+  //   : " " + styles.inactive;
 
   let showHintsClassNames = styles.showHints;
   showHintsClassNames += showHints ? "" : " " + styles.inactive;
@@ -84,7 +92,7 @@ export const ChatInputBar = ({
 
   return (
     <div className={chatInputBarClassNames}>
-      <div
+      {/* <div
         className={showAllTranslationsClassNames}
         onClick={translationsToggleHandler}
       >
@@ -96,10 +104,17 @@ export const ChatInputBar = ({
               : "show all translations"
           }
         />
-      </div>
-      <button className={styles.inputPlus} disabled={!inputIsEnabled}>+</button>
-      {messageData && <label className={styles.translation}>{messageData.translation}</label>}
+      </div> */}
+      <button className={styles.inputPlus} disabled={!inputIsEnabled}>
+        <img src={plus} alt="special characters, emojies and media library" />
+      </button>
+      {messageData && (
+        <label className={styles.translation}>{messageData.translation}</label>
+      )}
       <input
+        id="if1"
+        ref={inputField}
+        autoFocus={true}
         className={styles.userInputField}
         type="text"
         onChange={userInputFieldChangeHandler}
