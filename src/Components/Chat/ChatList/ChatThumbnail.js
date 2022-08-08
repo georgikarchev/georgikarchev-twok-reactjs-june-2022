@@ -14,7 +14,7 @@ export const ChatThumbnail = ({ chat, isCurrent, onSelectChat }) => {
     : "";
 
   return (
-    <div className={thumbnailClassNames} onClick={()=>{onSelectChat(chat.id)}}>
+    <div className={thumbnailClassNames} onClick={()=>{onSelectChat(chat.chatId)}}>
       <h4 className={styles.contactName}>{chat.contactName}</h4>
       <img
         className={styles.contactAvatar}

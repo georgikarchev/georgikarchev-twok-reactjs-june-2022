@@ -8,21 +8,26 @@ import { ThemeContext } from "./Contexts/ThemeContext";
 import { ChatContext } from "./Contexts/ChatContext";
 import { AuthContext } from "./Contexts/AuthContext";
 
+// import * as authService from "./Services/authService";
+import * as storageService from "./Services/storageService";
+
 import { Header } from "./Components/Header/Header";
+import { Login } from "./Components/Auth/Login/Login";
 import { Profile } from "./Components/Profile/Profile";
 import { Chat } from "./Components/Chat/Chat";
+import { LoginWithPermalink } from "./Components/Auth/LoginWithPermalink/LoginWithPermalink";
 
 import "./App.scss";
+import { useEffect } from "react";
 
 function App() {
   const [appSettings, setAppSettings] = useState({ appLanguage: "en" });
 
   const [isDark, setIsDark] = useState(false);
   const [isAutoplayOn, setIsAutoplayOn] = useState(false);
-  const [profileData, setProfileData] = useState({
-    loggedIn: true,
-    userId: "twok_user_1",
-  });
+  const [profileData, setProfileData] = useState({ loggedIn: false });
+  // { loggedIn: false }
+  // userId: "twok_user_1",
   const [showAllMessageTranslations, setShowAllMessageTranslations] =
     useState(false);
   const [selectedMessageData, setSelectedMessageData] = useState(null);
@@ -35,24 +40,41 @@ function App() {
     setIsAutoplayOn(newState);
   };
 
-  const logInTestHandler = () => {
-    setProfileData((oldState) => {
-      if (oldState.loggedIn) {
-        return { loggedIn: false };
-      } else {
-        return {
-          ...oldState,
-          loggedIn: !oldState.loggedIn,
-          profileImage: "./images/test-avatar.jpg",
-          profileDisplayName: "GtoTheK",
-          publicKey: "gtwokAi8x9asfaA",
-          privateKey: "???",
-          registeredOn: "2022-06-30 12:00:01",
-          languages: ["german", "dutch"],
-        };
-      }
-    });
-  };
+  useEffect(()=>{
+    const userDataFromStorage = storageService.getUser();
+    if(!profileData.loggedIn && userDataFromStorage !== null) {
+      setProfileData(userDataFromStorage);
+    }
+  },[]);
+
+  // const fetchProfileData = () => {
+  //   setProfileData((oldState) => {
+  //     if (oldState.loggedIn) {
+  //       return { loggedIn: false };
+  //     } else {
+  //       return {
+  //         ...oldState,
+  //         loggedIn: !oldState.loggedIn,
+  //         profileImage: "./images/test-avatar.jpg",
+  //         profileDisplayName: "GtoTheK",
+  //         publicKey: "gtwokAi8x9asfaA",
+  //         privateKey: "???",
+  //         registeredOn: "2022-06-30 12:00:01",
+  //         languages: ["german", "dutch"],
+  //       };
+  //     }
+  //   });
+  // };
+
+  // const fetchProfileData = () => {
+  //   setProfileData((oldState) => {
+  //     authService.getProfile(username)
+  //       .then(userData => {
+  //         console.log(userData);
+
+  //       });
+  //   });
+  // };
 
   // const [isAutoplayOn, setIsAutoplayOn] = useState(false);
 
@@ -60,7 +82,7 @@ function App() {
     <BrowserRouter>
       <AppContext.Provider value={{ appSettings, setAppSettings }}>
         <div className="app">
-          <AuthContext.Provider value={{ profileData, logInTestHandler }}>
+          <AuthContext.Provider value={{ profileData, setProfileData }}>
             <ChatContext.Provider
               value={{
                 isAutoplayOn,
@@ -75,8 +97,12 @@ function App() {
                 <Header className="app__header" />
                 <main className="app__main">
                   <Routes>
+                    <Route path="/login" element={<Login />} />
                     <Route path="/profile" element={<Profile />} />
                     <Route path="/chat" element={<Chat />} />
+                    <Route path="/chat/:contactName" element={<Chat />} />
+                    <Route path="/:username" element={<LoginWithPermalink />} />
+                    <Route path="/" element={ profileData.loggedIn ? <Profile /> : <Login />} />
                   </Routes>
                 </main>
               </ThemeContext.Provider>

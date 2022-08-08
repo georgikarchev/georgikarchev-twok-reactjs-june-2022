@@ -13,12 +13,12 @@ export const ChatsList = ({ currentChatId, selectChatHandler, chatsListData }) =
       <Spinner />
     </div>
   );
-  if (chatsListData && chatsListData.list.length > 0) {
+  if (chatsListData !== null && chatsListData && chatsListData.list.length > 0) {
     // TODO order chats by date (date last message/date last update)
     list = chatsListData.list.map((chat) => {
       return (
         <ChatThumbnail
-          key={`twokChatThumbnail_${chat.id}`}
+          key={`twokChatThumbnail_${chat.chatId}_${chat.language}`}
           chat={chat}
           isCurrent={chat.id === currentChatId}
           onSelectChat={selectChatHandler}

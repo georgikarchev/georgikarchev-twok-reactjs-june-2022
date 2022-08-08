@@ -1,58 +1,60 @@
-// const baseUrl = "http://twok/api/";
+const baseUrl = "https://demo.twok.app";
 
 // CHAT
-export const getChatsList = async (userId) => {
+// export const getChatsList = async (userId) => {
+export const getChatsList = async (username) => {
   // Real - uncomment once server is ready
-  //   const response = await fetch(`${baseUrl}/chats/${userId}`);
+  // console.log(`${baseUrl}/${username}/chats`);
+  const response = await fetch(`${baseUrl}/${username}/chats`);
+  const result = await response.json();
+  // console.log(result.list, result.count);
+  return {list: result.list, count: result.count};
+
+  // FAKE
+  // const chatsList = {
+  //   list: [
+  //     {
+  //       id: "twokChat1User1",
+  //       contactName: "Eve",
+  //       contactAvatar: "./images/botAvatars/eve.jpg",
+  //       language: "german",
+  //       lastMessage: {
+  //         content: "Hallo! Schön, dich kennenzulernen.",
+  //         bookmarked: true,
+  //         datetime: "2022-06-30T13:10:59.367Z",
+  //       },
+  //       unread: false,
+  //     },
+  //     {
+  //       id: "twokChat1User2",
+  //       contactName: "Pete",
+  //       contactAvatar: "./images/botAvatars/pete.jpg",
+  //       language: "german",
+  //       lastMessage: {
+  //         content: "Reden wir über die Schule.",
+  //         bookmarked: false,
+  //         datetime: "2022-07-07T13:10:59.367Z",
+  //       },
+  //       unread: true,
+  //     },
+  //   ],
+  //   count: 2,
+  //   listFrom: 1,
+  //   listTo: 12,
+  //   lastChangeHash: "#20",
+  // };
+
+  // return chatsList;
+};
+
+export const getChat = async (chatId) => {
+  //   const response = await fetch(`${baseUrl}/chat/${chatId}`);
   //   const result = await response.json();
 
   //   return result.chats;
 
   // FAKE
-  const chatsList = {
-    list: [
-      {
-        id: "twokChat1User1",
-        contactName: "Eve",
-        contactAvatar: "./images/botAvatars/eve.jpg",
-        language: "german",
-        lastMessage: {
-          content: "Hallo! Schön, dich kennenzulernen.",
-          bookmarked: true,
-          datetime: "2022-06-30T13:10:59.367Z",
-        },
-        unread: false,
-      },
-      {
-        id: "twokChat1User2",
-        contactName: "Pete",
-        contactAvatar: "./images/botAvatars/pete.jpg",
-        language: "german",
-        lastMessage: {
-          content: "Reden wir über die Schule.",
-          bookmarked: false,
-          datetime: "2022-07-07T13:10:59.367Z",
-        },
-        unread: true,
-      },
-    ],
-    count: 2,
-    listFrom: 1,
-    listTo: 12,
-    lastChangeHash: "#20",
-  };
-
-  return chatsList;
-};
-
-export const getChat = async (chatId) => {
-//   const response = await fetch(`${baseUrl}/chat/${chatId}`);
-//   const result = await response.json();
-
-//   return result.chats;
-
-// FAKE
-const chatData = {
+  const chatData = {
     id: "twokChat1User1",
     contactName: "Eve",
     contactAvatar: "./images/botAvatars/eve.jpg",
@@ -208,20 +210,20 @@ const chatData = {
 };
 
 export const setLastMessage = async (chatId, lastMessageId) => {
-    // const response = await fetch(`${baseUrl}/chat/${chatId}/set-last-message}`, {
-    //   method: "PUT",
-    //   headers: {
-    //     "content-type": "application/json",
-    //   },
-    //   body: JSON.stringify(lastMessageId),
-    // });
-  
-    // const result = await response.json();
-  
-    // return result;
+  // const response = await fetch(`${baseUrl}/chat/${chatId}/set-last-message}`, {
+  //   method: "PUT",
+  //   headers: {
+  //     "content-type": "application/json",
+  //   },
+  //   body: JSON.stringify(lastMessageId),
+  // });
 
-    return lastMessageId;
-  };
+  // const result = await response.json();
+
+  // return result;
+
+  return lastMessageId;
+};
 
 // export const sendMessage = async (messageData) => {
 //   const response = await fetch(baseUrl, {

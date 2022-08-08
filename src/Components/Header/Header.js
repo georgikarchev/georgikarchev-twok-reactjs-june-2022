@@ -1,6 +1,8 @@
 import { GlobalSettingsWidget } from "./GlobalSettingsWidget";
 import { Navigation } from "./Navigation";
 
+import { Link } from "react-router-dom";
+
 import styles from "./Header.module.scss";
 
 import logo from "./images/twok-logo--icon-text.svg";
@@ -8,9 +10,9 @@ import logo from "./images/twok-logo--icon-text.svg";
 export const Header = (props) => {
   return (
     <header className={styles.appHeader}>
-      <a href="http://twok.app" title="twok">
+      <Link to="/" title="twok">
         <img src={logo} className="twok-logo" alt="twok logo" />
-      </a>
+      </Link>
       <div className={styles.appHeader__navWrapper}>
         <GlobalSettingsWidget isAutoplayOn={false} isDark={false}  />
         <Navigation />

@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 
 import * as chatService from "../../Services/chatService";
 
@@ -13,23 +14,40 @@ import styles from "./Chat.module.scss";
 
 export const Chat = () => {
   const [currentChatId, setCurrentChat] = useState(null); //'twokChat1User1'
-  const [chatsList, setChatsList] = useState();
+  const [chatsList, setChatsList] = useState(null);
   const { profileData } = useContext(AuthContext);
 
+  const navigate = useNavigate();
+
+  // console.log("profileData:", profileData);
+  const { selectedChat } = useParams();
+  console.log('selectedChat', selectedChat);
+
   const selectChatHandler = (selectedChatId) => {
+    // console.log(Array.from(chatsList.list.values()).filter(el => el.chatId === currentChatId)[0]);
+    // navigate(`/chat/${selectedChatId}`)
     setCurrentChat(selectedChatId);
   };
 
+  // FAKE
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     chatService.getChatsList(profileData.userId)
+  //       .then((chats) => {
+  //         setChatsList(chats);
+  //       });
+  //   }, 500);
+  //   //eslint-disable-next-line
+  // }, []);
+
   useEffect(() => {
-    setTimeout(() => {
-      chatService.getChatsList(profileData.userId)
+    if(profileData.permalink) {
+      chatService.getChatsList(profileData.permalink)
         .then((chats) => {
           setChatsList(chats);
         });
-    }, 500);
-
-    //eslint-disable-next-line
-  }, []);
+    }
+  }, [profileData]);
 
   // const selectMessageHandler = (messageData) => {
   //   setSelectedMessageData(messageData);

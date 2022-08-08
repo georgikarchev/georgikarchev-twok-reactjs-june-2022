@@ -5,6 +5,7 @@ import styles from "./ProfileCard.module.scss";
 
 export const ProfileCard = () => {
   const { profileData } = useContext(AuthContext);
+  console.log(profileData);
 
   const avatarSrc = profileData.profileImage
     ? profileData.profileImage
@@ -33,17 +34,17 @@ export const ProfileCard = () => {
         <div className={styles.profileCard__publicKey}>
           Username <small>(Public Key)</small>
           <span className={styles.profileCard__publicKey__value}>
-            {profileData.publicKey
-              ? profileData.publicKey
+            {profileData.permalink
+              ? profileData.permalink
               : "Please register or login"}
           </span>
         </div>
-        <div className={styles.profileCard__privateKey}>
+        {/* <div className={styles.profileCard__privateKey}>
           Password <small>(Private Key)</small>
           <span className={styles.profileCard__privateKey__value}>
             *******
           </span>
-        </div>
+        </div> */}
       </main>
       <footer>
         {profileData.loggedIn ? <span className={styles.profileCard__registeredOn}>registered on {registeredOn}</span> : <i>You are not logged in</i>}

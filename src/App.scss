@@ -1,5 +1,15 @@
 .app {
   box-sizing: border-box;
+  
+  
+  width: 100%;
+
+  font-size: 1rem;
+
+  display: grid;
+  grid-template-areas: "appHeader" "appMain";
+  grid-template-columns: 100%;
+  grid-template-rows: 75px 1fr;
 
   & > * {
     box-sizing: border-box;
@@ -11,14 +21,12 @@
     box-sizing: border-box;
   }
 
-  width: 100%;
+  a {
+    text-decoration: underline;
+    color: #2ACBEE;
+    font-weight: 700;
+  }
 
-  font-size: 1rem;
-
-  display: grid;
-  grid-template-areas: "appHeader" "appMain";
-  grid-template-columns: 100%;
-  grid-template-rows: 75px 1fr;
 
   // if ChatList is on
 
