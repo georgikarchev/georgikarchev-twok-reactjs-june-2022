@@ -1,4 +1,4 @@
-import { useEffect, useContext, useState } from "react";
+import { useEffect, useContext, useState, createRef } from "react";
 
 import { ChatContext } from "../../../Contexts/ChatContext";
 
@@ -23,6 +23,8 @@ export const ChatMain = ({ currentChatId }) => {
     inputIsEnabled: false,
     userMessage: null,
   });
+
+  const refContentEnd = createRef();
 
   const { showAllMessageTranslations, setShowAllMessageTranslations } =
     useContext(ChatContext);
@@ -103,6 +105,9 @@ export const ChatMain = ({ currentChatId }) => {
         lastMessageId: state.chatData.lastMessageId + 1,
       },
     }));
+    if(refContentEnd.current) {
+      refContentEnd.current.scrollIntoView();
+    }
   };
 
   const translationsToggleHandler = () => {
@@ -115,7 +120,7 @@ export const ChatMain = ({ currentChatId }) => {
     : " " + styles.inactive;
 
   return (
-    <div className={`${styles.chatMain} ${styles.verticalScroll}`}>
+    <div className={`${styles.chatMain}`}>
       {!currentChatId && (
         <div className={styles.noChatSelectedMessage}>
           <h2>No chat selected.</h2>
@@ -131,8 +136,9 @@ export const ChatMain = ({ currentChatId }) => {
               desrciption={chatState.chatData.contactDescription}
             />
           </header>
-          <main>
+          <main className={`${styles.chatContent} ${styles.verticalScroll}`}>
             <ChatContent chatData={chatState.chatData} />
+            <div className={styles.contentEnd} ref={refContentEnd}></div>
           </main>
           <footer>
               <button

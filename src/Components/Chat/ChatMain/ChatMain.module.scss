@@ -28,8 +28,22 @@
     font-weight: 600;
     color: #ababab;
   }
+  
+  & main.chatContent {
+    height: 100%;
+    // padding-bottom: 13rem;
+    overflow-y: auto;
+
+    & .contentEnd {
+      margin-top: 13rem;
+      height: 10rem;
+    }
+  }
 
   & footer {
+    position: relative;
+    z-index: 10;
+
     display: flex;
     justify-content: space-between;
     align-items: center;

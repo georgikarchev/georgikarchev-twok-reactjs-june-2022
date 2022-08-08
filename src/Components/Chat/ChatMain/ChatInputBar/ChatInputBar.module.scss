@@ -159,6 +159,7 @@
   }
 
   & .sendButton {
+    z-index: 10;
     position: absolute;
     right: 1.3em;
     cursor: pointer;
