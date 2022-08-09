@@ -16,7 +16,7 @@ export const getChatsList = async (username) => {
   //     {
   //       id: "twokChat1User1",
   //       contactName: "Eve",
-  //       contactAvatar: "./images/botAvatars/eve.jpg",
+  //       contactAvatar: "/images/botAvatars/eve.jpg",
   //       language: "german",
   //       lastMessage: {
   //         content: "Hallo! Schön, dich kennenzulernen.",
@@ -28,7 +28,7 @@ export const getChatsList = async (username) => {
   //     {
   //       id: "twokChat1User2",
   //       contactName: "Pete",
-  //       contactAvatar: "./images/botAvatars/pete.jpg",
+  //       contactAvatar: "/images/botAvatars/pete.jpg",
   //       language: "german",
   //       lastMessage: {
   //         content: "Reden wir über die Schule.",
@@ -57,9 +57,9 @@ export const getChat = async (chatId) => {
   const chatData = {
     id: "twokChat1User1",
     contactName: "Eve",
-    contactAvatar: "./images/botAvatars/eve.jpg",
+    contactAvatar: "/images/botAvatars/eve.jpg",
     contactDescription:
-      "Eve is is a kindergarden teacher. She will help you with your first words.",
+      "111 Eve is is a kindergarden teacher. She will help you with your first words.",
     language: "german",
     unread: false,
     pinned: false,

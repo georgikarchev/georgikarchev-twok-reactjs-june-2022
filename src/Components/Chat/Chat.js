@@ -25,8 +25,8 @@ export const Chat = () => {
 
   const selectChatHandler = (selectedChatId) => {
     // console.log(Array.from(chatsList.list.values()).filter(el => el.chatId === currentChatId)[0]);
-    // navigate(`/chat/${selectedChatId}`)
     setCurrentChat(selectedChatId);
+    navigate(`/chat/${selectedChatId}`)
   };
 
   // FAKE
