@@ -87,8 +87,7 @@ export const ChatMain = ({ currentChatId }) => {
   // On every rerender scroll to bottom of chat unless a message has been clicked to show its translation.
   // In that case the rerender should not lead to a scrolling down to the bottom of the chat.
   useEffect(() => {
-    // console.log("tuk brq", selectedMessageData);
-    if (refContentEnd.current && selectedMessageData === null) {
+    if (refContentEnd.current && selectedMessageData === null && showAllMessageTranslations === false) {
       refContentEnd.current.scrollIntoView();
     }
   });
