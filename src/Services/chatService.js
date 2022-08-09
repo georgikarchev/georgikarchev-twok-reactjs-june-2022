@@ -228,6 +228,8 @@ export const updateChat = async (
       "content-type": "application/json",
     },
     body: JSON.stringify(chatUpdates),
+  }).catch(err => {
+    console.error(err);
   });
 
   const result = await response.json();

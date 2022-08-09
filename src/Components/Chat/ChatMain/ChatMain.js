@@ -49,11 +49,17 @@ export const ChatMain = ({ currentChatId }) => {
     if(!profileData.permalink) {
       return;
     }
+
     // console.log("Load Chat Data from server. currentChatiD: ", currentChatId);
-    setChatState((state) => ({
-      ...state,
-      chatData: null,
-    }));
+
+    //  ! TODO : remove the following if not needed
+    // setChatState((state) => ({
+    //   ...state,
+    //   chatData: null,
+    // }));
+
+
+
     // setTimeout(() => {
       chatService.getChat(profileData.permalink, currentChatId).then((chatDataResponse) => {
         setChatState((state) => ({
@@ -65,6 +71,8 @@ export const ChatMain = ({ currentChatId }) => {
   }, [currentChatId]);
 
   useEffect(() => {
+    // console.log(">>>> ", chatState.chatData);
+
     if (chatState.chatData) {
       let message = chatState.chatData.messages.find(
         (x) => Number(x.id) === Number(chatState.chatData.lastMessageId) + 1
@@ -91,23 +99,29 @@ export const ChatMain = ({ currentChatId }) => {
     }
   }, [chatState.chatData]);
 
+  // useEffect(() => {
+  //   showBotMessage();
+  // });
+
   const onSendHandler = () => {
     // ! TODO - update chatData on server
     nextMessage();
   };
 
   const showBotMessage = () => {
+    // console.log(chatState.chatData.lastMessageId + 1);
     // ! TODO - timeout should be dependent on the length of the message
-    const milisecondsToTypeOneSymbol = 100;
-    const symbolsInMessage = chatState.chatData.messages.find((x) => Number(x.id) === Number(chatState.chatData.lastMessageId) + 1).body.length;
-    
-    const lastMessageId = chatState.chatData.lastMessageId;
+    const lastMessageId = chatState.chatData.lastMessageId + 1;
     const lastMessageBody = chatState.chatData.messages.find(m => m.id === lastMessageId).body;
+    const symbolsInMessage = lastMessageBody.length;
+    const milisecondsToTypeOneSymbol = 100;
+    // chatState.chatData.messages.find((x) => +x.id === chatState.chatData.lastMessageId + 1).body.length;
+    
     // console.log("tuk:", lastMessageBody);
     // return;
 
     const updateResponse = chatService.updateChat(profileData.permalink, currentChatId, lastMessageId, lastMessageBody);
-    console.log(updateResponse);
+    // console.log(updateResponse);
     if(!updateResponse) {
       return;
     }
