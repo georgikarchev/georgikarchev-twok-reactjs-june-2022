@@ -90,7 +90,7 @@ export const ChatMain = ({ currentChatId }) => {
     if (refContentEnd.current && selectedMessageData === null && showAllMessageTranslations === false) {
       refContentEnd.current.scrollIntoView();
     }
-  });
+  }, [chatState.chatData]);
 
   const onSendHandler = () => {
     // ! TODO - update chatData on server
