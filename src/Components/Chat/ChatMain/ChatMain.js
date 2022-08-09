@@ -31,6 +31,8 @@ export const ChatMain = ({ currentChatId }) => {
   const { showAllMessageTranslations, setShowAllMessageTranslations } =
     useContext(ChatContext);
 
+  const { selectedMessageData } = useContext(ChatContext);
+
   // Load chat data from server
   useEffect(() => {
     if (!currentChatId) {
@@ -82,9 +84,11 @@ export const ChatMain = ({ currentChatId }) => {
     }
   }, [chatState.chatData]);
 
-  // On every rerender scroll to bottom of chat
+  // On every rerender scroll to bottom of chat unless a message has been clicked to show its translation.
+  // In that case the rerender should not lead to a scrolling down to the bottom of the chat.
   useEffect(() => {
-    if (refContentEnd.current) {
+    // console.log("tuk brq", selectedMessageData);
+    if (refContentEnd.current && selectedMessageData === null) {
       refContentEnd.current.scrollIntoView();
     }
   });
@@ -133,6 +137,10 @@ export const ChatMain = ({ currentChatId }) => {
         lastMessageId: state.chatData.lastMessageId + 1,
       },
     }));
+
+    if (refContentEnd.current) {
+      refContentEnd.current.scrollIntoView();
+    }
     // if (refContentEnd.current) {
     //   refContentEnd.current.scrollIntoView();
     // }

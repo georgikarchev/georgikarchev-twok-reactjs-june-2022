@@ -218,9 +218,9 @@ export const updateChat = async (
     lastMessageBody: lastMessageBody,
   };
   
-  console.log("updateChat: lastMessageId = ", lastMessageId);
-  console.log(`${baseUrl}/update-user-chat`);
-  console.log(chatUpdates);
+  // console.log("updateChat: lastMessageId = ", lastMessageId);
+  // console.log(`${baseUrl}/update-user-chat`);
+  // console.log(chatUpdates);
 
   const response = await fetch(`${baseUrl}/update-user-chat`, {
     method: "PUT",

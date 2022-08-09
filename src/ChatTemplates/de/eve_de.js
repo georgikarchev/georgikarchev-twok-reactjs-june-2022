@@ -1,13 +1,4 @@
 export const template = {
-    // contactName: "Eve",
-    // contactAvatar: "/images/botAvatars/eve.jpg",
-    // contactDescription:
-    //   "Eve is is a kindergarden teacher. She will help you with your first words.",
-    // language: "german",
-    // unread: false,
-    // pinned: false,
-    // dateCreated: "2022-06-30T12:00:00.000Z",
-    // lastMessageId: 0,
     messages: [
       {
         id: 1,
