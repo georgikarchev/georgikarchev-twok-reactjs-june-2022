@@ -10,7 +10,7 @@ export const template = {
         words: [
             { id: "w1", de: "Reden wir", en: ["Let's talk"] },
             { id: "w2", de: "über", en: ["about"] },
-            { id: "w2", de: "die Schule", en: ["school"] }
+            { id: "w3", de: "die Schule", en: ["school"] }
         ],
       },
       {
@@ -21,11 +21,11 @@ export const template = {
         body: "Ich studiere an einer Universität in Frankfurt.",
         translation: "I study in a university in Frankfurt.",
         words: [
-          { id: "w2", de: "Ich", en: ["I"] },
-          { id: "w3", de: "studiere", en: ["study"] },
-          { id: "w4", de: "an einer Universität", en: ["in a university"] },
+          { id: "w1", de: "Ich", en: ["I"] },
+          { id: "w2", de: "studiere", en: ["study"] },
+          { id: "w3", de: "an einer Universität", en: ["in a university"] },
           { id: "w4", de: "in", en: ["in"] },
-          { id: "w4", de: "Frankfurt", en: ["Frankfurt"] },
+          { id: "w5", de: "Frankfurt", en: ["Frankfurt"] },
         ],
       },
       {
@@ -45,7 +45,7 @@ export const template = {
         body: "Hi!",
         translation: "Hi!",
         words: [
-          { id: "w5", de: "Hi", en: ["Hi", "Hello", "Hey"] }
+          { id: "w1", de: "Hi", en: ["Hi", "Hello", "Hey"] }
         ],
       },
       {
@@ -56,12 +56,12 @@ export const template = {
         body: "Ich studiere auch an einer Universität.",
         translation: "I also study in a university.",
         words: [
-            { id: "w2", de: "Ich", en: ["I"] },
-            { id: "w3", de: "studiere", en: ["study"] },
-            { id: "w2", de: "auch", en: ["also"] },
+            { id: "w1", de: "Ich", en: ["I"] },
+            { id: "w2", de: "studiere", en: ["study"] },
+            { id: "w3", de: "auch", en: ["also"] },
             { id: "w4", de: "an einer Universität", en: ["in a university"] },
-            { id: "w4", de: "in", en: ["in"] },
-            { id: "w4", de: "Frankfurt", en: ["Frankfurt"] },
+            { id: "w5", de: "in", en: ["in"] },
+            { id: "w6", de: "Frankfurt", en: ["Frankfurt"] },
         ],
       },
       {
@@ -72,8 +72,8 @@ export const template = {
         body: "Echt? Wo?",
         translation: "Really? Where?",
         words: [
-          { id: "w10", de: "Echt?", en: ["Really?"] },
-          { id: "w11", de: "Wo?", en: ["Where?"] },
+          { id: "w1", de: "Echt?", en: ["Really?"] },
+          { id: "w2", de: "Wo?", en: ["Where?"] },
         ],
       },
       {
@@ -84,9 +84,9 @@ export const template = {
         body: "An der Universität Darmstadt",
         translation: "At the university Darmstadt.",
         words: [
-          { id: "w15", de: "An", en: ["At"] },
-          { id: "w16", de: "die Universität", en: ["university"] },
-          { id: "w17", de: "Darmstadt", en: ["Darmstadt", "a city in central germany"] },
+          { id: "w1", de: "An", en: ["At"] },
+          { id: "w2", de: "die Universität", en: ["university"] },
+          { id: "w3", de: "Darmstadt", en: ["Darmstadt", "a city in central germany"] },
         ],
       },
       {
@@ -97,11 +97,11 @@ export const template = {
         body: "Echt? Meine Schwester studiert dort auch.",
         translation: "Really? My sister studies there too.",
         words: [
-          { id: "w10", de: "Echt ?", en: ["Really ?"] },
-          { id: "w18", de: "sister", en: ["die Schwester"] },
-          { id: "w7", de: "studiert", en: ["studies"] },
-          { id: "w19", de: "dort", en: ["there"] },
-          { id: "w20", de: "auch", en: ["too", "also"] },
+          { id: "w1", de: "Echt ?", en: ["Really ?"] },
+          { id: "w2", de: "sister", en: ["die Schwester"] },
+          { id: "w3", de: "studiert", en: ["studies"] },
+          { id: "w4", de: "dort", en: ["there"] },
+          { id: "w5", de: "auch", en: ["too", "also"] },
         ],
       },
       {
@@ -112,11 +112,11 @@ export const template = {
         body: "Ich muss gehen! Ich komme zu spät zum Bus.",
         translation: "Got to go! I am late for the bus.",
         words: [
-          { id: "w21", de: "Ich", en: ["I"] },
-          { id: "w22", de: "muss", en: ["must"] },
-          { id: "w23", de: "gehen", en: ["go", "going", "walking"] },
-          { id: "w24", de: "Ich komme zu spät", en: ["I am late"] },
-          { id: "w24", de: "der Bus", en: ["bus"] },
+          { id: "w1", de: "Ich", en: ["I"] },
+          { id: "w2", de: "muss", en: ["must"] },
+          { id: "w3", de: "gehen", en: ["go", "going", "walking"] },
+          { id: "w4", de: "Ich komme zu spät", en: ["I am late"] },
+          { id: "w5", de: "der Bus", en: ["bus"] },
         ],
       },
       {
@@ -126,7 +126,7 @@ export const template = {
         type: "chatMessage",
         body: "Wiedersehen!",
         translation: "Bye!",
-        words: [{ id: "w25", de: "wiedersehen", en: ["bye"] }],
+        words: [{ id: "w1", de: "wiedersehen", en: ["bye"] }],
       },
       {
         id: 11,
