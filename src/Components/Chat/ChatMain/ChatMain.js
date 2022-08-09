@@ -48,14 +48,14 @@ export const ChatMain = ({ currentChatId }) => {
       ...state,
       chatData: null,
     }));
-    setTimeout(() => {
+    // setTimeout(() => {
       chatService.getChat(currentChatId).then((chatDataResponse) => {
         setChatState((state) => ({
           ...state,
           chatData: chatDataResponse,
         }));
       });
-    }, 800);
+    // }, 800);
   }, [currentChatId]);
 
   useEffect(() => {
@@ -92,12 +92,15 @@ export const ChatMain = ({ currentChatId }) => {
 
   const showBotMessage = () => {
     // ! TODO - timeout should be dependent on the length of the message
-    const milisecondsToTypeOneSymbol = 30;
+    const milisecondsToTypeOneSymbol = 100;
     const symbolsInMessage = chatState.chatData.messages.find((x) => Number(x.id) === Number(chatState.chatData.lastMessageId) + 1).body.length;
     setTimeout(nextMessage, symbolsInMessage * milisecondsToTypeOneSymbol);
   };
 
   const nextMessage = () => {
+    // if(chatState.chatData === null) {
+    //   return false;
+    // }
     setChatState((state) => ({
       ...state,
       chatData: {

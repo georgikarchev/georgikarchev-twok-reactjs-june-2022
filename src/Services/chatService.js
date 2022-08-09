@@ -59,7 +59,7 @@ export const getChat = async (chatId) => {
     contactName: "Eve",
     contactAvatar: "/images/botAvatars/eve.jpg",
     contactDescription:
-      "111 Eve is is a kindergarden teacher. She will help you with your first words.",
+      "Eve is is a kindergarden teacher. She will help you with your first words.",
     language: "german",
     unread: false,
     pinned: false,

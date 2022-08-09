@@ -21,11 +21,11 @@ export const Chat = () => {
 
   // console.log("profileData:", profileData);
   const { selectedChat } = useParams();
-  // console.log('selectedChat', selectedChat);
+  console.log('selectedChat', selectedChat);
 
   const selectChatHandler = (selectedChatId) => {
     // console.log(Array.from(chatsList.list.values()).filter(el => el.chatId === currentChatId)[0]);
-    setCurrentChat(selectedChatId);
+    // setCurrentChat(selectedChatId);
     navigate(`/chat/${selectedChatId}`)
   };
 
@@ -48,6 +48,10 @@ export const Chat = () => {
         });
     }
   }, [profileData]);
+
+  useEffect(() => {
+    setCurrentChat(selectedChat);
+  },[selectedChat]);
 
   return (
     <div className={`app-chat ${styles.chat}`}>

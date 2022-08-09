@@ -100,7 +100,7 @@ function App() {
                     <Route path="/login" element={<Login />} />
                     <Route path="/profile" element={<Profile />} />
                     <Route path="/chat" element={<Chat />} />
-                    <Route path="/chat/:contactName" element={<Chat />} />
+                    <Route path="/chat/:selectedChat" element={<Chat />} />
                     <Route path="/:username" element={<LoginWithPermalink />} />
                     <Route path="/" element={ profileData.loggedIn ? <Profile /> : <Login />} />
                   </Routes>
