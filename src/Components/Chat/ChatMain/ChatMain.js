@@ -1,6 +1,7 @@
 import { useEffect, useContext, useState, createRef } from "react";
 
 import { ChatContext } from "../../../Contexts/ChatContext";
+import { AuthContext } from "../../../Contexts/AuthContext";
 
 import * as chatService from "../../../Services/chatService";
 
@@ -17,6 +18,7 @@ export const ChatMain = ({ currentChatId }) => {
   // const [chatData, setChatData] = useState(null);
   // const [inputIsEnabled, setInputIsEnabled] = useState(false);
   // const [userMessage, setUserMessage] = useState(null);
+  const { profileData } = useContext(AuthContext);
 
   const [chatState, setChatState] = useState({
     chatData: null,
@@ -43,13 +45,17 @@ export const ChatMain = ({ currentChatId }) => {
     if (!currentChatId) {
       return;
     }
+
+    if(!profileData.permalink) {
+      return;
+    }
     // console.log("Load Chat Data from server. currentChatiD: ", currentChatId);
     setChatState((state) => ({
       ...state,
       chatData: null,
     }));
     // setTimeout(() => {
-      chatService.getChat(currentChatId).then((chatDataResponse) => {
+      chatService.getChat(profileData.permalink, currentChatId).then((chatDataResponse) => {
         setChatState((state) => ({
           ...state,
           chatData: chatDataResponse,
@@ -94,6 +100,18 @@ export const ChatMain = ({ currentChatId }) => {
     // ! TODO - timeout should be dependent on the length of the message
     const milisecondsToTypeOneSymbol = 100;
     const symbolsInMessage = chatState.chatData.messages.find((x) => Number(x.id) === Number(chatState.chatData.lastMessageId) + 1).body.length;
+    
+    const lastMessageId = chatState.chatData.lastMessageId;
+    const lastMessageBody = chatState.chatData.messages.find(m => m.id === lastMessageId).body;
+    // console.log("tuk:", lastMessageBody);
+    // return;
+
+    const updateResponse = chatService.updateChat(profileData.permalink, currentChatId, lastMessageId, lastMessageBody);
+    console.log(updateResponse);
+    if(!updateResponse) {
+      return;
+    }
+    
     setTimeout(nextMessage, symbolsInMessage * milisecondsToTypeOneSymbol);
   };
 

@@ -21,7 +21,6 @@ export const Chat = () => {
 
   // console.log("profileData:", profileData);
   const { selectedChat } = useParams();
-  console.log('selectedChat', selectedChat);
 
   const selectChatHandler = (selectedChatId) => {
     // console.log(Array.from(chatsList.list.values()).filter(el => el.chatId === currentChatId)[0]);
