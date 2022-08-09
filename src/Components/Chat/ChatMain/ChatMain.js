@@ -43,6 +43,7 @@ export const ChatMain = ({ currentChatId }) => {
       return;
     }
 
+    // get chat data
     chatService
       .getChat(profileData.permalink, currentChatId)
       .then((chatDataResponse) => {
@@ -52,7 +53,17 @@ export const ChatMain = ({ currentChatId }) => {
           userMessage: null,
           chatData: chatDataResponse,
         }));
+
+        // mark selected chat read if unread
+        if(chatDataResponse && chatDataResponse.unread == true) {
+          chatService.updateChatRead(profileData.permalink, currentChatId)
+            .then((chatUnread) => {
+              console.log(chatUnread);
+            });
+        }
+        
       });
+
   }, [currentChatId]);
 
   useEffect(() => {
