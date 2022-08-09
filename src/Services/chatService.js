@@ -1,4 +1,5 @@
 import { template as templateEve } from "../ChatTemplates/de/eve_de";
+import { templates } from "../ChatTemplates/templates";
 
 const baseUrl = "https://demo.twok.app";
 
@@ -30,11 +31,14 @@ export const getChat = async (username, chatId) => {
   chatData.dateCreated = result.dateCreated;
   chatData.chatLastActive = result.chatLastActive;
 
-  if (result.chatTemplate === "eve_de") {
-    chatData.messages = templateEve.messages;
-  } else {
-    chatData.messages = templateEve.messages;
-  }
+  // console.log(templates[result.chatTemplate].template.messages);
+  chatData.messages = templates[result.chatTemplate].template.messages;
+
+  // if (result.chatTemplate === "eve_de") {
+  //   chatData.messages = templateEve.messages;
+  // } else {
+  //   chatData.messages = templateEve.messages;
+  // }
 
   // console.log(chatData.messages);
 
