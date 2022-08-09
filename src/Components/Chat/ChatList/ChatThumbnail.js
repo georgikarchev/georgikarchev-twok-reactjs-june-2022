@@ -3,13 +3,13 @@ import { lastActive } from "../../../Utils/dateUtils";
 import styles from "./ChatThumbnail.module.scss";
 
 export const ChatThumbnail = ({ chat, isCurrent, onSelectChat }) => {
-
   let thumbnailClassNames = styles.chatThumbnail;
-  thumbnailClassNames += chat.unread ? " " + styles.unread : "";
+  thumbnailClassNames += +chat.unread === 1 ? " " + styles.unread : "";
   thumbnailClassNames += isCurrent ? " " + styles.current : "";
 
   let lastMessageClassNames = styles.lastMessage;
-  lastMessageClassNames += chat.lastMessage.bookmarked
+  // console.log("b", chat.lastMessage);
+  lastMessageClassNames += chat.lastMessage.bookmarked === 1
     ? " " + styles.bookmarked
     : "";
 

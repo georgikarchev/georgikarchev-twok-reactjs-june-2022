@@ -46,7 +46,7 @@ export const Chat = () => {
           setChatsList(chats);
         });
     }
-  }, [profileData]);
+  }); //, [profileData]
 
   useEffect(() => {
     setCurrentChat(selectedChat);

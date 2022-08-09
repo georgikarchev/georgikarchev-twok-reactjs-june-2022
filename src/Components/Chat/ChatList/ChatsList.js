@@ -20,7 +20,7 @@ export const ChatsList = ({ currentChatId, selectChatHandler, chatsListData }) =
         <ChatThumbnail
           key={`twokChatThumbnail_${chat.chatId}_${chat.language}`}
           chat={chat}
-          isCurrent={chat.id === currentChatId}
+          isCurrent={chat.chatId === currentChatId}
           onSelectChat={selectChatHandler}
         />
       );
