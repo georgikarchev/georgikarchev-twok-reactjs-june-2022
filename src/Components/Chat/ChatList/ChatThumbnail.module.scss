@@ -50,6 +50,13 @@
     object-fit: cover;
   }
 
+  & .flag {
+    position: absolute;
+    left: 6.4rem;
+    top: 6.4rem;
+    border: 1px solid #fff;
+  }
+
   & .contactName {
     grid-area: contactName;
     font-size: 2.4rem;

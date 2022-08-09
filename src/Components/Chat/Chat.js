@@ -21,7 +21,7 @@ export const Chat = () => {
 
   // console.log("profileData:", profileData);
   const { selectedChat } = useParams();
-  console.log('selectedChat', selectedChat);
+  // console.log('selectedChat', selectedChat);
 
   const selectChatHandler = (selectedChatId) => {
     // console.log(Array.from(chatsList.list.values()).filter(el => el.chatId === currentChatId)[0]);
@@ -48,10 +48,6 @@ export const Chat = () => {
         });
     }
   }, [profileData]);
-
-  // const selectMessageHandler = (messageData) => {
-  //   setSelectedMessageData(messageData);
-  // };
 
   return (
     <div className={`app-chat ${styles.chat}`}>

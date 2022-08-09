@@ -21,6 +21,8 @@ export const ChatThumbnail = ({ chat, isCurrent, onSelectChat }) => {
         src={chat.contactAvatar}
         alt={chat.contactName}
       />
+      <img className={styles.flag} src={`/images/flags/${chat.language}.svg`} alt={chat.language} />
+      <span>{}</span>
       <p className={lastMessageClassNames}>{chat.lastMessage.content}</p>
       <span className={styles.lastActive}>{lastActive(chat.lastMessage.datetime)}</span>
     </div>
