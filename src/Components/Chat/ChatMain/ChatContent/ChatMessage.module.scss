@@ -51,12 +51,13 @@
     }
   }
 
-  &.correct {
-  }
+  //  ! THIS concept is on hold
+  // &.correct {
+  // }
 
-  &.false {
+  // &.false {
     
-  }
+  // }
 
   & .translation {
     max-width: 45%;
@@ -68,21 +69,6 @@
     opacity: 1;
     pointer-events: none;
   }
-
-  // .translation-enter {
-  //   opacity: 0;
-  // }
-  // .translation-enter-active {
-  //   opacity: 1;
-  //   transition: opacity 200ms;
-  // }
-  // .translation-exit {
-  //   opacity: 1;
-  // }
-  // .translation-exit-active {
-  //   opacity: 0;
-  //   transition: opacity 200ms;
-  // }
 
   .fadeOut {
     opacity: 0;
@@ -101,8 +87,9 @@
     max-width: 45%;
 
     display: block;
-    background-color: #ababab;
-    box-shadow: 0px 1px 20px rgba(0, 0, 0, 0.1);
+    // background-color: #ababab;
+    background-image: linear-gradient(to bottom right, rgba(140, 17, 199, 0.2) , rgba(42, 203, 238, 0.2));
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.3);
     color: #424242;
     font-size: 1.8em;
     box-sizing: border-box;
