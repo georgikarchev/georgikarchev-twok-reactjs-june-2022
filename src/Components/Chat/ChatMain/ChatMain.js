@@ -82,9 +82,12 @@ export const ChatMain = ({ currentChatId }) => {
     }
   }, [chatState.chatData]);
 
-  // useEffect(() => {
-  //   showBotMessage();
-  // });
+  // On every rerender scroll to bottom of chat
+  useEffect(() => {
+    if (refContentEnd.current) {
+      refContentEnd.current.scrollIntoView();
+    }
+  });
 
   const onSendHandler = () => {
     // ! TODO - update chatData on server
@@ -130,9 +133,9 @@ export const ChatMain = ({ currentChatId }) => {
         lastMessageId: state.chatData.lastMessageId + 1,
       },
     }));
-    if (refContentEnd.current) {
-      refContentEnd.current.scrollIntoView();
-    }
+    // if (refContentEnd.current) {
+    //   refContentEnd.current.scrollIntoView();
+    // }
   };
 
   const translationsToggleHandler = () => {
