@@ -31,43 +31,26 @@ export const ChatMain = ({ currentChatId }) => {
   const { showAllMessageTranslations, setShowAllMessageTranslations } =
     useContext(ChatContext);
 
-  // if (chatState.chatData) {
-  //   console.log(
-  //     "ChatMain component | lastMessageId: ",
-  //     chatState.chatData.lastMessageId ? chatState.chatData.lastMessageId : null
-  //   );
-  // } else {
-  //   console.log("ChatMain component ChatData is: ", chatState.chatData);
-  // }
-
   // Load chat data from server
   useEffect(() => {
     if (!currentChatId) {
       return;
     }
 
-    if(!profileData.permalink) {
+    if (!profileData.permalink) {
       return;
     }
 
-    // console.log("Load Chat Data from server. currentChatiD: ", currentChatId);
-
-    //  ! TODO : remove the following if not needed
-    // setChatState((state) => ({
-    //   ...state,
-    //   chatData: null,
-    // }));
-
-
-
-    // setTimeout(() => {
-      chatService.getChat(profileData.permalink, currentChatId).then((chatDataResponse) => {
+    chatService
+      .getChat(profileData.permalink, currentChatId)
+      .then((chatDataResponse) => {
         setChatState((state) => ({
           ...state,
+          inputIsEnabled: false,
+          userMessage: null,
           chatData: chatDataResponse,
         }));
       });
-    // }, 800);
   }, [currentChatId]);
 
   useEffect(() => {
@@ -76,8 +59,8 @@ export const ChatMain = ({ currentChatId }) => {
     if (chatState.chatData) {
       let message = chatState.chatData.messages.find(
         (x) => Number(x.id) === Number(chatState.chatData.lastMessageId) + 1
-        );
-        if (message !== undefined) {
+      );
+      if (message !== undefined) {
         if (message.authorIsUser) {
           setChatState((state) => ({
             ...state,
@@ -86,7 +69,7 @@ export const ChatMain = ({ currentChatId }) => {
           }));
         } else {
           message = null;
-          if(chatState.inputIsEnabled === true) {
+          if (chatState.inputIsEnabled === true) {
             setChatState((state) => ({
               ...state,
               inputIsEnabled: false,
@@ -112,20 +95,27 @@ export const ChatMain = ({ currentChatId }) => {
     // console.log(chatState.chatData.lastMessageId + 1);
     // ! TODO - timeout should be dependent on the length of the message
     const lastMessageId = chatState.chatData.lastMessageId + 1;
-    const lastMessageBody = chatState.chatData.messages.find(m => m.id === lastMessageId).body;
+    const lastMessageBody = chatState.chatData.messages.find(
+      (m) => m.id === lastMessageId
+    ).body;
     const symbolsInMessage = lastMessageBody.length;
     const milisecondsToTypeOneSymbol = 100;
     // chatState.chatData.messages.find((x) => +x.id === chatState.chatData.lastMessageId + 1).body.length;
-    
+
     // console.log("tuk:", lastMessageBody);
     // return;
 
-    const updateResponse = chatService.updateChat(profileData.permalink, currentChatId, lastMessageId, lastMessageBody);
+    const updateResponse = chatService.updateChat(
+      profileData.permalink,
+      currentChatId,
+      lastMessageId,
+      lastMessageBody
+    );
     // console.log(updateResponse);
-    if(!updateResponse) {
+    if (!updateResponse) {
       return;
     }
-    
+
     setTimeout(nextMessage, symbolsInMessage * milisecondsToTypeOneSymbol);
   };
 
@@ -140,7 +130,7 @@ export const ChatMain = ({ currentChatId }) => {
         lastMessageId: state.chatData.lastMessageId + 1,
       },
     }));
-    if(refContentEnd.current) {
+    if (refContentEnd.current) {
       refContentEnd.current.scrollIntoView();
     }
   };
@@ -176,19 +166,23 @@ export const ChatMain = ({ currentChatId }) => {
             <div className={styles.contentEnd} ref={refContentEnd}></div>
           </main>
           <footer>
-              <button
-            className={showAllTranslationsClassNames}
-            onClick={translationsToggleHandler}
-          >
-            <img
-              src={showAllMessageTranslations ? translateActive : translateInactive}
-              alt={
-                showAllMessageTranslations
-                  ? "stop showing all translations"
-                  : "show all translations"
-              }
-            />
-          </button>
+            <button
+              className={showAllTranslationsClassNames}
+              onClick={translationsToggleHandler}
+            >
+              <img
+                src={
+                  showAllMessageTranslations
+                    ? translateActive
+                    : translateInactive
+                }
+                alt={
+                  showAllMessageTranslations
+                    ? "stop showing all translations"
+                    : "show all translations"
+                }
+              />
+            </button>
             <ChatInputBar
               messageData={chatState.userMessage}
               inputIsEnabled={chatState.inputIsEnabled}
