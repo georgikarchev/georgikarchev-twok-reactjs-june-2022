@@ -18,11 +18,28 @@
     margin-left: 2.4rem;
     margin-right: 2rem;
     
-    & img {
+    & img.photo {
       object-fit: cover;
       width: 6rem;
       height: 6rem;
       border-radius: 50%;
+    }
+
+    & .flag {
+      position: absolute;
+      width: 2.8em;
+      height: auto;
+
+      left: 8.4rem;
+      top: 5.2rem;
+      border: 1px solid #fff;
+  
+      -webkit-border-radius: 28px;
+      -webkit-border-top-left-radius: 3px;
+      -moz-border-radius: 28px;
+      -moz-border-radius-topleft: 3px;
+      border-radius: 28px;
+      border-top-left-radius: 3px;
     }
   }
 

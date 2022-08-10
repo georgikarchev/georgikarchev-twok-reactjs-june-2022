@@ -199,6 +199,7 @@ export const ChatMain = ({ currentChatId }) => {
               name={chatState.chatData.contactName}
               avatar={chatState.chatData.contactAvatar}
               desrciption={chatState.chatData.contactDescription}
+              language={chatState.chatData.language}
             />
           </header>
           <main className={`${styles.chatContent} ${styles.verticalScroll}`}>

@@ -1,4 +1,5 @@
 import { lastActive } from "../../../Utils/dateUtils";
+import { languageToIso2 } from "../../../Utils/languageCodes";
 
 import styles from "./ChatThumbnail.module.scss";
 
@@ -23,8 +24,7 @@ export const ChatThumbnail = ({ chat, isCurrent, onSelectChat }) => {
         src={chat.contactAvatar}
         alt={chat.contactName}
       />
-      <img className={styles.flag} src={`/images/flags/${chat.language}.svg`} alt={chat.language} />
-      <span>{}</span>
+      <img className={styles.flag} src={`/images/flags/${languageToIso2(chat.language)}.svg`} alt={chat.language} />
       <p className={lastMessageClassNames}>{lastMessage}</p>
       <span className={styles.lastActive}>{lastActive(chat.lastMessage.datetime)}</span>
     </div>
