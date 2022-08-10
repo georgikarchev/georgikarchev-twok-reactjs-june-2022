@@ -13,7 +13,7 @@ export const ChatThumbnail = ({ chat, isCurrent, onSelectChat }) => {
     ? " " + styles.bookmarked
     : "";
   
-  const lastMessage = chat.lastMessage.content.length > 30 ? chat.lastMessage.content.substring(0,30) + '&hellip;' : chat.lastMessage.content;
+  const lastMessage = chat.lastMessage.content.length > 30 ? chat.lastMessage.content.substring(0,30) + ' ...' : chat.lastMessage.content;
 
   return (
     <div className={thumbnailClassNames} onClick={()=>{onSelectChat(chat.chatId)}}>
