@@ -12,6 +12,8 @@ export const ChatThumbnail = ({ chat, isCurrent, onSelectChat }) => {
   lastMessageClassNames += chat.lastMessage.bookmarked === 1
     ? " " + styles.bookmarked
     : "";
+  
+  const lastMessage = chat.lastMessage.content.length > 30 ? chat.lastMessage.content.substring(0,30) + '&hellip;' : chat.lastMessage.content;
 
   return (
     <div className={thumbnailClassNames} onClick={()=>{onSelectChat(chat.chatId)}}>
@@ -23,7 +25,7 @@ export const ChatThumbnail = ({ chat, isCurrent, onSelectChat }) => {
       />
       <img className={styles.flag} src={`/images/flags/${chat.language}.svg`} alt={chat.language} />
       <span>{}</span>
-      <p className={lastMessageClassNames}>{chat.lastMessage.content}</p>
+      <p className={lastMessageClassNames}>{lastMessage}</p>
       <span className={styles.lastActive}>{lastActive(chat.lastMessage.datetime)}</span>
     </div>
   );
