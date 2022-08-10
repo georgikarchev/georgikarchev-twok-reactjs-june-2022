@@ -59,6 +59,15 @@ export const ChatInputBar = ({ inputIsEnabled, messageData, onSend }) => {
     // console.log("isvalid: ", e.target.value === messageData.body, e.target.value, messageData.body);
   };
 
+  const keyUpHandler = (e) => {
+    // check if Enter has been pressed and SUBMIT if the userInput is valid
+    var code = (e.keyCode ? e.keyCode : e.which);
+    if(code == 13 && isValid) {
+      onSend(e.target.value);
+      setUserInput('');
+    }
+  };
+
   // useEffect(() => {
   //     setIsValid(userInput === messageData.body);
   //     console.log("isvalid: ", userInput === messageData.body, userInput, messageData.body);
@@ -119,6 +128,7 @@ export const ChatInputBar = ({ inputIsEnabled, messageData, onSend }) => {
         className={styles.userInputField}
         type="text"
         onChange={userInputFieldChangeHandler}
+        onKeyUp={keyUpHandler}
         value={userInput}
         disabled={!inputIsEnabled}
       />
