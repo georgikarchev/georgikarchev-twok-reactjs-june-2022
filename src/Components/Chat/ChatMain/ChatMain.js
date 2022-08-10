@@ -107,7 +107,25 @@ export const ChatMain = ({ currentChatId }) => {
   }, [chatState.chatData]);
 
   const onSendHandler = () => {
-    // ! TODO - update chatData on server
+   
+    const lastMessageId = chatState.chatData.lastMessageId + 1;
+    const lastMessageBody = chatState.chatData.messages.find(
+      (m) => m.id === lastMessageId
+    ).body;
+    const symbolsInMessage = lastMessageBody.length;
+    const milisecondsToTypeOneSymbol = 100;
+
+    const updateResponse = chatService.updateChat(
+      profileData.permalink,
+      currentChatId,
+      lastMessageId,
+      lastMessageBody
+    );
+    // console.log(updateResponse);
+    if (!updateResponse) {
+      return;
+    }
+
     nextMessage();
   };
 
