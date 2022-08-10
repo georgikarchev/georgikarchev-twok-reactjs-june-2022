@@ -66,7 +66,7 @@ export const template = {
         authorIsUser: true,
         isBookmarked: false,
         type: "chatMessage",
-        body: "An der Universität Darmstadt",
+        body: "An der Universität Darmstadt.",
         translation: "At the university Darmstadt.",
         words: [
           { id: "w1", de: "An", en: ["At"] },
@@ -83,10 +83,11 @@ export const template = {
         translation: "Really? My sister studies there too.",
         words: [
           { id: "w1", de: "Echt ?", en: ["Really ?"] },
-          { id: "w2", de: "sister", en: ["die Schwester"] },
-          { id: "w3", de: "studiert", en: ["studies"] },
-          { id: "w4", de: "dort", en: ["there"] },
-          { id: "w5", de: "auch", en: ["too", "also"] },
+          { id: "w2", de: "meine", en: ["my"] },
+          { id: "w3", de: "sister", en: ["die Schwester"] },
+          { id: "w4", de: "studiert", en: ["studies"] },
+          { id: "w5", de: "dort", en: ["there"] },
+          { id: "w6", de: "auch", en: ["too", "also"] },
         ],
       },
       {

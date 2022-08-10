@@ -6,7 +6,8 @@
 
   display: flex;
   justify-content: flex-start;
-  align-items: flex-start;
+  // align-items: flex-start;
+  align-items: center;
 
   box-sizing: border-box;
 
@@ -61,7 +62,7 @@
 
   & .translation {
     max-width: 45%;
-    margin-top: 1rem;
+    // margin-top: 1rem; // not needed after the translation became vertically centered with the message body
     margin-left: 2rem;
     margin-right: 2rem;
     font-size: 1.8em;
