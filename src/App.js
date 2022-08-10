@@ -31,6 +31,7 @@ function App() {
   const [showAllMessageTranslations, setShowAllMessageTranslations] =
     useState(false);
   const [selectedMessageData, setSelectedMessageData] = useState(null);
+  const [selectedChatLanguage, setSelectedChatLanguage] = useState(null);
 
   const toggleThemeHandler = (newState) => {
     setIsDark(newState);
@@ -47,37 +48,6 @@ function App() {
     }
   },[]);
 
-  // const fetchProfileData = () => {
-  //   setProfileData((oldState) => {
-  //     if (oldState.loggedIn) {
-  //       return { loggedIn: false };
-  //     } else {
-  //       return {
-  //         ...oldState,
-  //         loggedIn: !oldState.loggedIn,
-  //         profileImage: "./images/test-avatar.jpg",
-  //         profileDisplayName: "GtoTheK",
-  //         publicKey: "gtwokAi8x9asfaA",
-  //         privateKey: "???",
-  //         registeredOn: "2022-06-30 12:00:01",
-  //         languages: ["german", "dutch"],
-  //       };
-  //     }
-  //   });
-  // };
-
-  // const fetchProfileData = () => {
-  //   setProfileData((oldState) => {
-  //     authService.getProfile(username)
-  //       .then(userData => {
-  //         console.log(userData);
-
-  //       });
-  //   });
-  // };
-
-  // const [isAutoplayOn, setIsAutoplayOn] = useState(false);
-
   return (
     <BrowserRouter>
       <AppContext.Provider value={{ appSettings, setAppSettings }}>
@@ -91,6 +61,8 @@ function App() {
                 setShowAllMessageTranslations,
                 selectedMessageData,
                 setSelectedMessageData,
+                selectedChatLanguage,
+                setSelectedChatLanguage
               }}
             >
               <ThemeContext.Provider value={{ isDark, toggleThemeHandler }}>

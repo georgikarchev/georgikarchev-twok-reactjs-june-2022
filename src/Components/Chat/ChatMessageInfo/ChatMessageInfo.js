@@ -1,22 +1,24 @@
+import { useEffect } from "react";
 import { useContext } from "react";
 
 import { AppContext } from "../../../Contexts/AppContext";
 import { ChatContext } from "../../../Contexts/ChatContext";
-import { languageCodesIso2 } from "../../../Utils/languageCodes";
+import { languageCodesIso2, languageToIso2 } from "../../../Utils/languageCodes";
 
 
 import styles from "./ChatMessageInfo.module.scss";
 
 export const ChatMessageInfo = () => {
-  const { selectedMessageData } = useContext(ChatContext);
+  const { selectedMessageData, selectedChatLanguage } = useContext(ChatContext);
   const { appSettings } = useContext(AppContext);
 
   const words = !selectedMessageData? '' : selectedMessageData.words.map((word) => {
     // console.log(word[languageCodesIso2.en].join(', '));
+    const chatLanguageIso2 = languageToIso2(selectedChatLanguage);
     // ! TODO - Use appSettings.appLanguage
     return (
         <article key={`word_${word.id}`} className={styles.word}>
-            <main>{word[languageCodesIso2.de]}</main>
+            <main>{word[languageCodesIso2[chatLanguageIso2]]}</main>
             <aside>{word[languageCodesIso2.en].join(', ')}</aside>
         </article>
     );

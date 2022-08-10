@@ -117,7 +117,7 @@ export const template = {
       {
         id: 10,
         type: "chatNotification",
-        body: "You have already learned 25 words from this chat.",
+        body: "50 new words learned",
       },
     ],
   };

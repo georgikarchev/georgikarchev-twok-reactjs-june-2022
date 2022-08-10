@@ -22,7 +22,7 @@ export const ChatMain = ({ currentChatId }) => {
 
   const [chatState, setChatState] = useState({
     chatData: null,
-    inputIsEnabled: false,
+    inputIsEnabled: false, 
     userMessage: null,
   });
 
@@ -31,7 +31,7 @@ export const ChatMain = ({ currentChatId }) => {
   const { showAllMessageTranslations, setShowAllMessageTranslations } =
     useContext(ChatContext);
 
-  const { selectedMessageData } = useContext(ChatContext);
+  const { selectedMessageData, setSelectedMessageData, setSelectedChatLanguage } = useContext(ChatContext);
 
   // Load chat data from server
   useEffect(() => {
@@ -53,6 +53,8 @@ export const ChatMain = ({ currentChatId }) => {
           userMessage: null,
           chatData: chatDataResponse,
         }));
+
+        setSelectedChatLanguage(chatDataResponse.language);
 
         // mark selected chat read if unread
         if(chatDataResponse && chatDataResponse.unread == true) {
@@ -92,6 +94,7 @@ export const ChatMain = ({ currentChatId }) => {
           showBotMessage();
         }
       }
+      setSelectedMessageData(null);
     }
   }, [chatState.chatData]);
 
