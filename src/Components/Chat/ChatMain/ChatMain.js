@@ -10,11 +10,13 @@ import styles from "./ChatMain.module.scss";
 import { ChatContent } from "./ChatContent/ChatContent";
 import { ChatHeader } from "./ChatHeader";
 import { Spinner } from "../../Common/Spinner";
+import { SpinnerTyping } from "../../Common/SpinnerTyping";
 
 import translateActive from "./images/translate--active.svg";
 import translateInactive from "./images/translate--inactive.svg";
 
 export const ChatMain = ({ currentChatId }) => {
+  const MILISECONDS_TO_TYPE_ONE_SYMBOL = 200;
   // const [chatData, setChatData] = useState(null);
   // const [inputIsEnabled, setInputIsEnabled] = useState(false);
   // const [userMessage, setUserMessage] = useState(null);
@@ -22,16 +24,20 @@ export const ChatMain = ({ currentChatId }) => {
 
   const [chatState, setChatState] = useState({
     chatData: null,
-    inputIsEnabled: false, 
+    inputIsEnabled: false,
     userMessage: null,
   });
 
   const refContentEnd = createRef();
-
-  const { showAllMessageTranslations, setShowAllMessageTranslations } =
-    useContext(ChatContext);
-
-  const { selectedMessageData, setSelectedMessageData, setSelectedChatLanguage } = useContext(ChatContext);
+  const {
+    showAllMessageTranslations,
+    setShowAllMessageTranslations,
+    selectedMessageData,
+    setSelectedMessageData,
+    setSelectedChatLanguage,
+    botIsTyping,
+    setBotIsTyping,
+  } = useContext(ChatContext);
 
   // Load chat data from server
   useEffect(() => {
@@ -57,20 +63,17 @@ export const ChatMain = ({ currentChatId }) => {
         setSelectedChatLanguage(chatDataResponse.language);
 
         // mark selected chat read if unread
-        if(chatDataResponse && chatDataResponse.unread == true) {
-          chatService.updateChatRead(profileData.permalink, currentChatId)
+        if (chatDataResponse && chatDataResponse.unread == true) {
+          chatService
+            .updateChatRead(profileData.permalink, currentChatId)
             .then((chatUnread) => {
               console.log(chatUnread);
             });
         }
-        
       });
-
   }, [currentChatId]);
 
   useEffect(() => {
-    // console.log(">>>> ", chatState.chatData);
-
     if (chatState.chatData) {
       let message = chatState.chatData.messages.find(
         (x) => Number(x.id) === Number(chatState.chatData.lastMessageId) + 1
@@ -91,6 +94,7 @@ export const ChatMain = ({ currentChatId }) => {
               userMessage: null,
             }));
           }
+
           showBotMessage();
         }
       }
@@ -101,19 +105,22 @@ export const ChatMain = ({ currentChatId }) => {
   // On every rerender scroll to bottom of chat unless a message has been clicked to show its translation.
   // In that case the rerender should not lead to a scrolling down to the bottom of the chat.
   useEffect(() => {
-    if (refContentEnd.current && selectedMessageData === null && showAllMessageTranslations === false) {
+    if (
+      refContentEnd.current &&
+      selectedMessageData === null &&
+      showAllMessageTranslations === false
+    ) {
       refContentEnd.current.scrollIntoView();
     }
   }, [chatState.chatData]);
 
   const onSendHandler = () => {
-   
     const lastMessageId = chatState.chatData.lastMessageId + 1;
     const lastMessageBody = chatState.chatData.messages.find(
       (m) => m.id === lastMessageId
     ).body;
     const symbolsInMessage = lastMessageBody.length;
-    const milisecondsToTypeOneSymbol = 100;
+    const MILISECONDS_TO_TYPE_ONE_SYMBOL = 100;
 
     const updateResponse = chatService.updateChat(
       profileData.permalink,
@@ -130,42 +137,46 @@ export const ChatMain = ({ currentChatId }) => {
   };
 
   const showBotMessage = () => {
+    setBotIsTyping(true);
+
     const lastMessageId = chatState.chatData.lastMessageId + 1;
     const lastMessageObj = chatState.chatData.messages.find(
       (m) => m.id === lastMessageId
     );
     const lastMessageBody = lastMessageObj.body;
     const symbolsInMessage = lastMessageBody.length;
-    const milisecondsToTypeOneSymbol = 100;
-    
-    if(lastMessageObj.type !== 'chatNotification') {
+
+    if (lastMessageObj.type !== "chatNotification") {
       const updateResponse = chatService.updateChat(
         profileData.permalink,
         currentChatId,
         lastMessageId,
         lastMessageBody
       );
-      
+
       if (!updateResponse) {
         return;
       }
     }
 
-
-    setTimeout(nextMessage, symbolsInMessage * milisecondsToTypeOneSymbol);
+    setTimeout(nextMessage, symbolsInMessage * MILISECONDS_TO_TYPE_ONE_SYMBOL);
   };
 
   const nextMessage = () => {
+    setBotIsTyping(false);
     // if(chatState.chatData === null) {
     //   return false;
     // }
-    setChatState((state) => ({
-      ...state,
-      chatData: {
-        ...state.chatData,
-        lastMessageId: state.chatData.lastMessageId + 1,
-      },
-    }));
+
+    // setTimeout(() => {
+      setChatState((state) => ({
+        ...state,
+        chatData: {
+          ...state.chatData,
+          lastMessageId: state.chatData.lastMessageId + 1,
+        },
+      }));
+    // }, 500);
 
     if (refContentEnd.current) {
       refContentEnd.current.scrollIntoView();
@@ -204,6 +215,7 @@ export const ChatMain = ({ currentChatId }) => {
           </header>
           <main className={`${styles.chatContent} ${styles.verticalScroll}`}>
             <ChatContent chatData={chatState.chatData} />
+            {botIsTyping && <SpinnerTyping />}
             <div className={styles.contentEnd} ref={refContentEnd}></div>
           </main>
           <footer>

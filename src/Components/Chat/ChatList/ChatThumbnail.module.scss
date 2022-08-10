@@ -84,6 +84,12 @@
     }
   }
 
+  & .spinnerTyping {
+    height: 2rem;
+    padding-left: 0;
+    margin: 0;
+  }
+
   & .lastActive {
     font-size: 1.4rem;
     line-height: 1;

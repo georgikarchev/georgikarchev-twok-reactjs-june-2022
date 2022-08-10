@@ -32,6 +32,7 @@ function App() {
     useState(false);
   const [selectedMessageData, setSelectedMessageData] = useState(null);
   const [selectedChatLanguage, setSelectedChatLanguage] = useState(null);
+  const [botIsTyping, setBotIsTyping] = useState(false);
 
   const toggleThemeHandler = (newState) => {
     setIsDark(newState);
@@ -62,7 +63,9 @@ function App() {
                 selectedMessageData,
                 setSelectedMessageData,
                 selectedChatLanguage,
-                setSelectedChatLanguage
+                setSelectedChatLanguage,
+                botIsTyping,
+                setBotIsTyping
               }}
             >
               <ThemeContext.Provider value={{ isDark, toggleThemeHandler }}>
