@@ -39,33 +39,18 @@ export const template = {
       },
       {
         id: 4,
-        authorIsUser: false,
+        authorIsUser: true,
         isBookmarked: false,
         type: "chatMessage",
-        body: "Hi!",
-        translation: "Hi!",
+        body: "Ich auch.",
+        translation: "Me too.",
         words: [
-          { id: "w1", de: "Hi", en: ["Hi", "Hello", "Hey"] }
+            { id: "w1", de: "Ich", en: ["I", "Me"] },
+            { id: "w3", de: "auch", en: ["also", "too"] },
         ],
       },
       {
         id: 5,
-        authorIsUser: true,
-        isBookmarked: false,
-        type: "chatMessage",
-        body: "Ich studiere auch an einer Universität.",
-        translation: "I also study in a university.",
-        words: [
-            { id: "w1", de: "Ich", en: ["I"] },
-            { id: "w2", de: "studiere", en: ["study"] },
-            { id: "w3", de: "auch", en: ["also"] },
-            { id: "w4", de: "an einer Universität", en: ["in a university"] },
-            { id: "w5", de: "in", en: ["in"] },
-            { id: "w6", de: "Frankfurt", en: ["Frankfurt"] },
-        ],
-      },
-      {
-        id: 6,
         authorIsUser: false,
         isBookmarked: false,
         type: "chatMessage",
@@ -77,7 +62,7 @@ export const template = {
         ],
       },
       {
-        id: 7,
+        id: 6,
         authorIsUser: true,
         isBookmarked: false,
         type: "chatMessage",
@@ -90,7 +75,7 @@ export const template = {
         ],
       },
       {
-        id: 8,
+        id: 7,
         authorIsUser: false,
         isBookmarked: false,
         type: "chatMessage",
@@ -105,7 +90,7 @@ export const template = {
         ],
       },
       {
-        id: 9,
+        id: 8,
         authorIsUser: false,
         isBookmarked: false,
         type: "chatMessage",
@@ -120,7 +105,7 @@ export const template = {
         ],
       },
       {
-        id: 10,
+        id: 9,
         authorIsUser: true,
         isBookmarked: false,
         type: "chatMessage",
@@ -129,7 +114,7 @@ export const template = {
         words: [{ id: "w1", de: "wiedersehen", en: ["bye"] }],
       },
       {
-        id: 11,
+        id: 10,
         type: "chatNotification",
         body: "You have already learned 25 words from this chat.",
       },

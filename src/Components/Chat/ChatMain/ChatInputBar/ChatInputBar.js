@@ -49,6 +49,7 @@ export const ChatInputBar = ({ inputIsEnabled, messageData, onSend }) => {
 
   const sendButtonClickHandler = (e) => {
     onSend(e.target.value);
+    setUserInput('');
   };
 
   const userInputFieldChangeHandler = (e) => {
