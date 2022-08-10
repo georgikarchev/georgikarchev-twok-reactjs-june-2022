@@ -130,29 +130,27 @@ export const ChatMain = ({ currentChatId }) => {
   };
 
   const showBotMessage = () => {
-    // console.log(chatState.chatData.lastMessageId + 1);
-    // ! TODO - timeout should be dependent on the length of the message
     const lastMessageId = chatState.chatData.lastMessageId + 1;
-    const lastMessageBody = chatState.chatData.messages.find(
+    const lastMessageObj = chatState.chatData.messages.find(
       (m) => m.id === lastMessageId
-    ).body;
+    );
+    const lastMessageBody = lastMessageObj.body;
     const symbolsInMessage = lastMessageBody.length;
     const milisecondsToTypeOneSymbol = 100;
-    // chatState.chatData.messages.find((x) => +x.id === chatState.chatData.lastMessageId + 1).body.length;
-
-    // console.log("tuk:", lastMessageBody);
-    // return;
-
-    const updateResponse = chatService.updateChat(
-      profileData.permalink,
-      currentChatId,
-      lastMessageId,
-      lastMessageBody
-    );
-    // console.log(updateResponse);
-    if (!updateResponse) {
-      return;
+    
+    if(lastMessageObj.type !== 'chatNotification') {
+      const updateResponse = chatService.updateChat(
+        profileData.permalink,
+        currentChatId,
+        lastMessageId,
+        lastMessageBody
+      );
+      
+      if (!updateResponse) {
+        return;
+      }
     }
+
 
     setTimeout(nextMessage, symbolsInMessage * milisecondsToTypeOneSymbol);
   };
