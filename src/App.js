@@ -1,6 +1,7 @@
 // import logo from './images/logo.svg';
 import React, { useState } from "react";
-import { BrowserRouter, } from "react-router-dom";
+// import { BrowserRouter, } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Route, Routes } from "react-router";
 
 import { AppContext } from "./Contexts/AppContext";
@@ -25,7 +26,7 @@ import { Dashboard } from "./Components/Dashboard/Dashboard";
 
 function App() {
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const [appSettings, setAppSettings] = useState({ appLanguage: "en" });
   const [isDark, setIsDark] = useState(false);
@@ -63,12 +64,12 @@ function App() {
       });
     } else {
       // user is not logged in and there is no data saved in the local storage -> bring him to the login page
-      // navigate('/login');
+      navigate('/login');
     }
   },[]);
 
   return (
-    <BrowserRouter>
+    // <BrowserRouter>
       <AppContext.Provider value={{ appSettings, setAppSettings }}>
         <div className="app">
           <AuthContext.Provider value={{ profileData, setProfileData }}>
@@ -109,7 +110,7 @@ function App() {
           </AuthContext.Provider>
         </div>
       </AppContext.Provider>
-    </BrowserRouter>
+    // </BrowserRouter>
   );
 }
 
