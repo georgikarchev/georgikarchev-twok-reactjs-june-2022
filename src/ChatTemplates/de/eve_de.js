@@ -6,8 +6,8 @@ export const template = {
         isBookmarked: false,
         datetime: "2022-06-30T13:11:03.000Z",
         type: "chatMessage",
-        body: "Hallo!",
-        translation: "Hello!",
+        body: 'Hallo! 👋',
+        translation: 'Hello!',
         words: [{ id: "w1", de: "hallo", en: ["hello"] }],
       },
       {

@@ -5,7 +5,7 @@ import { useParams, useNavigate, Navigate } from "react-router-dom";
 import * as chatService from "../../../Services/chatService";
 
 import { AuthContext } from "../../../Contexts/AuthContext";
-import { ChatContent } from "../../Chat/ChatMain/ChatContent/ChatContent";
+import { ChatContext } from "../../../Contexts/ChatContext";
 
 import { usernameValidator } from "../../../Utils/validators";
 import * as authService from "../../../Services/authService";
@@ -14,7 +14,7 @@ import * as storageService from "../../../Services/storageService";
 export const LoginWithPermalink = () => {
   const { username } = useParams();
   const { profileData, setProfileData } = useContext(AuthContext);
-  const { bookmarks, setBookmarks } = useContext(ChatContent)
+  const { bookmarks, setBookmarks } = useContext(ChatContext)
 
   useEffect(() => {
     if (usernameValidator(username)) {

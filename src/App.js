@@ -1,6 +1,6 @@
 // import logo from './images/logo.svg';
 import React, { useState } from "react";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, } from "react-router-dom";
 import { Route, Routes } from "react-router";
 
 import { AppContext } from "./Contexts/AppContext";
@@ -24,8 +24,10 @@ import { useEffect } from "react";
 import { Dashboard } from "./Components/Dashboard/Dashboard";
 
 function App() {
-  const [appSettings, setAppSettings] = useState({ appLanguage: "en" });
 
+  // const navigate = useNavigate();
+
+  const [appSettings, setAppSettings] = useState({ appLanguage: "en" });
   const [isDark, setIsDark] = useState(false);
   const [isAutoplayOn, setIsAutoplayOn] = useState(false);
   const [profileData, setProfileData] = useState({ loggedIn: false });
@@ -59,6 +61,9 @@ function App() {
       chatService.getBookmarks(userDataFromStorage.permalink).then((bookmarks) => {
         setBookmarks(bookmarks);
       });
+    } else {
+      // user is not logged in and there is no data saved in the local storage -> bring him to the login page
+      // navigate('/login');
     }
   },[]);
 

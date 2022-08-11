@@ -1,11 +1,17 @@
 import { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+
+import * as storageService from "../../Services/storageService";
+
 import { AuthContext } from "../../Contexts/AuthContext";
+
+import { stringToDdMonthYyyy } from "../../Utils/dateUtils";
 
 import styles from "./ProfileCard.module.scss";
 
 export const ProfileCard = () => {
-  const { profileData } = useContext(AuthContext);
-  console.log(profileData);
+  const { profileData, setProfileData } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const avatarSrc = profileData.profileImage
     ? profileData.profileImage
@@ -14,12 +20,25 @@ export const ProfileCard = () => {
     ? profileData.profileDisplayName
     : "avatar";
 
-    let learningLanguages = false;
-    if (profileData.languages !== undefined && profileData.languages.length > 0) {
-      learningLanguages = <div className={styles.profileCard__learningLanguages}>learning <a href="/languages">{profileData.languages.length} Languages</a></div>;
-    }
+  let learningLanguages = false;
 
-  let registeredOn = "01 July 2022";
+  if (profileData.enrolledIn !== undefined && profileData.enrolledIn.length > 0) {
+    learningLanguages = (
+      <div className={styles.profileCard__learningLanguages}>
+        learning{" "}
+        <Link to="/languages">{profileData.enrolledIn.length} Languages</Link>
+      </div>
+    );
+  }
+
+  //  ! TODO - switch hardcoded date with real data from the user profile
+  let registeredOn = profileData && profileData.created ? stringToDdMonthYyyy(profileData.created) : "01 July 2022";
+
+  const logoutClickHandler = () => {
+    setProfileData({ loggedIn: false });
+    storageService.deleteStorage();
+    navigate('/');
+  };
 
   return (
     <div className={styles.profileCard}>
@@ -45,9 +64,18 @@ export const ProfileCard = () => {
             *******
           </span>
         </div> */}
+        <button className={styles.logout} onClick={logoutClickHandler}>
+          logout
+        </button>
       </main>
       <footer>
-        {profileData.loggedIn ? <span className={styles.profileCard__registeredOn}>registered on {registeredOn}</span> : <i>You are not logged in</i>}
+        {profileData.loggedIn ? (
+          <span className={styles.profileCard__registeredOn}>
+            registered on {registeredOn}
+          </span>
+        ) : (
+          <i>You are not logged in</i>
+        )}
         {learningLanguages}
       </footer>
     </div>

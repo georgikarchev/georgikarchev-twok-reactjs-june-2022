@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 
 import * as chatService from "../../Services/chatService";
 
-import { ChatContext } from "../../Contexts/ChatContext";
+// import { ChatContext } from "../../Contexts/ChatContext";
 import { AuthContext } from "../../Contexts/AuthContext";
 
 import { ChatsList } from "./ChatList/ChatsList";

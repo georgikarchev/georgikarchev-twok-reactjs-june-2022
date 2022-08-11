@@ -17,18 +17,8 @@ import translateInactive from "./images/translate--inactive.svg";
 
 export const ChatMain = ({ currentChatId }) => {
   const MILISECONDS_TO_TYPE_ONE_SYMBOL = 200;
-  // const [chatData, setChatData] = useState(null);
-  // const [inputIsEnabled, setInputIsEnabled] = useState(false);
-  // const [userMessage, setUserMessage] = useState(null);
   const { profileData } = useContext(AuthContext);
-  const [ isLoading, setIsLoading ] = useState(false);
-
-  // const [chatState, setChatState] = useState({
-  //   chatData: null,
-  //   inputIsEnabled: false,
-  //   userMessage: null,
-  // });
-
+  const [isLoading, setIsLoading] = useState(false);
   const refContentEnd = createRef();
   const {
     showAllMessageTranslations,
@@ -40,10 +30,8 @@ export const ChatMain = ({ currentChatId }) => {
     setBotIsTyping,
     chatState,
     setChatState,
-    bookmarks
+    // bookmarks
   } = useContext(ChatContext);
-
-  // console.log(bookmarks);
 
   // Load chat data from server
   useEffect(() => {
@@ -69,43 +57,6 @@ export const ChatMain = ({ currentChatId }) => {
         }));
         setIsLoading(false);
 
-        //  ! TODO - Move this to context api and load server data at login
-        // chatService.getBookmarks(profileData.permalink).then((bookmarks) => {
-        //   console.log('getBookmarks ->', bookmarks);
-        
-        
-        
-        // if (bookmarks && bookmarks.count > 0) {
-        //   const bookmarksForCurrentChat = bookmarks.list.filter((b) => {
-        //     return +b.chatId === +currentChatId;
-        //   }).map(b=> +b.messageId);
-
-        //   if (bookmarksForCurrentChat.length > 0) {
-        //     const updatedMessagesList = [...chatDataResponse.messages].map(
-        //       (m) => {
-        //         if(bookmarksForCurrentChat.includes(m.id)) {
-        //           m.isBookmarked = true;
-        //         }
-        //         return m;
-        //       }
-        //     );
-
-        //     setChatState(state => ({
-        //       ...state,
-        //       chatData: ({
-        //         ...chatDataResponse,
-        //         messages: updatedMessagesList
-        //       })
-        //     }));
-        //   }
-        // }
-
-
-
-        // });
-
-        // console.log(bookmarks);
-
         setSelectedChatLanguage(chatDataResponse.language);
 
         // mark selected chat read if unread
@@ -118,11 +69,10 @@ export const ChatMain = ({ currentChatId }) => {
         }
       });
 
-      setSelectedMessageData(null);
+    setSelectedMessageData(null);
   }, [currentChatId]);
 
   useEffect(() => {
-    // console.log("chatState.chatData > useEffect");
     if (chatState.chatData) {
       let message = chatState.chatData.messages.find(
         (x) => Number(x.id) === Number(chatState.chatData.lastMessageId) + 1
@@ -135,7 +85,7 @@ export const ChatMain = ({ currentChatId }) => {
             userMessage: { ...message },
           }));
         } else {
-          message = null;
+
           if (chatState.inputIsEnabled === true) {
             setChatState((state) => ({
               ...state,
@@ -143,46 +93,19 @@ export const ChatMain = ({ currentChatId }) => {
               userMessage: null,
             }));
           }
-
-          showBotMessage();
+          
+          if (message.type === "chatNotification") {
+            showChatNotification();
+          } else {
+            message = null;
+            showBotMessage();
+          }
         }
       }
       // setSelectedMessageData(null);
-
     }
   }, [chatState.chatData]);
 
-  // useState(()=>{
-  //   console.log('useState -> bookmarks', bookmarks)
-  //   // set/update chat bookmarks
-  //   if (bookmarks && bookmarks.count > 0) {
-  //     const bookmarksForCurrentChat = bookmarks.list.filter((b) => {
-  //       return +b.chatId === +currentChatId;
-  //     }).map(b=> +b.messageId);
-
-  //     if (bookmarksForCurrentChat.length > 0) {
-  //       const updatedMessagesList = [...chatState.chatData.messages].map(
-  //         (m) => {
-  //           if(bookmarksForCurrentChat.includes(m.id)) {
-  //             m.isBookmarked = true;
-  //           }
-  //           return m;
-  //         }
-  //       );
-
-  //       setChatState(state => ({
-  //         ...state,
-  //         chatData: ({
-  //           ...state.chatData,
-  //           messages: updatedMessagesList
-  //         })
-  //       }));
-  //     }
-  //   }
-  // },[bookmarks]);
-
-  // On every rerender scroll to bottom of chat unless a message has been clicked to show its translation.
-  // In that case the rerender should not lead to a scrolling down to the bottom of the chat.
   useEffect(() => {
     if (
       refContentEnd.current &&
@@ -198,8 +121,6 @@ export const ChatMain = ({ currentChatId }) => {
     const lastMessageBody = chatState.chatData.messages.find(
       (m) => m.id === lastMessageId
     ).body;
-    const symbolsInMessage = lastMessageBody.length;
-    const MILISECONDS_TO_TYPE_ONE_SYMBOL = 100;
 
     const updateResponse = chatService.updateChat(
       profileData.permalink,
@@ -241,13 +162,29 @@ export const ChatMain = ({ currentChatId }) => {
     setTimeout(nextMessage, symbolsInMessage * MILISECONDS_TO_TYPE_ONE_SYMBOL);
   };
 
+
+  const showChatNotification = () => {
+    const newLastMessageId = chatState.chatData.lastMessageId + 1;
+    const prevMessageObj = chatState.chatData.messages.find(
+      (m) => m.id === chatState.chatData.lastMessageId
+    );
+
+    chatService.updateChat(
+      profileData.permalink,
+      currentChatId,
+      newLastMessageId,
+      prevMessageObj.body
+    ).then((res)=>{
+      console.log(res);
+    });
+
+    nextMessage();
+    
+  };
+
   const nextMessage = () => {
     setBotIsTyping(false);
-    // if(chatState.chatData === null) {
-    //   return false;
-    // }
 
-    // setTimeout(() => {
     setChatState((state) => ({
       ...state,
       chatData: {
@@ -255,14 +192,10 @@ export const ChatMain = ({ currentChatId }) => {
         lastMessageId: state.chatData.lastMessageId + 1,
       },
     }));
-    // }, 500);
 
     if (refContentEnd.current) {
       refContentEnd.current.scrollIntoView();
     }
-    // if (refContentEnd.current) {
-    //   refContentEnd.current.scrollIntoView();
-    // }
   };
 
   const translationsToggleHandler = () => {
@@ -282,7 +215,7 @@ export const ChatMain = ({ currentChatId }) => {
           <p>Choose a chat from the list on the left.</p>
         </div>
       )}
-      {((currentChatId && chatState.chatData !== null) && !isLoading) && (
+      {currentChatId && chatState.chatData !== null && !isLoading && (
         <>
           <header>
             <ChatHeader

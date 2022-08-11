@@ -41,7 +41,7 @@ export const template = {
       authorIsUser: false,
       isBookmarked: false,
       type: "chatMessage",
-      body: "Hoi!",
+      body: "Hoi! 👋",
       translation: "Hi!",
       words: [
         { id: "w5", nl: "Hoi", en: ["Hi", "Hello", "Hey"] }
@@ -77,7 +77,7 @@ export const template = {
       isBookmarked: false,
       type: "chatMessage",
       body: "Aan de Universiteit van Amsterdam.",
-      translation: "At the university of Darmstadt.",
+      translation: "At the university of Amsterdam.",
       words: [
         { id: "w15", nl: "Aan", en: ["At"] },
         { id: "w16", nl: "de Universiteit", en: ["university"] },

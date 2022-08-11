@@ -5,3 +5,7 @@ export const saveUser = (data) => {
 export const getUser = () => {
     return JSON.parse(localStorage.getItem('twok_user'));
 }
+
+export const deleteStorage = () => {
+    localStorage.removeItem('twok_user');
+}

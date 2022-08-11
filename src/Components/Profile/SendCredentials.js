@@ -26,7 +26,7 @@ export const SendCredentials = () => {
             placeholder="email address"
             onChange={inputEmailonChangeHandler}
           />
-          <button className="submit" onClick={onSubmitHandler}>Send user &amp; pass to my email</button>
+          <button className="submit" onClick={onSubmitHandler}>Send a permalink to my email</button>
         </form>
       </div>
       <p className={styles.info}>
