@@ -1,25 +1,50 @@
 .navigation {
-    font-size: 1em;
+  font-size: 1em;
+  display: flex;
+  flex-direction: row;
+
+  & > * {
+    margin-left: 5px;
+    margin-right: 5px;
+    cursor: pointer;
+  }
+
+  &__toggle {
+    font-size: inherit;
+    width: 4em;
+
     display: flex;
-    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 1;
 
     & > * {
-        margin-left: 5px;
-        margin-right: 5px;
-        cursor: pointer;
+      cursor: pointer;
     }
+  }
 
-    &__toggle {
+  & .menu {
+    display: flex;
+    position: absolute;
+    height: 100vh;
+    top: 0;
+    margin: 0;
+    background-color: rgba(255, 255, 255, 0.85);
+    right: 0;
+    width: 50vw;
+    transition: all 200ms;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 2.4rem;
+    box-sizing: border-box;
+    padding: 20rem 5rem;
 
-        font-size: inherit;
-        width: 4em;
-
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        & > * {
-            cursor: pointer;
-        }
+    & > a {
+        text-decoration: none;
+        padding-top: 1rem;
+        padding-bottom: 2rem;
     }
+  }
 }

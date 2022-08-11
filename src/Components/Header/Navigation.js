@@ -1,13 +1,14 @@
 import { useContext, useState } from "react";
+import { Link } from "react-router-dom";
 
 import { AuthContext } from "../../Contexts/AuthContext";
-
-import styles from "./Navigation.module.scss";
 
 import menu from "./images/menu.svg";
 import cross from "./images/cross.svg";
 import user from "./images/user.svg";
 import userAnonymous from "./images/user-anonymous.svg";
+
+import styles from "./Navigation.module.scss";
 
 export const Navigation = (props) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -44,7 +45,13 @@ export const Navigation = (props) => {
           />
         )}
       </div>
-      {isOpen && <nav></nav>}
+      {isOpen &&
+        <nav className={styles.menu}>
+          <Link to="/" title="dashboard" onClick={crossOnClick}>dashboard</Link>
+          <Link to="/chat" title="chat" onClick={crossOnClick}>chat</Link>
+          <Link to="/bookmarks" title="bookmarks" onClick={crossOnClick}>bookmarks</Link>
+        </nav>
+      }
     </div>
   );
 };
