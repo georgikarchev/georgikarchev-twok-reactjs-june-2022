@@ -21,7 +21,7 @@ export const ChatMain = ({ currentChatId }) => {
   // const [inputIsEnabled, setInputIsEnabled] = useState(false);
   // const [userMessage, setUserMessage] = useState(null);
   const { profileData } = useContext(AuthContext);
-  const [ isLoading, setIsLoading ] = useState(true);
+  const [ isLoading, setIsLoading ] = useState(false);
 
   // const [chatState, setChatState] = useState({
   //   chatData: null,
