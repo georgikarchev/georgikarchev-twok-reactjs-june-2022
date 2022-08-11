@@ -10,20 +10,32 @@ import { ChatNotification } from "./ChatNotification";
 
 import styles from "./ChatContent.module.scss";
 
-export const ChatContent = ({chatData, showAllTranslations}) => {
+export const ChatContent = ({ chatData, showAllTranslations }) => {
+  const { showAllMessageTranslations, bookmarks, chatState } = useContext(ChatContext);
+
+  
+  // if (bookmarks && bookmarks.count > 0) {
+    let bookmarksForCurrentChat = [];
+    if(bookmarks && bookmarks.count > 0){
+      bookmarksForCurrentChat = bookmarks.list.filter((b) => {
+        return +b.chatId === +chatState.chatData.id;
+      }).map(b=> +b.messageId);
+    }
+  // }
 
 
-    const {showAllMessageTranslations} = useContext(ChatContext);
-
-  let messages = '';
+  let messages = "";
   if (chatData && chatData.messages.length > 0) {
     messages = chatData.messages.map((message) => {
       if (Number(message.id) <= Number(chatData.lastMessageId)) {
         if (message.type === "chatMessage") {
+          const m = {...message};
+          m.isBookmarked = bookmarksForCurrentChat.includes(m.id);
+
           return (
             <ChatMessage
               key={"message_" + chatData.id + "_" + message.id}
-              {...message}
+              {...m}
               showAllTranslations={showAllMessageTranslations}
             />
           );

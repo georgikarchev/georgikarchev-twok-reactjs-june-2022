@@ -10,6 +10,7 @@ import { AuthContext } from "./Contexts/AuthContext";
 
 // import * as authService from "./Services/authService";
 import * as storageService from "./Services/storageService";
+import * as chatService from "./Services/chatService";
 
 import { Header } from "./Components/Header/Header";
 import { Login } from "./Components/Auth/Login/Login";
@@ -33,6 +34,12 @@ function App() {
   const [selectedMessageData, setSelectedMessageData] = useState(null);
   const [selectedChatLanguage, setSelectedChatLanguage] = useState(null);
   const [botIsTyping, setBotIsTyping] = useState(false);
+  const [bookmarks, setBookmarks] = useState(null);
+  const [chatState, setChatState] = useState({
+    chatData: null,
+    inputIsEnabled: false,
+    userMessage: null,
+  });
 
   const toggleThemeHandler = (newState) => {
     setIsDark(newState);
@@ -46,6 +53,10 @@ function App() {
     const userDataFromStorage = storageService.getUser();
     if(!profileData.loggedIn && userDataFromStorage !== null) {
       setProfileData(userDataFromStorage);
+
+      chatService.getBookmarks(userDataFromStorage.permalink).then((bookmarks) => {
+        setBookmarks(bookmarks);
+      });
     }
   },[]);
 
@@ -65,7 +76,11 @@ function App() {
                 selectedChatLanguage,
                 setSelectedChatLanguage,
                 botIsTyping,
-                setBotIsTyping
+                setBotIsTyping,
+                chatState,
+                setChatState,
+                bookmarks,
+                setBookmarks
               }}
             >
               <ThemeContext.Provider value={{ isDark, toggleThemeHandler }}>

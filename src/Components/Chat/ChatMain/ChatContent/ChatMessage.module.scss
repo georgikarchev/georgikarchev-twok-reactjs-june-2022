@@ -43,11 +43,12 @@
   &.bookmarked {
     & .body {
       border: 1px solid #11a6c7;
+      position: relative;
     }
 
     & .bookmark {
       position: absolute;
-      left: 0.5rem;
+      left: 1.5rem;
       top: -1rem;
     }
   }

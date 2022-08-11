@@ -42,8 +42,10 @@ export const ChatMessage = ({
 
   return (
     <article className={messageClassNames}>
-      <div className={styles.body} onClick={onClickHandler}>{body}</div>
-      {isBookmarked && <span className={styles.bookmark}><img src={bookmark} alt="bookmarked" /></span>}
+      <div className={styles.body} onClick={onClickHandler}>
+        {body}
+        {isBookmarked && <span className={styles.bookmark}><img src={bookmark} alt="bookmarked" /></span>}
+      </div>
       {/* {showTranslation && <span className={translationClassNames}>{translation}</span>} */}
       {/* <CSSTransition in={showTranslation} timeout={200} className="transition"> */}
         <span className={translationClassNames}>{translation}</span>

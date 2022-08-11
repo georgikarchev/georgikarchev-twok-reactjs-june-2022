@@ -22,11 +22,11 @@ export const ChatMain = ({ currentChatId }) => {
   // const [userMessage, setUserMessage] = useState(null);
   const { profileData } = useContext(AuthContext);
 
-  const [chatState, setChatState] = useState({
-    chatData: null,
-    inputIsEnabled: false,
-    userMessage: null,
-  });
+  // const [chatState, setChatState] = useState({
+  //   chatData: null,
+  //   inputIsEnabled: false,
+  //   userMessage: null,
+  // });
 
   const refContentEnd = createRef();
   const {
@@ -37,7 +37,12 @@ export const ChatMain = ({ currentChatId }) => {
     setSelectedChatLanguage,
     botIsTyping,
     setBotIsTyping,
+    chatState,
+    setChatState,
+    bookmarks
   } = useContext(ChatContext);
+
+  // console.log(bookmarks);
 
   // Load chat data from server
   useEffect(() => {
@@ -60,6 +65,43 @@ export const ChatMain = ({ currentChatId }) => {
           chatData: chatDataResponse,
         }));
 
+        //  ! TODO - Move this to context api and load server data at login
+        // chatService.getBookmarks(profileData.permalink).then((bookmarks) => {
+        //   console.log('getBookmarks ->', bookmarks);
+        
+        
+        
+        // if (bookmarks && bookmarks.count > 0) {
+        //   const bookmarksForCurrentChat = bookmarks.list.filter((b) => {
+        //     return +b.chatId === +currentChatId;
+        //   }).map(b=> +b.messageId);
+
+        //   if (bookmarksForCurrentChat.length > 0) {
+        //     const updatedMessagesList = [...chatDataResponse.messages].map(
+        //       (m) => {
+        //         if(bookmarksForCurrentChat.includes(m.id)) {
+        //           m.isBookmarked = true;
+        //         }
+        //         return m;
+        //       }
+        //     );
+
+        //     setChatState(state => ({
+        //       ...state,
+        //       chatData: ({
+        //         ...chatDataResponse,
+        //         messages: updatedMessagesList
+        //       })
+        //     }));
+        //   }
+        // }
+
+
+
+        // });
+
+        // console.log(bookmarks);
+
         setSelectedChatLanguage(chatDataResponse.language);
 
         // mark selected chat read if unread
@@ -71,9 +113,12 @@ export const ChatMain = ({ currentChatId }) => {
             });
         }
       });
+
+      setSelectedMessageData(null);
   }, [currentChatId]);
 
   useEffect(() => {
+    // console.log("chatState.chatData > useEffect");
     if (chatState.chatData) {
       let message = chatState.chatData.messages.find(
         (x) => Number(x.id) === Number(chatState.chatData.lastMessageId) + 1
@@ -98,9 +143,39 @@ export const ChatMain = ({ currentChatId }) => {
           showBotMessage();
         }
       }
-      setSelectedMessageData(null);
+      // setSelectedMessageData(null);
+
     }
   }, [chatState.chatData]);
+
+  // useState(()=>{
+  //   console.log('useState -> bookmarks', bookmarks)
+  //   // set/update chat bookmarks
+  //   if (bookmarks && bookmarks.count > 0) {
+  //     const bookmarksForCurrentChat = bookmarks.list.filter((b) => {
+  //       return +b.chatId === +currentChatId;
+  //     }).map(b=> +b.messageId);
+
+  //     if (bookmarksForCurrentChat.length > 0) {
+  //       const updatedMessagesList = [...chatState.chatData.messages].map(
+  //         (m) => {
+  //           if(bookmarksForCurrentChat.includes(m.id)) {
+  //             m.isBookmarked = true;
+  //           }
+  //           return m;
+  //         }
+  //       );
+
+  //       setChatState(state => ({
+  //         ...state,
+  //         chatData: ({
+  //           ...state.chatData,
+  //           messages: updatedMessagesList
+  //         })
+  //       }));
+  //     }
+  //   }
+  // },[bookmarks]);
 
   // On every rerender scroll to bottom of chat unless a message has been clicked to show its translation.
   // In that case the rerender should not lead to a scrolling down to the bottom of the chat.
@@ -169,13 +244,13 @@ export const ChatMain = ({ currentChatId }) => {
     // }
 
     // setTimeout(() => {
-      setChatState((state) => ({
-        ...state,
-        chatData: {
-          ...state.chatData,
-          lastMessageId: state.chatData.lastMessageId + 1,
-        },
-      }));
+    setChatState((state) => ({
+      ...state,
+      chatData: {
+        ...state.chatData,
+        lastMessageId: state.chatData.lastMessageId + 1,
+      },
+    }));
     // }, 500);
 
     if (refContentEnd.current) {

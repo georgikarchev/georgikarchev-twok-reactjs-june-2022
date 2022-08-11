@@ -15,7 +15,7 @@ export const getChat = async (username, chatId) => {
   const result = await response.json();
 
   const chatData = {};
-  chatData.id = +result.chatId;
+  chatData.id = +result.chatId.split('-')[1];
   chatData.contactName = result.contactName;
   chatData.contactDescription = result.contactDescription;
   chatData.contactAvatar = result.contactAvatar;
@@ -94,6 +94,75 @@ export const updateChatRead = async (username, chatId) => {
       "content-type": "application/json",
     },
     body: JSON.stringify(chatUpdates),
+  }).catch(err => {
+    console.error(err);
+  });
+
+  const result = await response.json();
+  return result;
+};
+
+// BOOKMARKS
+export const getBookmarks = async (username) => {
+  const response = await fetch(`${baseUrl}/${username}/bookmarks`);
+  const result = await response.json();
+  return { list: result.list, count: result.count };
+};
+
+export const createBookmark = async (username, chatId, messageId, messageBody) => {
+  if (
+    username === undefined ||
+    chatId === undefined ||
+    messageId === undefined ||
+    messageBody === undefined
+  ) {
+    console.error('Chat service  -> Create Bookmark :: parameters are not defined.');
+    return false;
+  }
+
+  const postData = {
+    userPermalink: username,
+    chatId: chatId,
+    messageId: messageId,
+    body: messageBody
+  };
+
+  const response = await fetch(`${baseUrl}/new-bookmark`, {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+    },
+    body: JSON.stringify(postData),
+  }).catch(err => {
+    console.error(err);
+  });
+
+  const result = await response.json();
+  return result;
+};
+
+export const deleteBookmark = async (username, chatId, messageId) => {
+  if (
+    username === undefined ||
+    chatId === undefined ||
+    messageId === undefined
+  ) {
+    console.error('Chat service  -> Delete Bookmark :: parameters are not defined.');
+    return false;
+  }
+
+  const postData = {
+    userPermalink: username,
+    chatId: chatId,
+    messageId: messageId
+  };
+
+  const response = await fetch(`${baseUrl}/delete-bookmark`, {
+    method: "DELETE",
+    headers: {
+      "content-type": "application/json",
+    },
+    body: JSON.stringify(postData),
   }).catch(err => {
     console.error(err);
   });
