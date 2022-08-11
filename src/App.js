@@ -12,11 +12,12 @@ import { AuthContext } from "./Contexts/AuthContext";
 import * as storageService from "./Services/storageService";
 import * as chatService from "./Services/chatService";
 
+import { LoginWithPermalink } from "./Components/Auth/LoginWithPermalink/LoginWithPermalink";
 import { Header } from "./Components/Header/Header";
 import { Login } from "./Components/Auth/Login/Login";
 import { Profile } from "./Components/Profile/Profile";
 import { Chat } from "./Components/Chat/Chat";
-import { LoginWithPermalink } from "./Components/Auth/LoginWithPermalink/LoginWithPermalink";
+import { Bookmarks } from "./Components/Bookmarks/Bookmarks";
 
 import "./App.scss";
 import { useEffect } from "react";
@@ -93,6 +94,7 @@ function App() {
                     <Route path="/chat/:selectedChat" element={<Chat />} />
                     <Route path="/:username" element={<LoginWithPermalink />} />
                     <Route path="/" element={ profileData.loggedIn ? <Profile /> : <Login />} />
+                    <Route path="/bookmarks" element={<Bookmarks />} />
                   </Routes>
                 </main>
               </ThemeContext.Provider>

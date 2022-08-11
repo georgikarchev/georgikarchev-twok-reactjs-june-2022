@@ -37,6 +37,7 @@ export const ChatContent = ({ chatData, showAllTranslations }) => {
               key={"message_" + chatData.id + "_" + message.id}
               {...m}
               showAllTranslations={showAllMessageTranslations}
+              clickable={true}
             />
           );
         } else if (message.type === "chatNotification") {

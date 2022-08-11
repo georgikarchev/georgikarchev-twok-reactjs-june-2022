@@ -15,7 +15,9 @@ export const ChatMessage = ({
   body,
   translation,
   words,
-  showAllTranslations
+  showAllTranslations,
+  language,
+  clickable
 }) => {
   // const [showTranslation, setShowTranslation] = useState(false);
   const {selectedMessageData, setSelectedMessageData} = useContext(ChatContext);
@@ -37,12 +39,15 @@ export const ChatMessage = ({
   
   const onClickHandler = () => {
     // setShowTranslation(state => !state)
-    setSelectedMessageData({id: id, body: body, translation: translation, words: words, isBookmarked: isBookmarked});
+    if(clickable) {
+      setSelectedMessageData({id: id, body: body, translation: translation, words: words, isBookmarked: isBookmarked});
+    }
   };
 
   return (
     <article className={messageClassNames}>
       <div className={styles.body} onClick={onClickHandler}>
+        {language}
         {body}
         {isBookmarked && <span className={styles.bookmark}><img src={bookmark} alt="bookmarked" /></span>}
       </div>

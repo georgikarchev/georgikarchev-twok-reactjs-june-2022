@@ -1,4 +1,3 @@
-import { template as templateEve } from "../ChatTemplates/de/eve_de";
 import { templates } from "../ChatTemplates/templates";
 
 const baseUrl = "https://demo.twok.app";
@@ -30,6 +29,12 @@ export const getChat = async (username, chatId) => {
   chatData.messages = templates[result.chatTemplate].template.messages;
 
   return chatData;
+};
+
+export const getMessageFromChatTemplate = (messageId, chatTemplate) => {
+  return templates[chatTemplate].template.messages.find(m=>{
+    return +m.id === +messageId;
+  });
 };
 
 export const updateChat = async (

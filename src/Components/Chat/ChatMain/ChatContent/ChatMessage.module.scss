@@ -11,9 +11,9 @@
 
   box-sizing: border-box;
 
-  &.selected.userMessage .body {
-    background: red;
-  }
+  // &.selected.userMessage .body {
+  //   background: red;
+  // }
 
   &.botMessage {
     flex-direction: row;
