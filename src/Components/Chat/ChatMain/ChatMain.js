@@ -21,6 +21,7 @@ export const ChatMain = ({ currentChatId }) => {
   // const [inputIsEnabled, setInputIsEnabled] = useState(false);
   // const [userMessage, setUserMessage] = useState(null);
   const { profileData } = useContext(AuthContext);
+  const [ isLoading, setIsLoading ] = useState(true);
 
   // const [chatState, setChatState] = useState({
   //   chatData: null,
@@ -54,6 +55,8 @@ export const ChatMain = ({ currentChatId }) => {
       return;
     }
 
+    setIsLoading(true);
+
     // get chat data
     chatService
       .getChat(profileData.permalink, currentChatId)
@@ -64,6 +67,7 @@ export const ChatMain = ({ currentChatId }) => {
           userMessage: null,
           chatData: chatDataResponse,
         }));
+        setIsLoading(false);
 
         //  ! TODO - Move this to context api and load server data at login
         // chatService.getBookmarks(profileData.permalink).then((bookmarks) => {
@@ -278,7 +282,7 @@ export const ChatMain = ({ currentChatId }) => {
           <p>Choose a chat from the list on the left.</p>
         </div>
       )}
-      {currentChatId && chatState.chatData !== null && (
+      {((currentChatId && chatState.chatData !== null) && !isLoading) && (
         <>
           <header>
             <ChatHeader
@@ -319,7 +323,7 @@ export const ChatMain = ({ currentChatId }) => {
           </footer>
         </>
       )}
-      {currentChatId && chatState.chatData === null && (
+      {((currentChatId && chatState.chatData === null) || isLoading) && (
         <div className={styles.spinnerWrapper}>
           <Spinner />
         </div>
