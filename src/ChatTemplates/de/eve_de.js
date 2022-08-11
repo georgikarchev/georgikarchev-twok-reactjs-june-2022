@@ -136,6 +136,8 @@ export const template = {
         id: 11,
         type: "chatNotification",
         body: "25 new words learned",
+        achievement: "You learned you first 25 words in German.",
+        newWordsLearned: 25
       },
     ],
   };

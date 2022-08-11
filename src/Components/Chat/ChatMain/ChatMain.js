@@ -4,6 +4,7 @@ import { ChatContext } from "../../../Contexts/ChatContext";
 import { AuthContext } from "../../../Contexts/AuthContext";
 
 import * as chatService from "../../../Services/chatService";
+import * as languageService from "../../../Services/languageService";
 
 import { ChatInputBar } from "./ChatInputBar/ChatInputBar";
 import styles from "./ChatMain.module.scss";
@@ -16,7 +17,7 @@ import translateActive from "./images/translate--active.svg";
 import translateInactive from "./images/translate--inactive.svg";
 
 export const ChatMain = ({ currentChatId }) => {
-  const MILISECONDS_TO_TYPE_ONE_SYMBOL = 200;
+  const MILISECONDS_TO_TYPE_ONE_SYMBOL = 100;
   const { profileData } = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(false);
   const refContentEnd = createRef();
@@ -85,7 +86,6 @@ export const ChatMain = ({ currentChatId }) => {
             userMessage: { ...message },
           }));
         } else {
-
           if (chatState.inputIsEnabled === true) {
             setChatState((state) => ({
               ...state,
@@ -93,7 +93,7 @@ export const ChatMain = ({ currentChatId }) => {
               userMessage: null,
             }));
           }
-          
+
           if (message.type === "chatNotification") {
             showChatNotification();
           } else {
@@ -162,24 +162,74 @@ export const ChatMain = ({ currentChatId }) => {
     setTimeout(nextMessage, symbolsInMessage * MILISECONDS_TO_TYPE_ONE_SYMBOL);
   };
 
-
   const showChatNotification = () => {
     const newLastMessageId = chatState.chatData.lastMessageId + 1;
+    const thisMessageObj = chatState.chatData.messages.find(
+      (m) => m.id === newLastMessageId
+    );
     const prevMessageObj = chatState.chatData.messages.find(
       (m) => m.id === chatState.chatData.lastMessageId
     );
 
-    chatService.updateChat(
-      profileData.permalink,
-      currentChatId,
-      newLastMessageId,
-      prevMessageObj.body
-    ).then((res)=>{
-      console.log(res);
-    });
+    chatService
+      .updateChat(
+        profileData.permalink,
+        currentChatId,
+        newLastMessageId,
+        prevMessageObj.body
+      )
+      .then((res) => {
+        console.log(res);
+      });
+
+    if (
+      thisMessageObj.achievement &&
+      thisMessageObj.achievement.length > 0 &&
+      chatState.chatData.language
+    ) {
+      // save achievement to the DB
+      languageService
+        .createAchievement(
+          profileData.permalink,
+          chatState.chatData.language,
+          thisMessageObj.achievement
+        )
+        .then((res) => {
+          console.log(
+            "Achievement successfully saved to the DB:",
+            chatState.chatData.language,
+            thisMessageObj.achievement
+          );
+        });
+    }
+
+    if (
+      thisMessageObj.newWordsLearned &&
+      thisMessageObj.newWordsLearned > 0 &&
+      chatState.chatData.language
+    ) {
+      // save achievement to the DB
+      languageService
+        .updateWordsLearnedCount(
+          profileData.permalink,
+          chatState.chatData.language,
+          +thisMessageObj.newWordsLearned
+        )
+        .then((res) => {
+          console.log(
+            "New words learned updated for " +
+              chatState.chatData.language +
+              " : ",
+            thisMessageObj.newWordsLearned
+          );
+        });
+    }
+
+    if (thisMessageObj.newWords && +thisMessageObj.newWords > 0) {
+      // save newWords learned count to the DB
+    }
 
     nextMessage();
-    
   };
 
   const nextMessage = () => {

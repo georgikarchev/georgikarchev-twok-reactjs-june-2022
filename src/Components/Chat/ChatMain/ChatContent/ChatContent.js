@@ -4,13 +4,13 @@ import { stringToDdMonthYyyy } from "../../../../Utils/dateUtils";
 
 import { ChatContext } from "../../../../Contexts/ChatContext";
 
-import { Spinner } from "../../../Common/Spinner";
+// import { Spinner } from "../../../Common/Spinner";
 import { ChatMessage } from "./ChatMessage";
 import { ChatNotification } from "./ChatNotification";
 
 import styles from "./ChatContent.module.scss";
 
-export const ChatContent = ({ chatData, showAllTranslations }) => {
+export const ChatContent = ({ chatData }) => {
   const { showAllMessageTranslations, bookmarks, chatState } = useContext(ChatContext);
 
   
