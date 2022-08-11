@@ -14,7 +14,7 @@ export const Bookmarks = () => {
 
   const totalBookmarksCount = bookmarks ? bookmarks.count : "";
 
-  console.log(bookmarks);
+  console.log("Bookmarks: ", bookmarks);
 
   let lists = [];
   if (bookmarks) {
@@ -27,7 +27,7 @@ export const Bookmarks = () => {
         }
       })
       .map((bm) => {
-        console.log(bm);
+        // console.log(bm);
         const messageFromTemplate = chatService.getMessageFromChatTemplate(
           bm.messageId,
           bm.chatTemplate

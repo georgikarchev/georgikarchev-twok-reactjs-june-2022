@@ -32,7 +32,7 @@ export const getChat = async (username, chatId) => {
 };
 
 export const getMessageFromChatTemplate = (messageId, chatTemplate) => {
-  console.log(">>>", messageId, chatTemplate, templates[chatTemplate]);
+  // console.log(">>>", messageId, chatTemplate, templates[chatTemplate]);
   if(!templates && templates[chatTemplate] === undefined) {
     return null;
   }
@@ -147,6 +147,7 @@ export const createBookmark = async (username, chatId, messageId, messageBody) =
   });
 
   const result = await response.json();
+  // console.log(result, username, chatId, messageId, messageBody);
   return result;
 };
 
