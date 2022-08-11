@@ -1,0 +1,95 @@
+.timelineWrapper {
+  .timeline {
+    font-size: 1.8rem;
+    color: #ababab;
+
+    width: clamp(32rem, 54rem, 50vw);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+
+    .milestone {
+      list-style: none;
+      width: 50%;
+      min-width: 50%;
+      box-sizing: border-box;
+      padding-top: 0rem;
+      padding-bottom: 6rem;
+
+      .date {
+        position: relative;
+        color: #787878;
+        margin-top: -0.3rem;
+
+        &::after {
+          content: "";
+          width: 2rem;
+          height: 2rem;
+          background-color: unset;
+          border: 2px dashed #ababab;
+          position: absolute;
+          display: block;
+          border-radius: 50%;
+          top: 0.3rem;
+        }
+      }
+
+      &:nth-child(odd) {
+        align-self: flex-start;
+        text-align: right;
+        // border-right: 2px dashed #ababab;
+        padding-right: 2rem;
+        margin-left: 2px;
+
+        .date {
+          &::after {
+            right: -3.1rem;
+          }
+        }
+      }
+      &:nth-child(even) {
+        align-self: flex-end;
+        text-align: left;
+        // border-left: 2px dashed #ababab;
+        padding-left: 2rem;
+
+        .date {
+          &::after {
+            left: -3.1rem;
+          }
+        }
+      }
+
+      &.reached {
+
+        &:nth-child(odd) {
+            border-right: 2px solid #2acbee;
+
+            &:nth-last-child(2) {
+                border-right: 2px dashed #ababab;
+            }
+        }
+
+        &:nth-child(even) {
+            border-left: 2px solid #2acbee;
+
+            &:nth-last-child(2) {
+                border-left: 2px dashed #ababab;
+            }
+        }
+
+        
+
+
+        .date {
+            &::after {
+                background-color: #2acbee;
+                border: unset;
+            }
+        }
+      }
+    }
+  }
+}
