@@ -7,4 +7,12 @@
         margin-top: 9rem;
         margin-bottom: 9rem;
       }
+
+    main {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        align-items: flex-start;
+    }
 }

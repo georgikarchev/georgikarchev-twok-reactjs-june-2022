@@ -4,9 +4,9 @@ import { stringToDdMonthYyyy } from "../../../Utils/dateUtils";
 
 export const Timeline = ({milestones}) => {
 
-    if(milestones && milestones.length > 0) {
-        console.log(milestones);
-    }
+    // if(milestones && milestones.length > 0) {
+    //     console.log(milestones);
+    // }
 
     const line = milestones.map((m,i)=>{
         // console.log(m)
@@ -21,6 +21,7 @@ export const Timeline = ({milestones}) => {
 
     return (
         <div className={styles.timelineWrapper}>
+            <h3>Timeline</h3>
             <ul className={styles.timeline}>
                 {line}
             </ul>
