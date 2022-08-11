@@ -28,12 +28,11 @@ export const Navigation = (props) => {
 
   return (
     <div className={styles.navigation}>
-      {profileData.loggedIn && (
-        <img src={user} alt="profile" onClick={logInTestHandler} />
-      )}
-      {!profileData.loggedIn && (
-        <img src={userAnonymous} alt="log in" onClick={logInTestHandler} />
-      )}
+      
+      <Link to="/profile" title="profile">
+        <img src={user} alt="profile"/>
+      </Link>
+      
       <div className={styles.navigation__toggle}>
         {!isOpen && (
           <img
