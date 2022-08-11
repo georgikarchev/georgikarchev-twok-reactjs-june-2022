@@ -1,19 +1,19 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
-import { AuthContext } from "../../Contexts/AuthContext";
+// import { AuthContext } from "../../Contexts/AuthContext";
 
 import menu from "./images/menu.svg";
 import cross from "./images/cross.svg";
 import user from "./images/user.svg";
-import userAnonymous from "./images/user-anonymous.svg";
+// import userAnonymous from "./images/user-anonymous.svg";
 
 import styles from "./Navigation.module.scss";
 
 export const Navigation = (props) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const { profileData, logInTestHandler } = useContext(AuthContext);
+  // const { profileData, logInTestHandler } = useContext(AuthContext);
 
   const burgerOnClick = () => {
     setIsOpen(true);

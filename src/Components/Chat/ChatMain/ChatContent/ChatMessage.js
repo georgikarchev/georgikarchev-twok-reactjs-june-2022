@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 
 import { ChatContext } from "../../../../Contexts/ChatContext";
 
@@ -10,8 +10,8 @@ export const ChatMessage = ({
   id,
   authorIsUser,
   isBookmarked,
-  datetime,
-  type,
+  // datetime,
+  // type,
   body,
   translation,
   words,

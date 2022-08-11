@@ -3,7 +3,7 @@ import { useContext, useState } from "react";
 
 import * as chatService from "../../../Services/chatService";
 
-import { AppContext } from "../../../Contexts/AppContext";
+// import { AppContext } from "../../../Contexts/AppContext";
 import { AuthContext } from "../../../Contexts/AuthContext";
 import { ChatContext } from "../../../Contexts/ChatContext";
 
@@ -22,11 +22,11 @@ export const ChatMessageInfo = () => {
     setSelectedMessageData,
     selectedChatLanguage,
     chatState,
-    setChatState,
-    bookmarks,
+    // setChatState,
+    // bookmarks,
     setBookmarks,
   } = useContext(ChatContext);
-  const { appSettings } = useContext(AppContext);
+  // const { appSettings } = useContext(AppContext);
   const { profileData } = useContext(AuthContext);
   const [ isLoading, setIsLoading ] = useState(false);
 
