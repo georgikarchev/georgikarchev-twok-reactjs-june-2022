@@ -4,6 +4,7 @@ import { AuthContext } from "../../Contexts/AuthContext";
 
 import { Timeline } from "../Common/Timeline/Timeline";
 import { Achievements } from "./Achievements/Achievements";
+import { Summary } from "./Achievements/Summary/Summary";
 
 import styles from "./Dashboard.module.scss";
 
@@ -14,7 +15,6 @@ export const Dashboard = () => {
 
   useEffect(() => {
     if (profileData && profileData.permalink != undefined) {
-      
       const newMilestones = [];
       newMilestones.push({
         date: profileData.created,
@@ -75,8 +75,13 @@ export const Dashboard = () => {
         <h1>Dashboard</h1>
       </header>
       <main>
-        <Timeline milestones={milestones} />
-        <Achievements achievements={achievements} />
+        <div className={styles.leftSide}>
+          <Timeline milestones={milestones} />
+        </div>
+        <div className={styles.rightSide}>
+          <Summary />
+          <Achievements achievements={achievements} />
+        </div>
       </main>
     </article>
   );

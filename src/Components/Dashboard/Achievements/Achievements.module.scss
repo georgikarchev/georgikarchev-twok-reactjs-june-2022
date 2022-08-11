@@ -9,8 +9,11 @@
   }
 
   .list {
+    list-style: none;
+    padding-left: unset;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     .badge {
       list-style: none;
       width: 6.5rem;
