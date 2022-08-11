@@ -21,6 +21,7 @@ import { Bookmarks } from "./Components/Bookmarks/Bookmarks";
 
 import "./App.scss";
 import { useEffect } from "react";
+import { Dashboard } from "./Components/Dashboard/Dashboard";
 
 function App() {
   const [appSettings, setAppSettings] = useState({ appLanguage: "en" });
@@ -89,6 +90,7 @@ function App() {
                 <main className="app__main">
                   <Routes>
                     <Route path="/login" element={<Login />} />
+                    <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="/profile" element={<Profile />} />
                     <Route path="/chat" element={<Chat />} />
                     <Route path="/chat/:selectedChat" element={<Chat />} />

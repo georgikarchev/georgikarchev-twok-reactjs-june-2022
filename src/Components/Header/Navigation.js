@@ -55,7 +55,7 @@ export const Navigation = (props) => {
       <nav className={menuClasses}>
         {isOpen && (
           <>
-            <Link to="/" title="dashboard" onClick={crossOnClick}>
+            <Link to="/dashboard" title="dashboard" onClick={crossOnClick}>
               dashboard
             </Link>
             <Link to="/chat" title="chat" onClick={crossOnClick}>

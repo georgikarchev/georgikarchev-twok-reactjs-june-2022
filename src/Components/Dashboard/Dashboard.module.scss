@@ -1,0 +1,10 @@
+.dashboard {
+    & h1 {
+        grid-area: header;
+        text-align: center;
+        color: #11a6c7;
+        font-size: 2.4em;
+        margin-top: 9rem;
+        margin-bottom: 9rem;
+      }
+}
