@@ -17,43 +17,68 @@ export const ChatMessage = ({
   words,
   showAllTranslations,
   language,
-  clickable
+  clickable,
 }) => {
   // const [showTranslation, setShowTranslation] = useState(false);
-  const {selectedMessageData, setSelectedMessageData} = useContext(ChatContext);
+  const { selectedMessageData, setSelectedMessageData } =
+    useContext(ChatContext);
 
   let messageClassNames = styles.message;
-  messageClassNames += authorIsUser !== undefined && authorIsUser ? " " + styles.userMessage : " " + styles.botMessage;
+  messageClassNames +=
+    authorIsUser !== undefined && authorIsUser
+      ? " " + styles.userMessage
+      : " " + styles.botMessage;
   messageClassNames += isBookmarked ? " " + styles.bookmarked : "";
-  messageClassNames += selectedMessageData && selectedMessageData.id === id ? " " + styles.selected : "";
+  messageClassNames +=
+    selectedMessageData && selectedMessageData.id === id
+      ? " " + styles.selected
+      : "";
   // messageClassNames += isCorrect !== undefined && isCorrect ? " " + styles.correct : " " + styles.false;
-  
+
   let translationClassNames = styles.translation;
-  if(showAllTranslations) {
+  if (showAllTranslations) {
     translationClassNames += " " + styles.fadeIn;
   } else {
-    translationClassNames += selectedMessageData && selectedMessageData.id === id ? " " + styles.fadeIn : " " + styles.fadeOut;
+    translationClassNames +=
+      selectedMessageData && selectedMessageData.id === id
+        ? " " + styles.fadeIn
+        : " " + styles.fadeOut;
     // translationClassNames += showTranslation ? " " + styles.fadeIn : " " + styles.fadeOut;
   }
-  
-  
+
   const onClickHandler = () => {
     // setShowTranslation(state => !state)
-    if(clickable) {
-      setSelectedMessageData({id: id, body: body, translation: translation, words: words, isBookmarked: isBookmarked});
+    if (clickable) {
+      setSelectedMessageData({
+        id: id,
+        body: body,
+        translation: translation,
+        words: words,
+        isBookmarked: isBookmarked,
+      });
     }
   };
 
   return (
     <article className={messageClassNames}>
       <div className={styles.body} onClick={onClickHandler}>
-        {language}
+        {language && (
+          <img
+            className={styles.flag}
+            src={`/images/flags/${language}.svg`}
+            alt={language}
+          />
+        )}
         {body}
-        {isBookmarked && <span className={styles.bookmark}><img src={bookmark} alt="bookmarked" /></span>}
+        {isBookmarked && (
+          <span className={styles.bookmark}>
+            <img src={bookmark} alt="bookmarked" />
+          </span>
+        )}
       </div>
       {/* {showTranslation && <span className={translationClassNames}>{translation}</span>} */}
       {/* <CSSTransition in={showTranslation} timeout={200} className="transition"> */}
-        <span className={translationClassNames}>{translation}</span>
+      <span className={translationClassNames}>{translation}</span>
       {/* </CSSTransition> */}
     </article>
   );

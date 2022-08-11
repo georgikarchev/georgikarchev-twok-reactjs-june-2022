@@ -42,6 +42,7 @@ export const Bookmarks = () => {
             isBookmarked={true}
             showAllTranslations={true}
             clickable={false}
+            language={bm.language}
           />
         );
       });
