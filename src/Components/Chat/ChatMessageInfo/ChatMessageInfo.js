@@ -1,5 +1,5 @@
 // import { useEffect } from "react";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
 import * as chatService from "../../../Services/chatService";
 
@@ -14,6 +14,7 @@ import {
 import { BookmarkToggleButton } from "../../Common/BookmarkToggleButton/BookmarkToggleButton";
 
 import styles from "./ChatMessageInfo.module.scss";
+import { Spinner } from "../../Common/Spinner";
 
 export const ChatMessageInfo = () => {
   const {
@@ -27,14 +28,10 @@ export const ChatMessageInfo = () => {
   } = useContext(ChatContext);
   const { appSettings } = useContext(AppContext);
   const { profileData } = useContext(AuthContext);
-
-  // useEffect(()=> {
-  //   if(selectedMessageData) {
-  //     console.log(selectedMessageData.isBookmarked)
-  //   }
-  // }, [selectedMessageData]);
+  const [ isLoading, setIsLoading ] = useState(false);
 
   const bookmarkButtonClickedHandler = () => {
+    setIsLoading(true);
     if (selectedMessageData.isBookmarked) {
       chatService
         .deleteBookmark(
@@ -64,6 +61,8 @@ export const ChatMessageInfo = () => {
             ...state,
             isBookmarked: false,
           }));
+
+          setIsLoading(false);
         });
       
     } else {
@@ -104,32 +103,8 @@ export const ChatMessageInfo = () => {
             isBookmarked: true,
           }));
 
-          // if (res) {
-          //   setSelectedMessageData((state) => ({
-          //     ...state,
-          //     isBookmarked: true,
-          //   }));
+          setIsLoading(false);
 
-          //   setChatState((state) => {
-          //     const messageIndex = state.chatData.messages.findIndex((el) => {
-          //       // console.log('----',+el.id,+res.messageId,+el.id === +res.messageId)
-          //       if (+el.id === +res.bookmark.messageId) {
-          //         return true;
-          //       }
-          //     });
-
-          //     const newMessagesAray = [...state.chatData.messages];
-          //     newMessagesAray[messageIndex].isBookmarked = true;
-
-          //     return {
-          //       ...state,
-          //       chatData: {
-          //         ...state.chatData,
-          //         messages: newMessagesAray,
-          //       },
-          //     };
-          //   });
-          // }
         });
     }
     // console.log(chatState.chatData.messages);
@@ -160,11 +135,14 @@ export const ChatMessageInfo = () => {
         )}
         {selectedMessageData && (
           <>
-            {selectedMessageData && (
+            {(selectedMessageData && !isLoading) && (
               <BookmarkToggleButton
                 isBookmarked={selectedMessageData.isBookmarked}
                 onClick={bookmarkButtonClickedHandler}
               />
+            )}
+            {(selectedMessageData && isLoading) && (
+              <Spinner />
             )}
             <h4 className={styles.body}>{selectedMessageData.body}</h4>
             <h5 className={styles.bodyTranslation}>
