@@ -75,12 +75,18 @@ export const ChatMessageInfo = () => {
           selectedMessageData.body
         )
         .then((res) => {
+          console.log(res);
           setBookmarks((state) => {
+            if(state === null){
+              state = [];
+            }
             const newList = [...state.list];
             newList.push({
               chatId: res.bookmark.chatId,
               messageId: res.bookmark.messageId,
               body: res.bookmark.body,
+              language: res.bookmark.language,
+              chatTemplate: res.bookmark.chatTemplate
             });
 
             return {

@@ -10,6 +10,10 @@
   }
 
   .listsWrapper {
+    text-align: center;
+    font-size: 2em;
+    color: #ababab;
+
     grid-area: bookmarks;
     padding-left: clamp(3rem, 5%, 7rem);
     padding-right: clamp(3rem, 5%, 7rem);

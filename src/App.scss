@@ -36,7 +36,8 @@
 
   &__main {
     // prevens shadows to bleed into the header area
-    overflow: hidden;
+    // overflow: hidden;
+    overflow: auto;
 
     grid-area: appMain;
 

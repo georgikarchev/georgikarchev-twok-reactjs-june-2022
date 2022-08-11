@@ -32,6 +32,10 @@ export const getChat = async (username, chatId) => {
 };
 
 export const getMessageFromChatTemplate = (messageId, chatTemplate) => {
+  console.log(">>>", messageId, chatTemplate, templates[chatTemplate]);
+  if(!templates && templates[chatTemplate] === undefined) {
+    return null;
+  }
   return templates[chatTemplate].template.messages.find(m=>{
     return +m.id === +messageId;
   });

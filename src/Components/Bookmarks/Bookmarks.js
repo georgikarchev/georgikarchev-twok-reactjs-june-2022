@@ -14,6 +14,8 @@ export const Bookmarks = () => {
 
   const totalBookmarksCount = bookmarks ? bookmarks.count : "";
 
+  console.log(bookmarks);
+
   let lists = [];
   if (bookmarks) {
     lists = [...bookmarks.list]
@@ -21,14 +23,16 @@ export const Bookmarks = () => {
         if (a.language === b.language) {
           return a.body.localeCompare(b.body);
         } else {
-          return a.language.localeCompare(b.language)
+          return a.language.localeCompare(b.language);
         }
       })
       .map((bm) => {
+        console.log(bm);
         const messageFromTemplate = chatService.getMessageFromChatTemplate(
           bm.messageId,
           bm.chatTemplate
         );
+
         // console.log(messageFromTemplate);
         return (
           <ChatMessage
@@ -46,15 +50,15 @@ export const Bookmarks = () => {
   return (
     <div className={styles.bookmarks}>
       <h1>{totalBookmarksCount} Bookmarks</h1>
-      
-        <div className={styles.listsWrapper}>
-            <div className={styles.lists}>{lists}</div>
-        </div>
 
-        {/* <div className={styles.sidebar}>
+      <div className={styles.listsWrapper}>
+        {bookmarks && <div className={styles.lists}>{lists}</div>}
+        {!bookmarks && <span>You have no bookmarks.</span>}
+      </div>
+
+      {/* <div className={styles.sidebar}>
             <ChatMessageInfo />
         </div> */}
-
     </div>
   );
 };
