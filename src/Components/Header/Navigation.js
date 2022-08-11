@@ -13,7 +13,7 @@ import styles from "./Navigation.module.scss";
 export const Navigation = (props) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const {profileData,logInTestHandler} = useContext(AuthContext);
+  const { profileData, logInTestHandler } = useContext(AuthContext);
 
   const burgerOnClick = () => {
     setIsOpen(true);
@@ -23,10 +23,17 @@ export const Navigation = (props) => {
     setIsOpen(false);
   };
 
+  let menuClasses = styles.menu;
+  menuClasses += isOpen ? "" : " " + styles.hidden;
+
   return (
     <div className={styles.navigation}>
-      {profileData.loggedIn && <img src={user} alt="profile" onClick={logInTestHandler} />}
-      {!profileData.loggedIn && <img src={userAnonymous} alt="log in" onClick={logInTestHandler} />}
+      {profileData.loggedIn && (
+        <img src={user} alt="profile" onClick={logInTestHandler} />
+      )}
+      {!profileData.loggedIn && (
+        <img src={userAnonymous} alt="log in" onClick={logInTestHandler} />
+      )}
       <div className={styles.navigation__toggle}>
         {!isOpen && (
           <img
@@ -45,13 +52,22 @@ export const Navigation = (props) => {
           />
         )}
       </div>
-      {isOpen &&
-        <nav className={styles.menu}>
-          <Link to="/" title="dashboard" onClick={crossOnClick}>dashboard</Link>
-          <Link to="/chat" title="chat" onClick={crossOnClick}>chat</Link>
-          <Link to="/bookmarks" title="bookmarks" onClick={crossOnClick}>bookmarks</Link>
-        </nav>
-      }
+
+      <nav className={menuClasses}>
+        {isOpen && (
+          <>
+            <Link to="/" title="dashboard" onClick={crossOnClick}>
+              dashboard
+            </Link>
+            <Link to="/chat" title="chat" onClick={crossOnClick}>
+              chat
+            </Link>
+            <Link to="/bookmarks" title="bookmarks" onClick={crossOnClick}>
+              bookmarks
+            </Link>
+          </>
+        )}
+      </nav>
     </div>
   );
 };
