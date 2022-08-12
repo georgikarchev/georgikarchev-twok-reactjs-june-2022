@@ -18,6 +18,7 @@ export const ChatMessage = ({
   showAllTranslations,
   language,
   clickable,
+  onClick
 }) => {
   // const [showTranslation, setShowTranslation] = useState(false);
   const { selectedMessageData, setSelectedMessageData } =
@@ -49,7 +50,7 @@ export const ChatMessage = ({
   const onClickHandler = () => {
     // setShowTranslation(state => !state)
     if (clickable) {
-      setSelectedMessageData({
+      onClick({
         id: id,
         body: body,
         translation: translation,

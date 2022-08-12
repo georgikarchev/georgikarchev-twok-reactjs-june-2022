@@ -11,17 +11,22 @@ import { ChatNotification } from "./ChatNotification";
 import styles from "./ChatContent.module.scss";
 
 export const ChatContent = ({ chatData }) => {
-  const { showAllMessageTranslations, bookmarks, chatState } = useContext(ChatContext);
+  const { showAllMessageTranslations, bookmarks, chatState, selectedMessageData, setSelectedMessageData } = useContext(ChatContext);
 
-  
+
   // if (bookmarks && bookmarks.count > 0) {
-    let bookmarksForCurrentChat = [];
-    if(bookmarks && bookmarks.count > 0){
-      bookmarksForCurrentChat = bookmarks.list.filter((b) => {
-        return +b.chatId === +chatState.chatData.id;
-      }).map(b=> +b.messageId);
-    }
+  let bookmarksForCurrentChat = [];
+  if (bookmarks && bookmarks.count > 0) {
+    bookmarksForCurrentChat = bookmarks.list.filter((b) => {
+      return +b.chatId === +chatState.chatData.id;
+    }).map(b => +b.messageId);
+  }
   // }
+
+  const messageOnClickhandler = (data) => {
+    // console.log(data);
+    setSelectedMessageData(data);
+  };
 
 
   let messages = "";
@@ -29,7 +34,7 @@ export const ChatContent = ({ chatData }) => {
     messages = chatData.messages.map((message) => {
       if (Number(message.id) <= Number(chatData.lastMessageId)) {
         if (message.type === "chatMessage") {
-          const m = {...message};
+          const m = { ...message };
           m.isBookmarked = bookmarksForCurrentChat.includes(m.id);
 
           return (
@@ -38,6 +43,7 @@ export const ChatContent = ({ chatData }) => {
               {...m}
               showAllTranslations={showAllMessageTranslations}
               clickable={true}
+              onClick={messageOnClickhandler}
             />
           );
         } else if (message.type === "chatNotification") {
