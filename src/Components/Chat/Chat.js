@@ -41,12 +41,28 @@ export const Chat = () => {
 
   useEffect(() => {
     if(profileData.permalink) {
-      chatService.getChatsList(profileData.permalink)
-        .then((chats) => {
-          setChatsList(chats);
-        });
+      if(selectedChat) {
+        // mark selected chat read if unread
+        
+        chatService
+          .updateChatRead(profileData.permalink, currentChatId)
+          .then((chatUnread) => {
+            // console.log(chatUnread);
+            chatService.getChatsList(profileData.permalink)
+              .then((chats) => {
+                setChatsList(chats);
+              });
+          });
+        
+      } else {
+        chatService.getChatsList(profileData.permalink)
+              .then((chats) => {
+                setChatsList(chats);
+              });
+      }
+      
     }
-  }, [profileData.permalink]); //, [profileData]
+  }, [profileData.permalink,currentChatId]); //, [profileData]
 
   useEffect(() => {
     setCurrentChat(selectedChat);

@@ -62,14 +62,16 @@ export const ChatMain = ({ currentChatId }) => {
 
         setSelectedChatLanguage(chatDataResponse.language);
 
+        //  *** moved to Chat.js
         // mark selected chat read if unread
-        if (chatDataResponse && chatDataResponse.unread == true) {
-          chatService
-            .updateChatRead(profileData.permalink, currentChatId)
-            .then((chatUnread) => {
-              console.log(chatUnread);
-            });
-        }
+        // if (chatDataResponse && chatDataResponse.unread == true) {
+        //   chatService
+        //     .updateChatRead(profileData.permalink, currentChatId)
+        //     .then((chatUnread) => {
+        //       console.log(chatUnread);
+              
+        //     });
+        // }
       });
 
     setSelectedMessageData(null);
