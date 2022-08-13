@@ -14,8 +14,12 @@ export const Dashboard = () => {
   const { profileData } = useContext(AuthContext);
   const [milestones, setMilestones] = useState([]);
   const [achievements, setAchievements] = useState([]);
+  const [languagesCount, setLanguagesCount] = useState(1);
+  const [wordsCount, setWordsCount] = useState(1);
 
   useEffect(() => {
+    console.log("1> ",profileData.permalink);
+
     if (profileData && profileData.permalink != undefined) {
       const newMilestones = [];
       newMilestones.push({
@@ -23,10 +27,12 @@ export const Dashboard = () => {
         description: "You Joined twok",
         reached: true,
       });
-      setMilestones(newMilestones);
-
+      // setMilestones(state=>newMilestones);
+      console.log("2> ");
       languageService.getAchievementsList(profileData.permalink).then((res) => {
+        console.log("3> ",res);
         if (res && res.count > 0 && res.list.length > 0) {
+          console.log("4> ",res.list.length);
           res.list.map((x) => {
             newMilestones.push({
               date: x.dateCreated,
@@ -40,27 +46,16 @@ export const Dashboard = () => {
             description: "Learn 2000 words.",
             reached: false,
           });
-          setMilestones(newMilestones);
+          console.log("5>", newMilestones);
         }
+        setMilestones(state=>newMilestones);
       });
 
-      // ! TODO - fetch real timeline data from server
-      // newMilestones.push({
-      //   date: profileData.created,
-      //   description: "You learned you first 25 words in German.",
-      //   reached: true,
-      // });
-      // newMilestones.push({
-      //   date: profileData.created,
-      //   description: "You completed the basics  basics with Eve.",
-      //   reached: true,
-      // });
-      // newMilestones.push({
-      //   date: profileData.created,
-      //   description: "Learn 25 more words.",
-      //   reached: false,
-      // });
-      // setMilestones(newMilestones);
+      
+      if(profileData.enrolledIn.length > 0) {
+        // console.log(profileData.enrolledIn);
+        setLanguagesCount(profileData.enrolledIn.length);
+      }
     }
 
     // ! TODO - fetch real achievements from server
@@ -90,9 +85,7 @@ export const Dashboard = () => {
       reached: false,
     });
     setAchievements(newAchievements);
-  }, [profileData]);
-
-  console.log(profileData);
+  }, [profileData.permalink]);
 
   return (
     <article className={styles.dashboard}>
@@ -104,7 +97,11 @@ export const Dashboard = () => {
           <Timeline milestones={milestones} />
         </div>
         <div className={styles.rightSide}>
-          <Summary languages={2} wordsLearned={10} days={1} />
+          <Summary
+            languages={languagesCount}
+            wordsLearned={10}
+            days={1}
+          />
           <Achievements achievements={achievements} />
         </div>
       </main>
