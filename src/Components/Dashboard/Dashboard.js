@@ -15,10 +15,10 @@ export const Dashboard = () => {
   const [milestones, setMilestones] = useState([]);
   const [achievements, setAchievements] = useState([]);
   const [languagesCount, setLanguagesCount] = useState(1);
-  const [wordsCount, setWordsCount] = useState(1);
+  const [wordsCount, setWordsCount] = useState(25);
 
   useEffect(() => {
-    console.log("1> ",profileData.permalink);
+    // console.log("1> ",profileData.permalink);
 
     if (profileData && profileData.permalink != undefined) {
       const newMilestones = [];
@@ -28,11 +28,11 @@ export const Dashboard = () => {
         reached: true,
       });
       // setMilestones(state=>newMilestones);
-      console.log("2> ");
+      // console.log("2> ");
       languageService.getAchievementsList(profileData.permalink).then((res) => {
-        console.log("3> ",res);
+        // console.log("3> ",res);
         if (res && res.count > 0 && res.list.length > 0) {
-          console.log("4> ",res.list.length);
+          // console.log("4> ",res.list.length);
           res.list.map((x) => {
             newMilestones.push({
               date: x.dateCreated,
@@ -46,14 +46,14 @@ export const Dashboard = () => {
             description: "Learn 2000 words.",
             reached: false,
           });
-          console.log("5>", newMilestones);
+          // console.log("5>", newMilestones);
         }
         setMilestones(state=>newMilestones);
       });
 
       
       if(profileData.enrolledIn.length > 0) {
-        // console.log(profileData.enrolledIn);
+        console.log(profileData.enrolledIn);
         setLanguagesCount(profileData.enrolledIn.length);
       }
     }
@@ -99,7 +99,7 @@ export const Dashboard = () => {
         <div className={styles.rightSide}>
           <Summary
             languages={languagesCount}
-            wordsLearned={10}
+            wordsLearned={wordsCount}
             days={1}
           />
           <Achievements achievements={achievements} />

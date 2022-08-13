@@ -20,7 +20,7 @@ import translateInactive from "./images/translate--inactive.svg";
 
 export const ChatMain = ({ currentChatId }) => {
   const MILISECONDS_TO_TYPE_ONE_SYMBOL = 100;
-  const { profileData } = useContext(AuthContext);
+  const { profileData, setProfileData } = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(false);
   const refContentEnd = createRef();
   const {
@@ -35,6 +35,19 @@ export const ChatMain = ({ currentChatId }) => {
     setChatState,
     // bookmarks
   } = useContext(ChatContext);
+
+
+  // if(profileData && profileData.enrolledIn) {
+  //   console.log(profileData.enrolledIn.filter(x=>x.language === "de"));
+
+  // }
+
+  // setProfileData(state=> {
+  //   console.log(state;)
+
+  //   return state
+  // });
+
 
   // Load chat data from server
   useEffect(() => {
@@ -206,6 +219,13 @@ export const ChatMain = ({ currentChatId }) => {
             chatState.chatData.language,
             thisMessageObj.achievement
           );
+
+          // update state
+          // setProfileData(state=> {
+          //   console.log(state;)
+
+          //   return state
+          // });
         });
     }
 
