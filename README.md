@@ -36,15 +36,15 @@ The user progress, their achievements and bookmarks are saved on a remote server
 		|	|	|	└── /Prompt
 		|	|	├── /Timeline
 		|	|	├── /Spinner
-		|	|	├── /SpinnerTyping
+		|	|	└── /SpinnerTyping
 		|	├── /Dashboard
 		|	├── /Header
 		|	|	├── /Header
 		|	|	├── /GlobalSettingsWidget
 		|	|	├── /Navigation
-		|	|	├── /images
+		|	|	└── /images
 		|	├── /Home
-		|	├── /Profile
+		|	└── /Profile
 		├── /Contexts
 		├── /images
 		├── /Services
@@ -55,7 +55,7 @@ The user progress, their achievements and bookmarks are saved on a remote server
 		├── /Utils
 		|	├── /dateUtils
 		|	├── /languageCodes
-		|	├── /validators
+		|	└── /validators
 		├── App.js
 		└── index.js
 
