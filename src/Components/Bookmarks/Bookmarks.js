@@ -48,7 +48,8 @@ export const Bookmarks = () => {
             });
             setIsPromptOn(false);
           }
-        });
+        })
+        .catch(err=>console.error(err));
     }
     else {
       console.error("No bookmark is selected for deletion.");

@@ -49,7 +49,8 @@ export const Dashboard = () => {
           // console.log("5>", newMilestones);
         }
         setMilestones(state=>newMilestones);
-      });
+      })
+      .catch(err=>console.error(err));
 
       
       if(profileData.enrolledIn.length > 0) {

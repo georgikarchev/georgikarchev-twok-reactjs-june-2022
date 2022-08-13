@@ -85,7 +85,8 @@ export const ChatMain = ({ currentChatId }) => {
               
         //     });
         // }
-      });
+      })
+      .catch(err=>console.error(err));
 
     setSelectedMessageData(null);
   }, [currentChatId]);
@@ -199,7 +200,8 @@ export const ChatMain = ({ currentChatId }) => {
       )
       .then((res) => {
         console.log(res);
-      });
+      })
+      .catch(err=>console.error(err));
 
     if (
       thisMessageObj.achievement &&
@@ -218,7 +220,8 @@ export const ChatMain = ({ currentChatId }) => {
             "Achievement successfully saved to the DB:",
             chatState.chatData.language,
             thisMessageObj.achievement
-          );
+          )
+          .catch(err=>console.error(err));
 
           // update state
           // setProfileData(state=> {
@@ -248,7 +251,8 @@ export const ChatMain = ({ currentChatId }) => {
               " : ",
             thisMessageObj.newWordsLearned
           );
-        });
+        })
+        .catch(err=>console.error(err));
     }
 
     if (thisMessageObj.newWords && +thisMessageObj.newWords > 0) {

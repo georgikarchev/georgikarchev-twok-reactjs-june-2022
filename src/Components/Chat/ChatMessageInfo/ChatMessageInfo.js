@@ -63,7 +63,8 @@ export const ChatMessageInfo = () => {
           }));
 
           setIsLoading(false);
-        });
+        })
+        .catch(err=>console.error(err));
       
     } else {
       chatService
@@ -105,7 +106,8 @@ export const ChatMessageInfo = () => {
 
           setIsLoading(false);
 
-        });
+        })
+        .catch(err=>console.error(err));
     }
     // console.log(chatState.chatData.messages);
   };

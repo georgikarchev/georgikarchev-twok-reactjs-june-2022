@@ -51,14 +51,17 @@ export const Chat = () => {
             chatService.getChatsList(profileData.permalink)
               .then((chats) => {
                 setChatsList(chats);
-              });
-          });
+              })
+              .catch(err=>console.error(err));
+          })
+          .catch(err=>console.error(err));
         
       } else {
         chatService.getChatsList(profileData.permalink)
               .then((chats) => {
                 setChatsList(chats);
-              });
+              })
+              .catch(err=>console.error(err));
       }
       
     }

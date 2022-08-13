@@ -46,7 +46,8 @@ export const NewUser = () => {
         return;
       }
       setPermalink(userData.permalink);
-    });
+    })
+    .catch(err=>console.error(err));;
   }, []);
 
   return (
