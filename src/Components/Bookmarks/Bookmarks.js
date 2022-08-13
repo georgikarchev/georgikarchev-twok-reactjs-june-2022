@@ -60,7 +60,7 @@ export const Bookmarks = () => {
   };
 
   useEffect(()=>{
-    if (bookmarks) {
+    if (bookmarks && bookmarks.list) {
       let newList = [...bookmarks.list]
         .sort((a, b) => {
           if (a.language === b.language) {

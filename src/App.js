@@ -20,11 +20,12 @@ import { Profile } from "./Components/Profile/Profile";
 import { Chat } from "./Components/Chat/Chat";
 import { Bookmarks } from "./Components/Bookmarks/Bookmarks";
 
-import "./App.scss";
 import { useEffect } from "react";
 import { Dashboard } from "./Components/Dashboard/Dashboard";
 import { Home } from "./Components/Home/Home";
 import { NewUser } from "./Components/Auth/NewUser/NewUser";
+
+import "./App.scss";
 
 function App() {
   const location = useLocation();
