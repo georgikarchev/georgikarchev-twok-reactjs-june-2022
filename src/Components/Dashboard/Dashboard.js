@@ -1,5 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 
+import * as languageService from "../../Services/languageService";
+
 import { AuthContext } from "../../Contexts/AuthContext";
 
 import { Timeline } from "../Common/Timeline/Timeline";
@@ -21,25 +23,46 @@ export const Dashboard = () => {
         description: "You Joined twok",
         reached: true,
       });
+      setMilestones(newMilestones);
+
+      languageService.getAchievementsList(profileData.permalink).then((res) => {
+        if (res && res.count > 0 && res.list.length > 0) {
+          res.list.map((x) => {
+            newMilestones.push({
+              date: x.dateCreated,
+              description: x.description,
+              language: x.language,
+              reached: true,
+            });
+          });
+          newMilestones.push({
+            date: profileData.created,
+            description: "Learn 2000 words.",
+            reached: false,
+          });
+          setMilestones(newMilestones);
+        }
+      });
 
       // ! TODO - fetch real timeline data from server
-      newMilestones.push({
-        date: profileData.created,
-        description: "You learned you first 25 words in German.",
-        reached: true,
-      });
-      newMilestones.push({
-        date: profileData.created,
-        description: "You completed the basics  basics with Eve.",
-        reached: true,
-      });
-      newMilestones.push({
-        date: profileData.created,
-        description: "Learn 25 more words.",
-        reached: false,
-      });
-      setMilestones(newMilestones);
+      // newMilestones.push({
+      //   date: profileData.created,
+      //   description: "You learned you first 25 words in German.",
+      //   reached: true,
+      // });
+      // newMilestones.push({
+      //   date: profileData.created,
+      //   description: "You completed the basics  basics with Eve.",
+      //   reached: true,
+      // });
+      // newMilestones.push({
+      //   date: profileData.created,
+      //   description: "Learn 25 more words.",
+      //   reached: false,
+      // });
+      // setMilestones(newMilestones);
     }
+
     // ! TODO - fetch real achievements from server
     const newAchievements = [];
     newAchievements.push({
@@ -69,6 +92,8 @@ export const Dashboard = () => {
     setAchievements(newAchievements);
   }, [profileData]);
 
+  console.log(profileData);
+
   return (
     <article className={styles.dashboard}>
       <header>
@@ -79,7 +104,7 @@ export const Dashboard = () => {
           <Timeline milestones={milestones} />
         </div>
         <div className={styles.rightSide}>
-          <Summary />
+          <Summary languages={2} wordsLearned={10} days={1} />
           <Achievements achievements={achievements} />
         </div>
       </main>

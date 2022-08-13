@@ -12,7 +12,7 @@ export const Timeline = ({milestones}) => {
         // console.log(m)
         return (
             <li key={i} className={`${m.reached? styles.reached : ''} ${styles.milestone}`}>
-                <div className={styles.date}>{m.reached? stringToDdMonthYyyy(m.date) : 'today'}</div>
+                <div className={styles.date}>{m.reached? stringToDdMonthYyyy(m.date) : '2022'}</div>
                 <div>{m.description}</div>
             </li>
         );

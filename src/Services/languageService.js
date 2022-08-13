@@ -33,6 +33,12 @@ export const createAchievement = async (username, language, description) => {
   return result;
 };
 
+export const getAchievementsList = async (username) => {
+  const response = await fetch(`${baseUrl}/${username}/achievements`);
+  const result = await response.json();
+  return { list: result.list, count: result.count };
+};
+
 
 // Words Learned
 export const updateWordsLearnedCount = async (
