@@ -1,5 +1,8 @@
+import { useContext } from "react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+
+import { AuthContext } from "../../../Contexts/AuthContext";
 
 import { usernameValidator } from "../../../Utils/validators";
 
@@ -8,6 +11,8 @@ import styles from "./Login.module.scss";
 export const Login = () => {
   const [username, setUsername] = useState(null);
   const [isValid, setIsValid] = useState(false);
+  const {authError} = useContext(AuthContext);
+
 
   const nagivate = useNavigate();
 
@@ -31,6 +36,7 @@ export const Login = () => {
   return (
     <div className={styles.login}>
       <h1>Let's get you logged in</h1>
+      {authError &&  authError !== '' && <p className={styles.error}>{authError}</p>}
       <div className={styles.formWrapper}>
         <form>
           <input

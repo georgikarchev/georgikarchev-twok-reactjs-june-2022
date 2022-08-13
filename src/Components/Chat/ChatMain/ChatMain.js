@@ -6,6 +6,8 @@ import { AuthContext } from "../../../Contexts/AuthContext";
 import * as chatService from "../../../Services/chatService";
 import * as languageService from "../../../Services/languageService";
 
+import { languageToIso2 } from "../../../Utils/languageCodes";
+
 import { ChatInputBar } from "./ChatInputBar/ChatInputBar";
 import styles from "./ChatMain.module.scss";
 import { ChatContent } from "./ChatContent/ChatContent";
@@ -163,6 +165,8 @@ export const ChatMain = ({ currentChatId }) => {
   };
 
   const showChatNotification = () => {
+    console.log(chatState.chatData.language);
+
     const newLastMessageId = chatState.chatData.lastMessageId + 1;
     const thisMessageObj = chatState.chatData.messages.find(
       (m) => m.id === newLastMessageId
@@ -191,7 +195,7 @@ export const ChatMain = ({ currentChatId }) => {
       languageService
         .createAchievement(
           profileData.permalink,
-          chatState.chatData.language,
+          languageToIso2(chatState.chatData.language),
           thisMessageObj.achievement
         )
         .then((res) => {
@@ -212,7 +216,7 @@ export const ChatMain = ({ currentChatId }) => {
       languageService
         .updateWordsLearnedCount(
           profileData.permalink,
-          chatState.chatData.language,
+          languageToIso2(chatState.chatData.language),
           +thisMessageObj.newWordsLearned
         )
         .then((res) => {

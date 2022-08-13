@@ -21,3 +21,24 @@ export const editProfile = async (userId, userData) => {
 
   return result;
 };
+
+export const createUser = async () => {
+
+  const postData = {
+    userLanguage: 'en',
+    enrollLanguage: 'de'
+  };
+
+  const response = await fetch(`${baseUrl}/signup`, {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+    },
+    body: JSON.stringify(postData),
+  }).catch(err => {
+    console.error(err);
+  });
+
+  const result = await response.json();
+  return result;
+};

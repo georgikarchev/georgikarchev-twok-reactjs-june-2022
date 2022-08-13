@@ -66,11 +66,11 @@ export const template = {
         authorIsUser: true,
         isBookmarked: false,
         type: "chatMessage",
-        body: "An der Universität Darmstadt.",
+        body: "An der Uni Darmstadt.",
         translation: "At the university Darmstadt.",
         words: [
           { id: "w1", de: "An", en: ["At"] },
-          { id: "w2", de: "die Universität", en: ["university"] },
+          { id: "w2", de: "die Uni", en: ["university"] },
           { id: "w3", de: "Darmstadt", en: ["Darmstadt", "a city in central germany"] },
         ],
       },
@@ -118,6 +118,8 @@ export const template = {
         id: 10,
         type: "chatNotification",
         body: "50 new words learned",
+        achievement: "You learned you first 50 words in German.",
+        newWordsLearned: 25
       },
     ],
   };

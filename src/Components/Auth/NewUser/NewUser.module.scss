@@ -1,0 +1,64 @@
+.newUser {
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  & .line {
+    background: linear-gradient(91.97deg, #2acbee 25.48%, #11a6c7 79.21%);
+    background-clip: border-box;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0px 1px 15px rgba(140, 17, 199, 0.18);
+    font-weight: 600;
+
+    margin-bottom: 2rem;
+    line-height: 1;
+
+    opacity: 0;
+
+    &.line1 {
+      font-size: 2rem;
+    }
+
+    &.line2 {
+      font-size: 2.5rem;
+    }
+
+    &.line3 {
+      font-size: 3rem;
+    }
+
+    &.line4 {
+      font-size: 3.5rem;
+    }
+
+    &.line5 {
+      font-size: 4rem;
+    }
+
+    &.line6 {
+      font-size: 4.5rem;
+    }
+
+    &.line7 {
+      font-size: 7rem;
+    }
+
+    &.fadeOut {
+      opacity: 0;
+      // width: 0;
+      // height: 0;
+      transition: opacity 0.25s;
+    }
+    &.fadeIn {
+      opacity: 1;
+      // width: 100px;
+      // height: 100px;
+      transition: opacity 0.5s;
+    }
+  }
+}

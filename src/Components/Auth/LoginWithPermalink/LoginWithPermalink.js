@@ -14,8 +14,10 @@ import { usernameValidator } from "../../../Utils/validators";
 
 export const LoginWithPermalink = () => {
   const { username } = useParams();
-  const { setProfileData } = useContext(AuthContext);
+  const { setProfileData, setAuthError } = useContext(AuthContext);
   const { setBookmarks } = useContext(ChatContext)
+  
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (usernameValidator(username)) {
@@ -24,6 +26,12 @@ export const LoginWithPermalink = () => {
 
       authService.getProfile(username)
         .then(userData => {
+          if(!userData || !userData.permalink || userData && userData.permalink.length !== 8) {
+            setAuthError("Login was unsuccessful. Please try again.");
+            navigate ('/login');
+            return;
+          }
+          setAuthError('');
           const updatedUserData = {...userData, 'loggedIn': true}
           setProfileData(updatedUserData);
           storageService.saveUser(updatedUserData);
