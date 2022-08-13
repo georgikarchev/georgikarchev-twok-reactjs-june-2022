@@ -9,7 +9,7 @@ import { usernameValidator } from "../../../Utils/validators";
 import styles from "./Login.module.scss";
 
 export const Login = () => {
-  const [username, setUsername] = useState(null);
+  const [username, setUsername] = useState('');
   const [isValid, setIsValid] = useState(false);
   const {authError} = useContext(AuthContext);
 
@@ -43,6 +43,7 @@ export const Login = () => {
             className="inputUsername"
             type="text"
             placeholder="username hash"
+            value={username}
             onChange={inputUsernameOnChangeHandler}
           />
           <button className={submitClassNames} onClick={onSubmitHandler} disabled={!isValid}>
