@@ -71,7 +71,7 @@ function App() {
     } else {
       // user is not logged in and there is no data saved in the local storage -> bring him to the login page
       // UNLESS he is trying to go to the home page
-      if (location.pathname == "/home" || location.pathname == "/new-user") {
+      if (location.pathname === "/home" || location.pathname === "/new-user") {
         navigate("/home");
       } else {
         console.log("redirecting to /login")
