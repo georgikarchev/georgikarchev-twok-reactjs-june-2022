@@ -1,6 +1,95 @@
-# Getting Started with Create React App
+# twok - Learn to speak likea a five year old
+## A SoftUni Project - ReactJS - June 2022
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The following page describes a **SoftUni** project for **ReactJS - June 2022** by **@georgi.k**.
+The app created is a *hybrid language learning messenger* **SPA**, which connects the user with a chatbot instead of real users.
+During their communication the chatbot introduces new words and expressions.
+The user progress, their achievements and bookmarks are saved on a remote server, by tapping to an API created for this demo project. All data persists on the server.
+
+[![twok-home](https://twok.app/screenshot-home.png "twok-home")](http://twok.app "twok-home")
+
+## React SPA - Architecture Overview
+	└── /src
+		├── /chat
+		├── /Components
+		|	├── /Auth
+		|	|	├── /Login
+		|	|	├── /LoginWithPermalink
+		|	|	└── /NewUser
+		|	├── /Bookmarks
+		|	├── /Chat
+		|	|	├── /Chat
+		|	|	├── /ChatList
+		|	|	|	├── /ChatsList
+		|	|	|	├── /ChatThumbnail
+		|	|	├── /ChatMain
+		|	|	|	├── /ChatMain
+		|	|	|	├── /ChatContent
+		|	|	|	├── /ChatInputBar
+		|	|	|	├── /ChatHeader
+		|	|	|	└── /images
+		|	|	└── /ChatMessageInfo
+		|	├── /Common
+		|	|	├── /BookmarkToggleButton
+		|	|	├── /Modal
+		|	|	|	├── /Modal
+		|	|	|	└── /Prompt
+		|	|	├── /Timeline
+		|	|	├── /Spinner
+		|	|	├── /SpinnerTyping
+		|	├── /Dashboard
+		|	├── /Header
+		|	|	├── /Header
+		|	|	├── /GlobalSettingsWidget
+		|	|	├── /Navigation
+		|	|	├── /images
+		|	├── /Home
+		|	├── /Profile
+		├── /Contexts
+		├── /images
+		├── /Services
+		|	├── /authService
+		|	├── /chatService
+		|	├── /languageService
+		|	├── /storageService
+		├── /Utils
+		|	├── /dateUtils
+		|	├── /languageCodes
+		|	├── /validators
+		├── App.js
+		└── index.js
+
+## API
+
+The API lives at https://demo.twok.app
+
+**base URL:** https://demo.twok.app 
+**endpoints:**
+
+### Create
+### `https://demo.twok.app/signup`
+### `https://demo.twok.app/enroll`
+### `https://demo.twok.app/new-bookmark`
+### `https://demo.twok.app/new-achievement`
+
+
+### Read
+### `https://demo.twok.app/chats`
+### `https://demo.twok.app/chat`
+### `https://demo.twok.app/achievements`
+
+
+### Update
+### `https://demo.twok.app/update-user-chat`
+### `https://demo.twok.app/update-chat-read`
+### `https://demo.twok.app/update-chat-unread`
+### `https://demo.twok.app/update-language-words-learned`
+
+
+### Delete
+### `https://demo.twok.app/delete-bookmark`
+### `https://demo.twok.app/delete-user`
+
 
 ## Available Scripts
 
@@ -28,43 +117,3 @@ The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
